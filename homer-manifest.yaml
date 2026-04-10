@@ -1,0 +1,136 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: homer
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homer-config
+  namespace: homer
+data:
+  config.yml: |
+    title: "Home Services"
+    subtitle: "Fenner"
+    icon: "fas fa-home"
+
+    header: true
+    footer: false
+
+    theme: default
+    colors:
+      light:
+        highlight-primary: "#3367d6"
+        highlight-secondary: "#4285f4"
+        highlight-hover: "#5a95f5"
+        background: "#f2f2f2"
+        card-background: "#ffffff"
+        text: "#363636"
+        text-header: "#ffffff"
+        text-title: "#303030"
+        text-subtitle: "#424242"
+        card-shadow: rgba(0, 0, 0, 0.1)
+        link: "#3273dc"
+        link-hover: "#363636"
+      dark:
+        highlight-primary: "#3367d6"
+        highlight-secondary: "#4285f4"
+        highlight-hover: "#5a95f5"
+        background: "#131313"
+        card-background: "#2b2b2b"
+        text: "#eaeaea"
+        text-header: "#ffffff"
+        text-title: "#fafafa"
+        text-subtitle: "#f5f5f5"
+        card-shadow: rgba(0, 0, 0, 0.4)
+        link: "#3273dc"
+        link-hover: "#ffdd57"
+
+    services:
+      - name: "Trackers"
+        icon: "fas fa-chart-line"
+        items:
+          - name: "Momentum"
+            logo: "https://cdn.jsdelivr.net/gh/selfhst/icons@main/svg/nextcloud-tasks.svg"
+            subtitle: "Todo List"
+            url: "https://momentum.fenner.nexus"
+          - name: "Weight Tracker"
+            logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/healthchecks.png"
+            subtitle: "Weight Tracker"
+            url: "https://tracker.fenner.nexus"
+
+      - name: "Smart Home"
+        icon: "fas fa-lightbulb"
+        items:
+          - name: "WiZ Lights"
+            logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/home-assistant.png"
+            subtitle: "Light Controls"
+            url: "https://wiz.fenner.nexus"
+          - name: "Nanoleaf"
+            logo: "https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/smlight.png"
+            subtitle: "Light Panels"
+            url: "https://nanoleaf.fenner.nexus"
+
+      - name: "Network"
+        icon: "fas fa-network-wired"
+        items:
+          - name: "pfSense"
+            logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/pfsense.png"
+            subtitle: "Firewall & Router"
+            url: "http://192.168.1.1"
+          - name: "Nginx Proxy Manager"
+            logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/nginx-proxy-manager.png"
+            subtitle: "Reverse Proxy"
+            url: "http://192.168.1.22:81"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homer
+  namespace: homer
+  labels:
+    app: homer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homer
+  template:
+    metadata:
+      labels:
+        app: homer
+    spec:
+      containers:
+        - name: homer
+          image: b4bz/homer:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: config
+              mountPath: /www/assets/config.yml
+              subPath: config.yml
+          resources:
+            requests:
+              memory: "32Mi"
+              cpu: "10m"
+            limits:
+              memory: "64Mi"
+              cpu: "100m"
+      volumes:
+        - name: config
+          configMap:
+            name: homer-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: homer
+  namespace: homer
+spec:
+  type: ClusterIP
+  selector:
+    app: homer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
