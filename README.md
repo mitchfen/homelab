@@ -4,6 +4,8 @@
 
 ## Hardware
 
+<img src="homelab.jpg" width=500px />
+
 | Name | Form Factor | CPU | C/T | GPU | Memory | OS |
 | --- | --- | --- | --- | --- | --- | --- |
 | Varrock | Optiplex micro | i3-6100T | 2c/4t | Integrated | 8GB | pfSense |
