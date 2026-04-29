@@ -1,6 +1,4 @@
-# Homelab 
-
-
+# Mitch's Homelab 
 
 ## Self Hosted Applications
 
@@ -24,9 +22,14 @@ Allow anyone on my home network to control my WiZ lights without installing a pr
 - **Tech**: .NET 10, Blazor Server
 - **Repository**: [mitchfen/wiz-controller](https://github.com/mitchfen/wiz-controller)
 
+### 🚦Nginx Proxy Manager
+Reverse proxy which serves as the entrypoint for all the home services I run on my cluster. I'm leveraging it with Cloudflare and LetsEncrypt to get a valid `*.fenner.nexus` certificate and host my apps without SSL warnings. None of the apps are exposed to the internet, but this setup allows any device on my home network to access `wiz-controller.fenner.nexus` for example, without certificate warnings in their browser.
+- **Repository**: [NginxProxyManager/nginx-proxy-manager](https://github.com/NginxProxyManager/nginx-proxy-manager)
+
 ### 🏠 **Homer**
-Provides a central entry point to all my apps, so people on my home network only have to remember one URL. 
-- **Tech**: [Homer](https://github.com/bastienwirtz/homer)
+Provides a central entry point to all my apps.  
+People on my home network only have to remember one URL to reach all the apps. 
+- **Repository**: [bastienwirtz/homer](https://github.com/bastienwirtz/homer)
 
 ## Hardware
 
@@ -35,21 +38,16 @@ Provides a central entry point to all my apps, so people on my home network only
 | Name | Form Factor | CPU | C/T | GPU | Memory | OS |
 | --- | --- | --- | --- | --- | --- | --- |
 | Varrock | Optiplex micro | i3-6100T | 2c/4t | Integrated | 8GB | pfSense |
-| Karamja | Optiplex micro | i7-7700T | 4c/8t | Integrated | 16GB | Debian 13 |
+| Karamja | Optiplex micro | i7-7700T | 4c/8t | Integrated | 16GB | Debian |
 | Draynor | Optiplex micro | i5-7600T | 4c/4t | Integrated | 32GB | NixOS |
-| Lumbridge | 4U server chassis | Ryzen 5 7600 | 6c/12t | RX 7900 XTX | 32GB | Windows11 |
+| Lumbridge | 4U server chassis | Ryzen 5 7600 | 6c/12t | RX 7900 XTX | 32GB | Windows |
 
-## Purpose of each machine
+### Purpose of each machine
 
 - **Karamja** serves as a remote development environment. I keep all my repositories, dependencies, and messy build/dev environment tooling there. This allows me to use my ancient but much beloved Thinkpad as a thin client.
 - **Varrock** runs [pfSense](https://www.pfsense.org) and serves as my router/firewall. I added an M.2 to ethernet adapter in addition to the built in ethernet port to serve as the WAN and LAN interfaces.
 - **Draynor** runs a single-node kubernetes ([k3s](https://k3s.io/)) cluster that hosts all my applications
 - **Lumbridge** was built for gaming but recently I've been using the 24GB of VRAM in the 7900 XTX to try out AI models on my own hardware.
 
-
-
-
-
 ## Networking
-- **Reverse Proxy**: [Nginx Proxy Manager (NPM)](https://nginxproxymanager.com) on **Draynor** serves as the entrypoint for all the home services I run on my k3s cluster. I'm leveraging it with Cloudflare and LetsEncrypt to get a valid `*.fenner.nexus` certificate and host my apps without SSL warnings. None of the apps are exposed to the internet, but this setup allows any device on my home network to access `wiz-controller.fenner.nexus` for example, without unsigned certificate warnings in their browser.
-- **DNS**: pfSense on **Varrock** runs the recursive Unbound DNS resolver along with [pfBlocker-NG](https://docs.netgate.com/pfsense/en/latest/packages/pfblocker.html). pfBlocker allows me to block ads as well as time wasting sites. pfSense allows me to create custom DNS overrides, which is how I setup independant URLs for each of my apps. 
+- DNS resolution and filtering: pfSense on **Varrock** runs the recursive Unbound DNS resolver along with [pfBlocker-NG](https://docs.netgate.com/pfsense/en/latest/packages/pfblocker.html). pfBlocker allows me to block ads as well as time wasting sites. pfSense allows me to create custom DNS overrides, which is how I setup independant URLs for each of my apps.
