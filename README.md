@@ -1,35 +1,41 @@
 # Mitch's Homelab 
+Some details about my homelab; what I self host and why.
 
 ## Self Hosted Applications
 
-### 🎯 **Momentum**
-Helps me keep track of tasks which need to be done every day, and to do them in habit stacks.
-- **Tech**: Go, HTMX, CSS, Docker, Kubernetes
-- **Repository**: [mitchfen/momentum](https://github.com/mitchfen/momentum)
+### Apps I (vibe)coded myself:
+- 🎯**Momentum**
+  - **Description**: Helps me keep track of tasks which need to be done every day, and to do them in habit stacks.
+  - **Tech**: Go, HTMX, CSS, Docker, Kubernetes
+  - **Repo**: [mitchfen/momentum](https://github.com/mitchfen/momentum)
 
-###  💪️ **Weight Tracker**
-Allows me to track my weight and see a trend line.
-- **Tech**: Go, SQLite, HTML, CSS, JS, Docker, Kubernetes
-- **Repository**: [mitchfen/weight-tracker](https://github.com/mitchfen/weight-tracker)
+- 💪**Weight Tracker**
+  - **Description**: Allows me to track my weight and see a trend line.
+  - **Tech**: Go, SQLite, HTML, CSS, JS, Docker, Kubernetes
+  - **Repo**: [mitchfen/weight-tracker](https://github.com/mitchfen/weight-tracker)
 
-### 💡 **Nanoleaf Controller**
-Allow anyone on my home network to control the Nanoleaf light panels without installing a proprietary app on their phone.
-- **Tech**: .NET 10, Blazor Server, Nanoleaf OpenAPI, Docker, Kubernetes
-- **Repository**: [mitchfen/nanoleaf-controller](https://github.com/mitchfen/nanoleaf-controller)
+- 💡**Nanoleaf Controller**
+  - **Description**: Allow anyone on my home network to control the Nanoleaf light panels without installing a proprietary app on their phone.
+  - **Tech**: .NET 10, Blazor Server, Nanoleaf OpenAPI, Docker, Kubernetes
+  - **Repo**: [mitchfen/nanoleaf-controller](https://github.com/mitchfen/nanoleaf-controller)
 
-### 🔦 **Wiz Controller**
-Allow anyone on my home network to control my WiZ lights without installing a proprietary app on their phone.
-- **Tech**: Go, HTMX, CSS, Docker, Kubernetes
-- **Repository**: [mitchfen/wiz-controller](https://github.com/mitchfen/wiz-controller)
+- 💡**Wiz Controller**
+  - **Description**: Allow anyone on my home network to control my WiZ lights without installing a proprietary app on their phone.
+  - **Tech**: Go, HTMX, CSS, Docker, Kubernetes
+  - **Repo**: [mitchfen/wiz-controller](https://github.com/mitchfen/wiz-controller)
 
-### 🚦Nginx Proxy Manager
-Reverse proxy which serves as the entrypoint for all the home services I run on my cluster. I'm leveraging it with Cloudflare and LetsEncrypt to get a valid `*.fenner.nexus` certificate and host my apps without SSL warnings. None of the apps are exposed to the internet, but this setup allows any device on my home network to access `wiz-controller.fenner.nexus` for example, without certificate warnings in their browser.
-- **Repository**: [NginxProxyManager/nginx-proxy-manager](https://github.com/NginxProxyManager/nginx-proxy-manager)
+### Other apps:
+- 📃**Stirling PDF**
+  - **Description**: Manipulate and edit PDFs without paying for Adobe.
+  - **Repo**: [Stirling-Tools/Stirling-PDF](https://github.com/Stirling-Tools/Stirling-PDF)
 
-### 🏠 **Homer**
-Provides a central entry point to all my apps.  
-People on my home network only have to remember one URL to reach all the apps. 
-- **Repository**: [bastienwirtz/homer](https://github.com/bastienwirtz/homer)
+- 🚦**Nginx Proxy Manager**
+  - **Description**: Reverse proxy which serves as the entrypoint for all the home services I run on my cluster. I'm leveraging it with Cloudflare and LetsEncrypt to get a valid `*.fenner.nexus` certificate and host my apps without SSL warnings. None of the apps are exposed to the internet, but this setup allows any device on my home network to access `wiz-controller.fenner.nexus` for example, without certificate warnings in their browser.
+  - **Repo**: [NginxProxyManager/nginx-proxy-manager](https://github.com/NginxProxyManager/nginx-proxy-manager)
+
+- 🏠**Homer**
+  - **Description**: A central entry point to all my apps. So users only have to remember one URL to reach all the apps.
+  - **Repo**: [bastienwirtz/homer](https://github.com/bastienwirtz/homer)
 
 ## Hardware
 
