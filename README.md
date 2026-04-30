@@ -4,22 +4,22 @@
 
 ### 🎯 **Momentum**
 Helps me keep track of tasks which need to be done every day, and to do them in habit stacks.
-- **Tech**: Go, HTMX, CSS
+- **Tech**: Go, HTMX, CSS, Docker, Kubernetes
 - **Repository**: [mitchfen/momentum](https://github.com/mitchfen/momentum)
 
 ###  💪️ **Weight Tracker**
 Allows me to track my weight and see a trend line.
-- **Tech**: Go, SQLite, HTML, CSS, JS
+- **Tech**: Go, SQLite, HTML, CSS, JS, Docker, Kubernetes
 - **Repository**: [mitchfen/weight-tracker](https://github.com/mitchfen/weight-tracker)
 
 ### 💡 **Nanoleaf Controller**
 Allow anyone on my home network to control the Nanoleaf light panels without installing a proprietary app on their phone.
-- **Tech**: .NET 10, Blazor Server, Nanoleaf OpenAPI
+- **Tech**: .NET 10, Blazor Server, Nanoleaf OpenAPI, Docker, Kubernetes
 - **Repository**: [mitchfen/nanoleaf-controller](https://github.com/mitchfen/nanoleaf-controller)
 
 ### 🔦 **Wiz Controller**
 Allow anyone on my home network to control my WiZ lights without installing a proprietary app on their phone.
-- **Tech**: .NET 10, Blazor Server
+- **Tech**: Go, HTMX, CSS, Docker, Kubernetes
 - **Repository**: [mitchfen/wiz-controller](https://github.com/mitchfen/wiz-controller)
 
 ### 🚦Nginx Proxy Manager
