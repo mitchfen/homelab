@@ -25,17 +25,21 @@ Some details about my homelab; what I self host and why.
   - **Repo**: [mitchfen/wiz-controller](https://github.com/mitchfen/wiz-controller)
 
 ### Other apps:
-- 📃**Stirling PDF**
-  - **Description**: Manipulate and edit PDFs without paying for Adobe.
-  - **Repo**: [Stirling-Tools/Stirling-PDF](https://github.com/Stirling-Tools/Stirling-PDF)
-
 - 🚦**Nginx Proxy Manager**
   - **Description**: Reverse proxy which serves as the entrypoint for all the home services I run on my cluster. I'm leveraging it with Cloudflare and LetsEncrypt to get a valid `*.fenner.nexus` certificate and host my apps without SSL warnings. None of the apps are exposed to the internet, but this setup allows any device on my home network to access `wiz-controller.fenner.nexus` for example, without certificate warnings in their browser.
   - **Repo**: [NginxProxyManager/nginx-proxy-manager](https://github.com/NginxProxyManager/nginx-proxy-manager)
 
+- 🐳**Portainer**
+  - **Description**: Web UI for managing my Kubernetes cluster. Provides dashboards for deployments, pods, services, and other cluster resources without needing to use kubectl.
+  - **Repo**: [portainer/portainer](https://github.com/portainer/portainer)
+
 - 🏠**Homer**
   - **Description**: A central entry point to all my apps. So users only have to remember one URL to reach all the apps.
   - **Repo**: [bastienwirtz/homer](https://github.com/bastienwirtz/homer)
+
+- 📃**Stirling PDF**
+  - **Description**: Manipulate and edit PDFs without paying for Adobe.
+  - **Repo**: [Stirling-Tools/Stirling-PDF](https://github.com/Stirling-Tools/Stirling-PDF)
 
 ## Hardware
 

@@ -13,6 +13,7 @@ data:
     title: "Home Services"
     subtitle: "Fenner"
     icon: "fas fa-home"
+    logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/home-assistant.png"
 
     header: true
     footer: false
@@ -82,6 +83,18 @@ data:
             logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/nginx-proxy-manager.png"
             subtitle: "Reverse Proxy"
             url: "http://192.168.1.22:81"
+
+      - name: "Tools"
+        icon: "fas fa-toolbox"
+        items:
+          - name: "Stirling PDF"
+            logo: "https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/stirling-pdf.png"
+            subtitle: "PDF Utility"
+            url: "https://pdf.fenner.nexus"
+          - name: "Portainer"
+            logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/portainer.png"
+            subtitle: "Container Management"
+            url: "https://portainer.fenner.nexus"
 ---
 apiVersion: apps/v1
 kind: Deployment
