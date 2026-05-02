@@ -82,7 +82,7 @@ data:
           - name: "Nginx Proxy Manager"
             logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/nginx-proxy-manager.png"
             subtitle: "Reverse Proxy"
-            url: "http://192.168.1.22:81"
+            url: "http://draynor.home:81"
 
       - name: "Tools"
         icon: "fas fa-toolbox"

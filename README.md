@@ -1,5 +1,13 @@
 # Mitch's Homelab 
-Some details about my homelab; what I self host and why.
+Some details about my homelab; what and how I self host diffent things.  
+Why? because it's fun 😀
+
+## Networking
+- **No ports are open on my router and no IoT devices are allowed internet access**.
+- All apps are served on subdomains of `fenner.nexus`, a real/public domain, but one without any public DNS records. Internally those subdomains resolve only to internal IPs on my network.
+- [pfSense](https://www.pfsense.org) handles routing and firewalling
+- [Unbound](https://en.wikipedia.org/wiki/Unbound_(DNS_server)) provides recursive DNS resolution. 
+- [pfBlocker-NG](https://docs.netgate.com/pfsense/en/latest/packages/pfblocker.html) handles ad blocking at a network level.
 
 ## Self Hosted Applications
 
@@ -53,11 +61,7 @@ Some details about my homelab; what I self host and why.
 | Lumbridge | 4U server chassis | Ryzen 5 7600 | 6c/12t | RX 7900 XTX | 32GB | Windows |
 
 ### Purpose of each machine
-
-- **Karamja** serves as a remote development environment. I keep all my repositories, dependencies, and messy build/dev environment tooling there. This allows me to use my ancient but much beloved Thinkpad as a thin client.
-- **Varrock** runs [pfSense](https://www.pfsense.org) and serves as my router/firewall. I added an M.2 to ethernet adapter in addition to the built in ethernet port to serve as the WAN and LAN interfaces.
+- **Varrock** runs pfSense (see above networking section)
+- **Karamja** serves as a remote development environment. I keep all my repositories, dependencies, and messy build/dev environment tooling there. This allows me to use my ancient (but much loved) Thinkpad as a thin client.
 - **Draynor** runs a single-node kubernetes ([k3s](https://k3s.io/)) cluster that hosts all my applications
 - **Lumbridge** was built for gaming but recently I've been using the 24GB of VRAM in the 7900 XTX to try out AI models on my own hardware.
-
-## Networking
-- DNS resolution and filtering: pfSense on **Varrock** runs the recursive Unbound DNS resolver along with [pfBlocker-NG](https://docs.netgate.com/pfsense/en/latest/packages/pfblocker.html). pfBlocker allows me to block ads as well as time wasting sites. pfSense allows me to create custom DNS overrides, which is how I setup independant URLs for each of my apps.

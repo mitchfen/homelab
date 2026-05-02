@@ -59,8 +59,6 @@ spec:
       containers:
       - name: portainer
         image: portainer/portainer-ce:latest
-        args:
-        - "--admin-password="
         ports:
         - containerPort: 9000
           name: web
