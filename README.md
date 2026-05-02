@@ -1,8 +1,9 @@
-# Mitch's Homelab 
 > "Mom, can we have the cloud?"  
 > "We have the cloud at home."
 > 
 > The cloud at home:
+
+# Mitch's Homelab 
 
 ## Networking
 - **No ports are open on my router and no IoT devices are allowed internet access**.
