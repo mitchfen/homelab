@@ -1,13 +1,19 @@
 # Mitch's Homelab 
-Some details about my homelab; what and how I self host diffent things.  
-Why? because it's fun 😀
+> "Mom, can we have the cloud?"  
+> "We have the cloud at home."
+> 
+> The cloud at home:
 
 ## Networking
 - **No ports are open on my router and no IoT devices are allowed internet access**.
 - All apps are served on subdomains of `fenner.nexus`, a real/public domain, but one without any public DNS records. Internally those subdomains resolve only to internal IPs on my network.
 - [pfSense](https://www.pfsense.org) handles routing and firewalling
 - [Unbound](https://en.wikipedia.org/wiki/Unbound_(DNS_server)) provides recursive DNS resolution. 
-- [pfBlocker-NG](https://docs.netgate.com/pfsense/en/latest/packages/pfblocker.html) handles ad blocking at a network level.
+- [pfBlocker-NG](https://docs.netgate.com/pfsense/en/latest/packages/pfblocker.html) provides network-wide IP filtering and DNS blocklisting.
+  - **IP filtering**: Blocks inbound and outbound traffic to known malicious IP ranges using feeds such as [Spamhaus](https://www.spamhaus.org/blocklists/do-not-route-or-peer/).
+  - **Ad blocking**: Blocks ad-serving domains across every device on the network at the DNS level. No adblock browser extension required.
+  - **Tracker blocking**: Prevents tracking pixels, analytics scripts, and telemetry endpoints from resolving.
+  - **TLD blocking**: Blocks sites that used to suck up all my attention (Instagram, Facebook, Reddit, TikTok) at the DNS level across all devices on the network.
 
 ## Self Hosted Applications
 
