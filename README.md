@@ -41,7 +41,7 @@
   - **Repo**: [mitchfen/wiz-controller](https://github.com/mitchfen/wiz-controller)
 
 - 📋**Localpaste**
-  - **Description**: Allows me to send text data between devices on my home network with automatic 1-hour expiration.
+  - **Description**: Allows me to send text data between devices on my home network with automatic expiration.
   - **Tech**: Go, HTMX, CSS, Docker, Kubernetes
   - **Repo**: [mitchfen/localpaste](https://github.com/mitchfen/localpaste)
 
