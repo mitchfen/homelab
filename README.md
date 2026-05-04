@@ -40,6 +40,11 @@
   - **Tech**: Go, HTMX, CSS, Docker, Kubernetes
   - **Repo**: [mitchfen/wiz-controller](https://github.com/mitchfen/wiz-controller)
 
+- 📋**Localpaste**
+  - **Description**: Allows me to send text data between devices on my home network with automatic 1-hour expiration.
+  - **Tech**: Go, HTMX, CSS, Docker, Kubernetes
+  - **Repo**: [mitchfen/localpaste](https://github.com/mitchfen/localpaste)
+
 ### Other apps:
 - 🚦**Nginx Proxy Manager**
   - **Description**: Reverse proxy (See above: networking section). Its own admin UI is proxied through itself 🤯
