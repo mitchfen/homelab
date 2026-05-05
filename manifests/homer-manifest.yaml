@@ -95,6 +95,10 @@ data:
             logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/portainer.png"
             subtitle: "Container Management"
             url: "https://portainer.fenner.nexus"
+          - name: "Text sharing"
+            logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/pastebin.png"
+            subtitle: "Localpaste"
+            url: "https://paste.fenner.nexus"
 ---
 apiVersion: apps/v1
 kind: Deployment
