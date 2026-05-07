@@ -17,6 +17,23 @@
   - **Tracker blocking:** Prevents tracking pixels, analytics scripts, and telemetry endpoints from resolving.
   - **TLD blocking:** Blocks sites that used to suck up all my attention (Instagram, Facebook, Reddit, TikTok) at the DNS level across all devices on the network.
 
+## Hardware
+
+<img src="./images/homelab.jpg" width=500px />
+
+### Purpose of each machine
+- **Varrock** runs pfSense (see above: networking section)
+- **Karamja** serves as a remote development environment. I keep all my repositories, dependencies, and messy build/dev environment tooling there. This allows me to use my ancient (but much loved) Thinkpad as a thin client.
+- **Draynor** runs a single-node kubernetes ([k3s](https://k3s.io/)) cluster that hosts all my applications
+- **Lumbridge** was built for gaming but recently I've been using the 24GB of VRAM in the 7900 XTX to play with local AI models via [LM Studio](https://lmstudio.ai).
+
+| Name | Form Factor | CPU | C/T | GPU | Memory | OS |
+| --- | --- | --- | --- | --- | --- | --- |
+| Varrock | Optiplex micro | i3-6100T | 2c/4t | Intel HD 530 | 8GB | pfSense |
+| Karamja | Optiplex micro | i7-7700T | 4c/8t | Intel HD 630 | 16GB | Debian |
+| Draynor | Optiplex micro | i5-7600T | 4c/4t | Intel HD 630 | 32GB | NixOS |
+| Lumbridge | 4U server chassis | Ryzen 5 7600 | 6c/12t | RX 7900 XTX | 32GB | Windows |
+
 ## Self Hosted Applications
 
 ### Apps I (vibe)coded myself:
@@ -66,21 +83,3 @@
 > **Note:** The NPM dashboard shows access as "public" but this just means no authentication is configured within NPM itself. None of these services are exposed to the public internet.
 
 <img src="./images/npm.png" width=900px />
-
-## Hardware
-
-<img src="./images/homelab.jpg" width=500px />
-
-### Purpose of each machine
-- **Varrock** runs pfSense (see above: networking section)
-- **Karamja** serves as a remote development environment. I keep all my repositories, dependencies, and messy build/dev environment tooling there. This allows me to use my ancient (but much loved) Thinkpad as a thin client.
-- **Draynor** runs a single-node kubernetes ([k3s](https://k3s.io/)) cluster that hosts all my applications
-- **Lumbridge** was built for gaming but recently I've been using the 24GB of VRAM in the 7900 XTX to play with local AI models via [LM Studio](https://lmstudio.ai).
-
-| Name | Form Factor | CPU | C/T | GPU | Memory | OS |
-| --- | --- | --- | --- | --- | --- | --- |
-| Varrock | Optiplex micro | i3-6100T | 2c/4t | Intel HD 530 | 8GB | pfSense |
-| Karamja | Optiplex micro | i7-7700T | 4c/8t | Intel HD 630 | 16GB | Debian |
-| Draynor | Optiplex micro | i5-7600T | 4c/4t | Intel HD 630 | 32GB | NixOS |
-| Lumbridge | 4U server chassis | Ryzen 5 7600 | 6c/12t | RX 7900 XTX | 32GB | Windows |
-
