@@ -61,16 +61,10 @@
     screenfetch
   ];
 
-  systemd.services.k3s-server = {
-    description = "k3s server";
-
-    serviceConfig = {
-      Type = "exec";
-      ExecStart = "${pkgs.k3s}/bin/k3s server --disable traefik";
-      Restart = "on-failure";
-      RestartSec = 10;     };
-
-    wantedBy = [ "multi-user.target" ];
+  services.k3s = {
+    enable = true;
+    role = "server";
+    extraFlags = "--disable traefik";
   };
 
   systemd.timers.k3s-backup = {

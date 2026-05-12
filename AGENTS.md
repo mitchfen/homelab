@@ -32,6 +32,7 @@ Methodology for Development:
 - **Design the solution**: Discuss trade-offs and approach before implementation
 - **Implement incrementally**: Break work into manageable steps with clear milestones
    - Backend: Use Go with standard HTTP library; prefer stdlib over external frameworks
+   - C#/.NET: Use `dotnet run` to start apps (not direct DLL execution); framework-dependent builds work reliably
    - Frontend: Use HTMX with server-rendered HTML templates; minimal JavaScript
    - Database: Use SQLite for persistence, or JSON files for simple state
    - Testing: Write table-driven tests for business logic; use existing test patterns in the repo
