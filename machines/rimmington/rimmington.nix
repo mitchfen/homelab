@@ -35,7 +35,6 @@
     isNormalUser = true;
     description = "mitchfen";
     extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.powershell;
     packages = with pkgs; [];
   };
 
@@ -48,9 +47,8 @@
     k3s
     kubernetes-helm
     btop
-    powershell
     lf
-    microfetch 
+    screenfetch
   ];
 
   systemd.services.k3s-agent = {

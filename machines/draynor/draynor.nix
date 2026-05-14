@@ -43,7 +43,6 @@
     isNormalUser = true;
     description = "mitchfen";
     extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.powershell;
     packages = with pkgs; [];
   };
 
@@ -52,14 +51,21 @@
     defaultEditor = true;
   };
 
+  nixpkgs.config.allowUnfree = true;
+
   environment.systemPackages = with pkgs; [
     k3s
     kubernetes-helm
     btop
-    powershell
     lf
     screenfetch
   ];
+
+  services.unifi = {
+    enable = true;
+    initialJavaHeapSize = 1024;
+    maximumJavaHeapSize = 2048;
+  };
 
   services.k3s = {
     enable = true;
@@ -94,4 +100,3 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
 }
-

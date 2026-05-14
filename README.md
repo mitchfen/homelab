@@ -67,6 +67,9 @@
   - **Description**: Reverse proxy (See above: networking section). Its own admin UI is proxied through itself 🤯
   - **Repo**: [NginxProxyManager/nginx-proxy-manager](https://github.com/NginxProxyManager/nginx-proxy-manager)
 
+- 📡**UniFi Network Application (Controller)**
+  - **Description**: To manage and control my WiFi access points. I'm currently running the [unifi-controller NixOs package](https://search.nixos.org/packages?channel=unstable&query=unifi#show=unifi) on Draynor (not inside the cluster) but I'll probably move it into the cluster eventually.
+
 - 🐳**Portainer**
   - **Description**: Web UI for managing my Kubernetes cluster. Provides dashboards for deployments, pods, services, and other cluster resources without needing to use kubectl.
   - **Repo**: [portainer/portainer](https://github.com/portainer/portainer)
