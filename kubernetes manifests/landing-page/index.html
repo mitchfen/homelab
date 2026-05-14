@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -13,24 +16,12 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #f5f5f5;
-            color: #333;
+            font-family: 'IBM Plex Mono', monospace;
+            background: #282a36;
+            color: #f8f8f2;
             padding: 20px;
             transition: background 0.3s, color 0.3s;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            body {
-                background: #1a1a1a;
-                color: #eee;
-            }
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            display: none;
+            min-height: 100vh;
         }
 
         .container {
@@ -45,10 +36,12 @@
         .section-title {
             font-size: 1.5em;
             margin-bottom: 15px;
-            opacity: 0.8;
+            opacity: 0.95;
             display: flex;
             align-items: center;
             gap: 10px;
+            color: #f8f8f2;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         .links {
@@ -58,36 +51,35 @@
         }
 
         .link {
-            padding: 15px;
-            background: white;
-            border-radius: 8px;
+            padding: 20px;
+            background: rgba(68, 71, 90, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
             text-decoration: none;
-            color: #333;
-            transition: all 0.3s;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            color: #f8f8f2;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
             gap: 10px;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .link {
-                background: #2a2a2a;
-                color: #eee;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            }
+            border: 1px solid rgba(248, 248, 242, 0.1);
         }
 
         .link:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 16px 48px rgba(255, 121, 198, 0.3);
+            background: rgba(255, 121, 198, 0.2);
+            border-color: rgba(255, 121, 198, 0.5);
         }
 
-        @media (prefers-color-scheme: dark) {
+        @media (hover: none) {
             .link:hover {
-                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+                transform: none;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+                background: rgba(68, 71, 90, 0.4);
+                border-color: rgba(248, 248, 242, 0.1);
             }
         }
 
@@ -103,10 +95,6 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>start.fenner.nexus</h1>
-    </div>
-
     <div class="container">
         <!-- Tools -->
         <div class="section">
@@ -128,7 +116,7 @@
                 </a>
                 <a href="https://nanoleaf.fenner.nexus" class="link">
                     <div class="link-icon">🎨</div>
-                    <div class="link-name">Nanoleaf</div>
+                    <div class="link-name">Nanoleaf Lights</div>
                 </a>
                 <a href="https://pdf.fenner.nexus" class="link">
                     <div class="link-icon">📄</div>
@@ -137,10 +125,6 @@
                 <a href="https://paste.fenner.nexus" class="link">
                     <div class="link-icon">📋</div>
                     <div class="link-name">Text Sharing</div>
-                </a>
-                <a href="https://npm.fenner.nexus" class="link">
-                    <div class="link-icon">🚦</div>
-                    <div class="link-name">npm</div>
                 </a>
             </div>
         </div>
@@ -153,7 +137,7 @@
             <div class="links">
                 <a href="http://192.168.1.1" class="link">
                     <div class="link-icon">🛡️</div>
-                    <div class="link-name">pfSense</div>
+                    <div class="link-name">pfSense Router</div>
                 </a>
                 <a href="https://unifi.fenner.nexus" class="link">
                     <div class="link-icon">📡</div>
@@ -163,8 +147,8 @@
                     <div class="link-icon">🐳</div>
                     <div class="link-name">Portainer</div>
                 </a>
-                <a href="http://draynor.home:81" class="link">
-                    <div class="link-icon">🔄</div>
+                <a href="https://npm.fenner.nexus" class="link">
+                    <div class="link-icon">🚦</div>
                     <div class="link-name">Nginx Proxy Manager</div>
                 </a>
             </div>
