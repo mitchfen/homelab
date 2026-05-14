@@ -5,6 +5,15 @@
 
 # Mitch's Homelab 
 
+<img src="./images/homelab.jpg" width=500px />
+
+| Machine | CPU / GPU | CPU release year | Purpose | OS |
+| --- | --- | --- | --- | --- |
+| Karamja | i7-7700T | 2017 | I do all my development here over SSH | Debian |
+| Varrock | i3-6100T | 2015 | Router, firewall, adblocking | pfSense |
+| Draynor | i5-7600T | 2017 | Kubernetes (k3s) cluster | NixOS |
+| Lumbridge | Ryzen 5 7600 / 7900 XTX | 2022 | Local AI models & gaming (Rock and Stone!) | Windows |
+
 ## Networking
 - **No ports are open on my router and no IoT devices are allowed internet access**.
 - [pfSense](https://www.pfsense.org) handles routing and firewalling.
@@ -17,19 +26,9 @@
   - **Tracker blocking:** Prevents tracking pixels, analytics scripts, and telemetry endpoints from resolving.
   - **TLD blocking:** Blocks sites that used to suck up all my attention (Instagram, Facebook, Reddit, TikTok) at the DNS level across all devices on the network.
 
-## Hardware
-
-<img src="./images/homelab.jpg" width=500px />
-
-| Machine | CPU / GPU | CPU release year | Purpose | OS |
-| --- | --- | --- | --- | --- |
-| Karamja | i7-7700T | 2017 | Remote development environment. | Debian |
-| Varrock | i3-6100T | 2015 | Router | pfSense |
-| Draynor | i5-7600T | 2017 | Kubernetes (k3s) cluster | NixOS |
-| Lumbridge | Ryzen 5 7600 / 7900 XTX | 2022 | Local AI models & gaming | Windows |
-
 ## Self Hosted Applications
 
+My landing page:
 <img src="./images/landing-page.png" />
 
 ### Apps I (vibe)coded:
@@ -59,8 +58,8 @@
   - **Repo**: [mitchfen/localpaste](https://github.com/mitchfen/localpaste)
 
 - 🚀**Landing Page**
-   - **Description**: A minimal dashboard that serves as a central entry point to all my apps, so I only have to remember one URL.
-   - **Deployment**: `deploy.sh` regenerates the manifest and applies changes after editing `index.html`, no custom container image needed!
+   - **Description**: A simple dashboard that serves as a central entry point to all my apps, so I only have to remember one URL.
+   - **Deployment**: The [deploy script](./kubernetes%20manifests/landing-page/deploy.sh) regenerates the manifest and applies `index.html`. No custom container image needed for this one!
 
 ### Other apps:
 - 🚦**Nginx Proxy Manager**
@@ -81,4 +80,4 @@
 ### Proxy Host Overview
 <img src="./images/npm.png" width=900px />
 
-> **Note:** The NPM dashboard shows access as "public" but this just means no authentication is configured within NPM itself. None of my services are exposed to the public internet.
+> **Note:** The dashboard shows access as "public" but this just means no authentication is configured within NPM itself. None of my services are exposed to the public internet.
