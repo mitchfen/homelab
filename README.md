@@ -62,6 +62,11 @@
   - **Tech**: Go, HTMX, CSS, Docker, Kubernetes
   - **Repo**: [mitchfen/localpaste](https://github.com/mitchfen/localpaste)
 
+- 🚀**Landing Page**
+   - **Description**: A minimal dashboard that serves as a central entry point to all my apps, so I only have to remember one URL.
+   - **Location**: `kubernetes manifests/landing-page/`
+   - **Deployment**: `./deploy.sh` regenerates the manifest and applies changes after editing `index.html`, no custom container image needed!
+
 ### Other apps:
 - 🚦**Nginx Proxy Manager**
   - **Description**: Reverse proxy (See above: networking section). Its own admin UI is proxied through itself 🤯
@@ -74,15 +79,11 @@
   - **Description**: Web UI for managing my Kubernetes cluster. Provides dashboards for deployments, pods, services, and other cluster resources without needing to use kubectl.
   - **Repo**: [portainer/portainer](https://github.com/portainer/portainer)
 
-- 🏠**Homer**
-  - **Description**: A central entry point to all my apps. So users only have to remember one URL to reach all the apps.
-  - **Repo**: [bastienwirtz/homer](https://github.com/bastienwirtz/homer)
-
 - 📃**Stirling PDF**
   - **Description**: Manipulate and edit PDFs without paying for Adobe.
   - **Repo**: [Stirling-Tools/Stirling-PDF](https://github.com/Stirling-Tools/Stirling-PDF)
 
 ### Proxy Host Overview
-> **Note:** The NPM dashboard shows access as "public" but this just means no authentication is configured within NPM itself. None of these services are exposed to the public internet.
-
 <img src="./images/npm.png" width=900px />
+
+> **Note:** The NPM dashboard shows access as "public" but this just means no authentication is configured within NPM itself. None of these services are exposed to the public internet.
