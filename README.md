@@ -5,7 +5,7 @@
 
 # Mitch's Homelab 
 
-<img src="./images/homelab.jpg" width=500px />
+<img src="./images/homelab.jpg" width=700px />
 
 | Machine | CPU / GPU | CPU release year | Purpose | OS |
 | --- | --- | --- | --- | --- |
