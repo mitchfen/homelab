@@ -26,6 +26,10 @@
   - **Tracker blocking:** Prevents tracking pixels, analytics scripts, and telemetry endpoints from resolving.
   - **TLD blocking:** Blocks sites that used to suck up all my attention (Instagram, Facebook, Reddit, TikTok) at the DNS level across all devices on the network.
 
+## Local AI
+
+Recently I've been runnning local AI models using [LM Studio](https://lmstudio.ai) on **Lumbridge**, leveraging the RX 7900 XTX and it's 24 GB of VRAM for inference. I connect using GitHub Copilot CLI now that it has better support for BYOM (bring your own model). I'm new to local AI learning more about quantization, inference, tuning etc.
+
 ## Self Hosted Applications
 
 My landing page:
@@ -81,3 +85,4 @@ My landing page:
 <img src="./images/npm.png" width=900px />
 
 > **Note:** The dashboard shows access as "public" but this just means no authentication is configured within NPM itself. None of my services are exposed to the public internet.
+
