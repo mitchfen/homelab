@@ -15,12 +15,23 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --bg:        #0f172a;
+            --surface:   #1e293b;
+            --border:    #334155;
+            --text:      #f1f5f9;
+            --muted:     #94a3b8;
+            --accent:    #6366f1;
+            --accent-bg: rgba(99, 102, 241, 0.12);
+            --accent-border: rgba(99, 102, 241, 0.45);
+            --shadow:    rgba(0, 0, 0, 0.4);
+        }
+
         body {
             font-family: 'IBM Plex Mono', monospace;
-            background: #282a36;
-            color: #f8f8f2;
+            background: var(--bg);
+            color: var(--text);
             padding: 20px;
-            transition: background 0.3s, color 0.3s;
             min-height: 100vh;
         }
 
@@ -36,56 +47,54 @@
         .section-title {
             font-size: 1.5em;
             margin-bottom: 15px;
-            opacity: 0.95;
             display: flex;
             align-items: center;
             gap: 10px;
-            color: #f8f8f2;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            color: var(--muted);
         }
 
         .links {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 480px;
         }
 
         .link {
-            padding: 20px;
-            background: rgba(68, 71, 90, 0.4);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
+            padding: 14px 20px;
+            background: var(--surface);
+            border-radius: 10px;
             text-decoration: none;
-            color: #f8f8f2;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            color: var(--text);
+            transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 2px 8px var(--shadow);
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
-            text-align: center;
-            gap: 10px;
-            border: 1px solid rgba(248, 248, 242, 0.1);
+            gap: 14px;
+            border: 1px solid var(--border);
         }
 
         .link:hover {
-            transform: translateY(-8px) scale(1.05);
-            box-shadow: 0 16px 48px rgba(255, 121, 198, 0.3);
-            background: rgba(255, 121, 198, 0.2);
-            border-color: rgba(255, 121, 198, 0.5);
+            transform: translateX(4px);
+            box-shadow: 0 4px 16px var(--shadow);
+            background: var(--accent-bg);
+            border-color: var(--accent-border);
+            color: var(--text);
         }
 
         @media (hover: none) {
             .link:hover {
                 transform: none;
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-                background: rgba(68, 71, 90, 0.4);
-                border-color: rgba(248, 248, 242, 0.1);
+                box-shadow: 0 2px 8px var(--shadow);
+                background: var(--surface);
+                border-color: var(--border);
             }
         }
 
         .link-icon {
-            font-size: 2em;
-            opacity: 0.8;
+            font-size: 1.5em;
+            flex-shrink: 0;
         }
 
         .link-name {
@@ -118,13 +127,15 @@
                     <div class="link-icon">🎨</div>
                     <div class="link-name">Nanoleaf Lights</div>
                 </a>
+								<!--
                 <a href="https://pdf.fenner.nexus" class="link">
                     <div class="link-icon">📄</div>
                     <div class="link-name">Stirling PDF</div>
                 </a>
+								-->
                 <a href="https://paste.fenner.nexus" class="link">
                     <div class="link-icon">📋</div>
-                    <div class="link-name">Text Sharing</div>
+                    <div class="link-name">Localpaste</div>
                 </a>
             </div>
         </div>
@@ -139,6 +150,7 @@
                     <div class="link-icon">🛡️</div>
                     <div class="link-name">pfSense Router</div>
                 </a>
+								<!--
                 <a href="https://unifi.fenner.nexus" class="link">
                     <div class="link-icon">📡</div>
                     <div class="link-name">UniFi Controller</div>
@@ -147,6 +159,7 @@
                     <div class="link-icon">🐳</div>
                     <div class="link-name">Portainer</div>
                 </a>
+								-->
                 <a href="https://npm.fenner.nexus" class="link">
                     <div class="link-icon">🚦</div>
                     <div class="link-name">Nginx Proxy Manager</div>
