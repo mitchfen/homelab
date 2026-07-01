@@ -61,36 +61,16 @@
     screenfetch
   ];
 
-  services.unifi = {
-    enable = true;
-    initialJavaHeapSize = 1024;
-    maximumJavaHeapSize = 2048;
-  };
-
   services.k3s = {
     enable = true;
     role = "server";
     extraFlags = "--disable traefik";
   };
 
-  systemd.timers.k3s-backup = {
-    description = "K3s Cluster Backup Timer";
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      OnCalendar = "*-*-* 02:00:00";
-      Persistent = true;
-    };
+  environment.shellAliases = {
+    k = "kubectl";
+    vim = "nvim";
   };
-
-  systemd.services.k3s-backup = {
-    description = "K3s Cluster Backup";
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "/home/mitchfen/backup-k3s.sh";
-      User = "root";
-    };
-  };
-
 
   services.openssh.enable = true;
   networking.firewall.enable = false;

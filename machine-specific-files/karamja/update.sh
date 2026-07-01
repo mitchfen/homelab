@@ -58,11 +58,6 @@ total_space_saved=$((total_space_saved + go_saved))
 echo "  Freed: $(format_bytes $go_saved)"
 
 echo ""
-echo "########### Update CoPilot... ###########"
-echo ""
-sudo npm update -g @github/copilot
-
-echo ""
 echo "✓ All updates completed successfully!"
 echo "✓ Total space saved: $(format_bytes $total_space_saved)"
 echo ""
