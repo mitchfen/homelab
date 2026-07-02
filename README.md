@@ -1,18 +1,9 @@
 > "Mom, can we have the cloud?"  
-> "We have the cloud at home."
+> "No. We have the cloud at home."
 > 
 > The cloud at home:
 
 # Mitch's Homelab 
-
-<img src="./images/homelab.jpg" width=700px />
-
-| Machine | CPU / GPU | CPU release year | Purpose | OS |
-| --- | --- | --- | --- | --- |
-| Karamja | i7-7700T | 2017 | I do all my development here over SSH | Debian |
-| Varrock | i3-6100T | 2015 | Router, firewall, adblocking | pfSense |
-| Draynor | i5-7600T | 2017 | Kubernetes (k3s) cluster | NixOS |
-| Lumbridge | Ryzen 5 7600 / 7900 XTX | 2022 | Local AI models & gaming (Rock and Stone!) | Windows |
 
 ## Networking
 - **No ports are open on my router and no IoT devices are allowed internet access**.
@@ -28,12 +19,17 @@
 
 ## Local AI
 
-Recently I've been runnning local AI models using [LM Studio](https://lmstudio.ai) on **Lumbridge**, leveraging the RX 7900 XTX and it's 24 GB of VRAM for inference. I connect using GitHub Copilot CLI now that it has better support for BYOM (bring your own model). I'm new to local AI learning more about quantization, inference, tuning etc.
+- Recently I've been runnning local AI models using [LM Studio](https://lmstudio.ai) on **Lumbridge**, leveraging my RX 7900 XTX and it's 24 GB of VRAM. 
+- I host [Open WebUI](https://github.com/open-webui/open-webui) connected to LM Studio so other users on my home network can talk to my local LLMs. I'm new to local AI learning more about quantization, inference, tuning etc.
+- I also connect using GitHub Copilot CLI's BYOM (bring your own model) feature. 
+- I'm new to local AI; learning more about quantization, inference, tuning etc.
 
 ## Self Hosted Applications
 
+<!--
 My landing page:
 <img src="./images/landing-page.png" />
+-->
 
 ### Apps I (vibe)coded:
 - 🎯**Momentum**
@@ -45,6 +41,11 @@ My landing page:
   - **Description**: Allows me to track my weight and see a trend line.
   - **Tech**: Go, SQLite, HTML, CSS, JS, Docker, Kubernetes
   - **Repo**: [mitchfen/weight-tracker](https://github.com/mitchfen/weight-tracker)
+
+- ❤️**Blood Pressure Tracker**
+  - **Description**: Allows me to track my blood pressure and visualize trends.
+  - **Tech**: Go, HTMX, Tailwind, SQLite, Chart.js, Docker, Kubernetes
+  - **Repo**: [mitchfen/blood-pressure-tracker](https://github.com/mitchfen/blood-pressure-tracker)
 
 - 💡**Nanoleaf Controller**
   - **Description**: Allow anyone on my home network to control the Nanoleaf light panels without installing a proprietary app on their phone.
@@ -65,24 +66,31 @@ My landing page:
    - **Description**: A simple dashboard that serves as a central entry point to all my apps, so I only have to remember one URL.
    - **Deployment**: The [deploy script](./kubernetes%20manifests/landing-page/deploy.sh) regenerates the manifest and applies `index.html`. No custom container image needed for this one!
 
-### Other apps:
+### Off-the-Shelf Apps
+- 🤖**Open WebUI**
+  - **Description**: Frontend interface for my local LLMs running via LM Studio, allowing anyone on my home network to chat with local AI models.
+  - **Repo**: [open-webui/open-webui](https://github.com/open-webui/open-webui)
+
 - 🚦**Nginx Proxy Manager**
-  - **Description**: Reverse proxy. Its own admin UI is proxied through itself 🤯
+  - **Description**: Reverse proxy and entrypoint for all my apps. 
   - **Repo**: [NginxProxyManager/nginx-proxy-manager](https://github.com/NginxProxyManager/nginx-proxy-manager)
 
-- 📡**UniFi Network Application (Controller)**
-  - **Description**: To manage and control my WiFi access points. I'm currently running the [unifi-controller NixOs package](https://search.nixos.org/packages?channel=unstable&query=unifi#show=unifi) on Draynor (not inside the cluster) but I'll probably move it into the cluster eventually.
+- 📡**UniFiOS**
+  - **Description**: To manage and control my WiFi access points. This runs on **Karamja**.
 
-- 🐳**Portainer**
-  - **Description**: Web UI for managing my Kubernetes cluster. Provides dashboards for deployments, pods, services, and other cluster resources without needing to use kubectl.
-  - **Repo**: [portainer/portainer](https://github.com/portainer/portainer)
+## Hardware
 
-- 📃**Stirling PDF**
-  - **Description**: Manipulate and edit PDFs without paying for Adobe.
-  - **Repo**: [Stirling-Tools/Stirling-PDF](https://github.com/Stirling-Tools/Stirling-PDF)
+<img src="./images/homelab.jpg" width=450px />
+
+| Machine | CPU / GPU | CPU release year | Purpose | OS |
+| --- | --- | --- | --- | --- |
+| Lumbridge | Ryzen 5 7600 / RX 7900 XTX | 2022 | Development, Local AI models & gaming | NixOS |
+| Draynor | i5-7600T | 2017 | Kubernetes (k3s) cluster | NixOS |
+| Varrock | i3-6100T | 2015 | Router, firewall, adblocking | pfSense |
+| Karamja | i7-7700T | 2017 | Hosts UnifiOS  | Debian 13 |
 
 ### Proxy Host Overview
-<img src="./images/npm.png" width=900px />
+<img src="./images/npm.png" width=800px />
 
 > **Note:** The dashboard shows access as "public" but this just means no authentication is configured within NPM itself. None of my services are exposed to the public internet.
 
