@@ -5,8 +5,17 @@
 
 # Mitch's Homelab 
 
+## Hardware
+<img src="./images/homelab.jpg" width=550px />
+
+| Machine | CPU | GPU | CPU release year | C/T |  Memory |Purpose | OS |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Karamja | i7-7700T || 2017 | 4c/8t | 16GB | UnifiOS (needs another job)  | Debian 13 |
+| Varrock | i3-6100T || 2015 | 2c/4t | 8GB | Router, firewall, adblocking | pfSense |
+| Draynor | i5-7600T || 2017 | 4c/4t | 32GB | Kubernetes cluster (k3s) | NixOS |
+| Lumbridge | Ryzen 5 7600 | RX 7900 XTX | 2022 | 6c/12t | 32GB | Development, Local AI models | NixOS |
+
 ## Networking
-- **No ports are open on my router and no IoT devices are allowed internet access**.
 - [pfSense](https://www.pfsense.org) handles routing and firewalling.
 - All my apps are served on subdomains of `fenner.nexus` a real/public domain, but one with no public DNS records. I use a [Split-horizon DNS](https://en.wikipedia.org/wiki/Split-horizon_DNS) strategy so that my devices resolve those subdomains to the local IP of my cluster.
 - [Nginx Proxy Manager](https://github.com/NginxProxyManager/nginx-proxy-manager) acts as the reverse proxy, routing each request to the correct pod via the HTTP `Host` header. It uses the Cloudflare API to obtain a wildcard `*.fenner.nexus` TLS certificate via the [DNS-01 challenge](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge). So every app is served over HTTPS without browser certificate warnings ✨
@@ -16,6 +25,7 @@
   - **Ad blocking:** Blocks ad-serving domains across every device on the network at the DNS level. No adblock browser extension required.
   - **Tracker blocking:** Prevents tracking pixels, analytics scripts, and telemetry endpoints from resolving.
   - **TLD blocking:** Blocks sites that used to suck up all my attention (Instagram, Facebook, Reddit, TikTok) at the DNS level across all devices on the network.
+- **No ports are open on my router and no IoT devices are allowed internet access**.
 
 ## Local AI
 
@@ -26,15 +36,9 @@
 
 ## Self Hosted Applications
 
-| Langing page | Proxy Manager|
-| :---: | :---: |
-| <img src="./images/landing-page.png" width="550px" /> | <img src="./images/npm.png" width="550px" /> |
-| So I only have to remember 1 URL  | Entrypoint to all my apps 
-| | 
-
-### Custom-Built:
+### Custom-Built Apps:
 - 💡**Nanoleaf Controller**
-  - **Description**: Allow anyone on my home network to control the Nanoleaf light panels without installing a proprietary app on their phone.
+  - **Description**: Allow anyone on my home network to control the Nanoleaf light panels without installing an app on their phone.
   - **Tech**: .NET 10, Blazor Server, Nanoleaf OpenAPI, Docker, Kubernetes
   - **Repo**: [mitchfen/nanoleaf-controller](https://github.com/mitchfen/nanoleaf-controller)
 
@@ -67,7 +71,7 @@
    - **Description**: A simple dashboard that serves as a central entry point to all my apps, so I only have to remember one URL.
    - **Deployment**: The [deploy script](./kubernetes%20manifests/landing-page/deploy.sh) regenerates the manifest and applies `index.html`. No custom container image needed for this one!
 
-### Off-the-Shelf:
+### Off-the-Shelf Apps:
 - 🤖**Open WebUI**
   - **Description**: Frontend interface for my local LLMs running via LM Studio, allowing anyone on my home network to chat with local AI models.
   - **Repo**: [open-webui/open-webui](https://github.com/open-webui/open-webui)
@@ -77,15 +81,15 @@
   - **Repo**: [NginxProxyManager/nginx-proxy-manager](https://github.com/NginxProxyManager/nginx-proxy-manager)
 
 - 📡**UniFiOS**
-  - **Description**: To manage and control my WiFi access points. This runs on **Karamja**.
+  - **Description**: To manage and control my WiFi access points. This runs on Karamja.
 
-## Hardware
+## Pictures
 
-<img src="./images/homelab.jpg" width=800px />
+## Proxy dashboard
+<img src="./images/npm.png" />
 
-| Machine | CPU / GPU | CPU release year | Purpose | OS |
-| --- | --- | --- | --- | --- |
-| Lumbridge | Ryzen 5 7600 / RX 7900 XTX | 2022 | Development, Local AI models & gaming | NixOS |
-| Draynor | i5-7600T | 2017 | Kubernetes (k3s) cluster | NixOS |
-| Varrock | i3-6100T | 2015 | Router, firewall, adblocking | pfSense |
-| Karamja | i7-7700T | 2017 | Hosts UnifiOS  | Debian 13 |
+## Landing page
+<img src="./images/landing-page.png" /> 
+
+
+
