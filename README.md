@@ -10,7 +10,7 @@
 
 | Machine | CPU | GPU | CPU release year | C/T |  Memory |Purpose | OS |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Karamja | i7-7700T || 2017 | 4c/8t | 16GB | UnifiOS (needs another job)  | Debian 13 |
+| Karamja | i7-7700T || 2017 | 4c/8t | 16GB | UnifiOS and SMB Share | Debian 13 |
 | Varrock | i3-6100T || 2015 | 2c/4t | 8GB | Router, firewall, adblocking | pfSense |
 | Draynor | i5-7600T || 2017 | 4c/4t | 32GB | Kubernetes cluster (k3s) | NixOS |
 | Lumbridge | Ryzen 5 7600 | RX 7900 XTX | 2022 | 6c/12t | 32GB | Development, Local AI models | NixOS |
@@ -83,13 +83,9 @@
 - 📡**UniFiOS**
   - **Description**: To manage and control my WiFi access points. This runs on Karamja.
 
-## Pictures
-
-## Proxy dashboard
-<img src="./images/npm.png" />
 
 ## Landing page
 <img src="./images/landing-page.png" /> 
 
-
-
+## Proxy dashboard
+<img src="./images/npm.png" />
