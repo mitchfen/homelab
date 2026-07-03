@@ -19,13 +19,6 @@ require("lazy").setup({
     "mfussenegger/nvim-lsp-compl"
 })
 
--- LSP
-require'lspconfig'.powershell_es.setup{
-    bundle_path = 'c:/PowerShellEditorServices',
-    shell = 'pwsh.exe',
-    --on_attach=require'lsp_compl'.attach
-}
-
 require'lspconfig'.csharp_ls.setup{}
 
 -- Lua vim configurations

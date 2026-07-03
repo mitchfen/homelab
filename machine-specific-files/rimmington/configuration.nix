@@ -6,14 +6,21 @@
       ./hardware-configuration.nix
     ];
 
+  # Bootloader configuration
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Networking configuration
   networking.hostName = "rimmington"; # Define your hostname.
   networking.networkmanager.enable = true;
+  
+  # Set your time zone.
   time.timeZone = "America/Detroit";
+  
+  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
+  # Extra locale settings
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";
@@ -26,11 +33,13 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
 
+  # Define a user account
   users.users.mitchfen = {
     isNormalUser = true;
     description = "mitchfen";
@@ -38,11 +47,13 @@
     packages = with pkgs; [];
   };
 
+  # Default editor settings
   programs.neovim = {
     enable = true;
     defaultEditor = true;
   };
 
+  # List packages installed in system profile
   environment.systemPackages = with pkgs; [
     k3s
     kubernetes-helm
@@ -51,6 +62,7 @@
     screenfetch
   ];
 
+  # Configure k3s agent systemd service to connect to the main node
   systemd.services.k3s-agent = {
     description = "k3s agent";
 
@@ -68,10 +80,12 @@
   };
 
 
+  # Enable the OpenSSH daemon
   services.openssh.enable = true;
+  
+  # Disable the firewall
   networking.firewall.enable = false;
 
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.05"; # Did you read the comment?
+  # Do not change
+  system.stateVersion = "25.05";
 }

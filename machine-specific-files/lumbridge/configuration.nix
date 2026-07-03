@@ -1,3 +1,7 @@
+# Edit this configuration file to define what should be installed on
+# your system. Help is available in the configuration.nix(5) man page
+# and in the NixOS manual (accessible by running ‘nixos-help’).
+
 { config, pkgs, ... }:
 
 {
@@ -13,6 +17,28 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # Root file system mount options
+  fileSystems."/" = {
+    options = [ "noatime" ];
+  };
+
+  # Configure journald to use volatile storage (RAM) to reduce disk I/O
+  services.journald.extraConfig = ''
+    Storage=volatile
+    RuntimeMaxUse=50M
+  '';
+
+  # Automatically optimize the Nix store to save disk space
+  nix.settings.auto-optimise-store = true;
+
+  # Automate garbage collection
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+  };
+
+  # Define your hostname
   networking.hostName = "lumbridge"; 
 
   # Enable networking
@@ -63,7 +89,17 @@
     vimAlias = true;
   };
 
-  programs.fish.enable = true;
+  # Fish shell configuration and aliases
+  programs.fish = {
+    enable = true;
+    shellAliases = {
+      nixUpgrade = "sudo nixos-rebuild switch --upgrade";
+      nixClean = "sudo nix-collect-garbage -d";
+      nixListGenerations = "sudo nixos-rebuild list-generations";
+      k = "kubectl";
+      vim = "nvim";
+    };
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -98,7 +134,14 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  virtualisation.docker.enable = true;
+  # Enable Docker and auto-pruning
+  virtualisation.docker = {
+    enable = true;
+    autoPrune = {
+      enable = true;
+      dates = "weekly";
+    };
+  };
 
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
@@ -121,9 +164,16 @@
     kubectl
     k9s
     runelite
+    antigravity-cli
+    lf
   ];
 
-  networking.firewall.enable = false;
+  # Configure the firewall
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 1234 ]; # LMStudio
+  };
 
+  # Do not change
   system.stateVersion = "25.11"; 
 }
