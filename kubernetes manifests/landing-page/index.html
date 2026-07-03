@@ -3,175 +3,366 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Services</title>
+    <title>Mitch's Home Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #09090b;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.06);
+            --card-hover-border: rgba(99, 102, 241, 0.5);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-glow: rgba(99, 102, 241, 0.15);
+            --gradient-1: #6366f1;
+            --gradient-2: #8b5cf6;
+            --gradient-3: #ec4899;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --bg:        #0f172a;
-            --surface:   #1e293b;
-            --border:    #334155;
-            --text:      #f1f5f9;
-            --muted:     #94a3b8;
-            --accent:    #6366f1;
-            --accent-bg: rgba(99, 102, 241, 0.12);
-            --accent-border: rgba(99, 102, 241, 0.45);
-            --shadow:    rgba(0, 0, 0, 0.4);
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem 1.5rem;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        body {
-            font-family: 'IBM Plex Mono', monospace;
-            background: var(--bg);
-            color: var(--text);
-            padding: 20px;
-            min-height: 100vh;
+        /* Ambient Background Glow */
+        body::before, body::after {
+            content: '';
+            position: absolute;
+            width: 50vw;
+            height: 50vw;
+            max-width: 600px;
+            max-height: 600px;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.35;
+            animation: float 20s ease-in-out infinite alternate;
+        }
+
+        body::before {
+            background: radial-gradient(circle, var(--gradient-1), transparent 65%);
+            top: -10%;
+            left: -10%;
+        }
+
+        body::after {
+            background: radial-gradient(circle, var(--gradient-2), transparent 65%);
+            bottom: -10%;
+            right: -10%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
+            max-width: 1000px;
+            width: 100%;
+            z-index: 1;
         }
 
-        .section {
-            margin-bottom: 40px;
+        header {
+            margin-bottom: 4rem;
+            text-align: center;
+            animation: fadeInDown 1s ease-out forwards;
+        }
+
+        h1 {
+            font-weight: 800;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            letter-spacing: -0.04em;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .dashboard-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 3.5rem;
         }
 
         .section-title {
-            font-size: 1.5em;
-            margin-bottom: 15px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 10px;
-            color: var(--muted);
+            gap: 1rem;
+            position: relative;
+            padding-left: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
-        .links {
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 100%;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--gradient-1), var(--gradient-3));
+            border-radius: 4px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.25rem;
+            text-decoration: none;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px) scale(1.01);
+            border-color: var(--card-hover-border);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 12px 30px var(--accent-glow), inset 0 0 0 1px rgba(99, 102, 241, 0.3);
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .icon-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255,255,255,0.1);
+            font-size: 1.4rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card:hover .icon-wrapper {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .card-content {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            max-width: 480px;
+            gap: 0.2rem;
         }
 
-        .link {
-            padding: 14px 20px;
-            background: var(--surface);
-            border-radius: 10px;
-            text-decoration: none;
-            color: var(--text);
-            transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 2px 8px var(--shadow);
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 14px;
-            border: 1px solid var(--border);
-        }
-
-        .link:hover {
-            transform: translateX(4px);
-            box-shadow: 0 4px 16px var(--shadow);
-            background: var(--accent-bg);
-            border-color: var(--accent-border);
-            color: var(--text);
-        }
-
-        @media (hover: none) {
-            .link:hover {
-                transform: none;
-                box-shadow: 0 2px 8px var(--shadow);
-                background: var(--surface);
-                border-color: var(--border);
-            }
-        }
-
-        .link-icon {
-            font-size: 1.5em;
-            flex-shrink: 0;
-        }
-
-        .link-name {
+        .card-title {
             font-weight: 600;
-            font-size: 0.95em;
+            font-size: 1.05rem;
+            letter-spacing: 0.02em;
         }
+
+        .card-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-pop {
+            animation: popIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* Staggered delays for cards */
+        .card-grid .card:nth-child(1) { animation-delay: 0.1s; }
+        .card-grid .card:nth-child(2) { animation-delay: 0.15s; }
+        .card-grid .card:nth-child(3) { animation-delay: 0.2s; }
+        .card-grid .card:nth-child(4) { animation-delay: 0.25s; }
+        .card-grid .card:nth-child(5) { animation-delay: 0.3s; }
+        .card-grid .card:nth-child(6) { animation-delay: 0.35s; }
+        .card-grid .card:nth-child(7) { animation-delay: 0.4s; }
+        
+        .section:nth-child(2) .card:nth-child(1) { animation-delay: 0.45s; }
+        .section:nth-child(2) .card:nth-child(2) { animation-delay: 0.5s; }
+
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Tools -->
-        <div class="section">
-            <div class="section-title">
-                🛠️ Tools
-            </div>
-            <div class="links">
-                <a href="https://momentum.fenner.nexus" class="link">
-                    <div class="link-icon">✅</div>
-                    <div class="link-name">Momentum</div>
-                </a>
-                <a href="https://tracker.fenner.nexus" class="link">
-                    <div class="link-icon">⚖️</div>
-                    <div class="link-name">Weight Tracker</div>
-                </a>
-                <a href="https://bp.fenner.nexus" class="link">
-                    <div class="link-icon">❤️</div>
-                    <div class="link-name">Blood Pressure Tracker</div>
-                </a>
-                <a href="https://wiz.fenner.nexus" class="link">
-                    <div class="link-icon">💡</div>
-                    <div class="link-name">WiZ Lights</div>
-                </a>
-                <a href="https://nanoleaf.fenner.nexus" class="link">
-                    <div class="link-icon">🎨</div>
-                    <div class="link-name">Nanoleaf Lights</div>
-                </a>
-                <a href="https://ai.fenner.nexus" class="link">
-                    <div class="link-icon">🤖</div>
-                    <div class="link-name">Local AI</div>
-                </a>
-				<!--
-                <a href="https://pdf.fenner.nexus" class="link">
-                    <div class="link-icon">📄</div>
-                    <div class="link-name">Stirling PDF</div>
-                </a>
-				-->
-                <a href="https://paste.fenner.nexus" class="link">
-                    <div class="link-icon">📋</div>
-                    <div class="link-name">Localpaste</div>
-                </a>
-            </div>
-        </div>
+        <header>
+            <h1>start.fenner.nexus</h1>
+        </header>
 
-        <!-- Admin -->
-        <div class="section">
-            <div class="section-title">
-                ⚙️ Admin
+        <div class="dashboard-grid">
+            <!-- Tools Section -->
+            <div class="section">
+                <div class="section-title">Applications</div>
+                <div class="card-grid">
+                    <a href="https://ai.fenner.nexus" class="card animate-pop">
+                        <div class="icon-wrapper">🧠</div>
+                        <div class="card-content">
+                            <div class="card-title">Local AI</div>
+
+                        </div>
+                    </a>
+
+                    <a href="https://paste.fenner.nexus" class="card animate-pop">
+                        <div class="icon-wrapper">📋</div>
+                        <div class="card-content">
+                            <div class="card-title">Localpaste</div>
+
+                        </div>
+                    </a>
+                </div>
             </div>
-            <div class="links">
-                <a href="http://192.168.1.1" class="link">
-                    <div class="link-icon">🛡️</div>
-                    <div class="link-name">pfSense Router</div>
-                </a>
-								<!--
-                <a href="https://unifi.fenner.nexus" class="link">
-                    <div class="link-icon">📡</div>
-                    <div class="link-name">UniFi Controller</div>
-                </a>
-                <a href="https://portainer.fenner.nexus" class="link">
-                    <div class="link-icon">🐳</div>
-                    <div class="link-name">Portainer</div>
-                </a>
-								-->
-                <a href="https://npm.fenner.nexus" class="link">
-                    <div class="link-icon">🚦</div>
-                    <div class="link-name">Nginx Proxy Manager</div>
-                </a>
+
+            <!-- Light Controllers Section -->
+            <div class="section">
+                <div class="section-title">Light Controllers</div>
+                <div class="card-grid">
+                    <a href="https://wiz.fenner.nexus" class="card animate-pop">
+                        <div class="icon-wrapper">💡</div>
+                        <div class="card-content">
+                            <div class="card-title">WiZ</div>
+
+                        </div>
+                    </a>
+
+                    <a href="https://nanoleaf.fenner.nexus" class="card animate-pop">
+                        <div class="icon-wrapper">🎨</div>
+                        <div class="card-content">
+                            <div class="card-title">Nanoleaf</div>
+
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Trackers Section -->
+            <div class="section">
+                <div class="section-title">Trackers</div>
+                <div class="card-grid">
+                    <a href="https://momentum.fenner.nexus" class="card animate-pop">
+                        <div class="icon-wrapper">🚀</div>
+                        <div class="card-content">
+                            <div class="card-title">Momentum</div>
+
+                        </div>
+                    </a>
+
+                    <a href="https://tracker.fenner.nexus" class="card animate-pop">
+                        <div class="icon-wrapper">⚖️</div>
+                        <div class="card-content">
+                            <div class="card-title">Mitch's weight Tracker</div>
+
+                        </div>
+                    </a>
+
+                    <a href="https://caroline-tracker.fenner.nexus" class="card animate-pop">
+                        <div class="icon-wrapper">⚖️</div>
+                        <div class="card-content">
+                            <div class="card-title">Caroline's weight Tracker</div>
+
+                        </div>
+                    </a>
+
+                    <a href="https://bp.fenner.nexus" class="card animate-pop">
+                        <div class="icon-wrapper">❤️</div>
+                        <div class="card-content">
+                            <div class="card-title">Blood Pressure</div>
+
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Admin Section -->
+            <div class="section">
+                <div class="section-title">Network & Admin</div>
+                <div class="card-grid">
+                    <a href="http://192.168.1.1" class="card animate-pop">
+                        <div class="icon-wrapper">🛡️</div>
+                        <div class="card-content">
+                            <div class="card-title">pfSense Router/Firewall</div>
+                        </div>
+                    </a>
+
+                    <a href="https://unifi.fenner.nexus" class="card animate-pop">
+                        <div class="icon-wrapper">🛜</div>
+                        <div class="card-content">
+                            <div class="card-title">UniFi OS</div>
+
+                        </div>
+                    </a>
+
+                    <a href="https://npm.fenner.nexus" class="card animate-pop">
+                        <div class="icon-wrapper">🚦</div>
+                        <div class="card-content">
+                            <div class="card-title">Proxy Manager</div>
+
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

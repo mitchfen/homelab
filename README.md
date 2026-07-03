@@ -26,12 +26,23 @@
 
 ## Self Hosted Applications
 
-<!--
-My landing page:
-<img src="./images/landing-page.png" />
--->
+| Langing page | Proxy Manager|
+| :---: | :---: |
+| <img src="./images/landing-page.png" width="550px" /> | <img src="./images/npm.png" width="550px" /> |
+| So I only have to remember 1 URL  | Entrypoint to all my apps 
+| | 
 
-### Apps I (vibe)coded:
+### Custom-Built:
+- 💡**Nanoleaf Controller**
+  - **Description**: Allow anyone on my home network to control the Nanoleaf light panels without installing a proprietary app on their phone.
+  - **Tech**: .NET 10, Blazor Server, Nanoleaf OpenAPI, Docker, Kubernetes
+  - **Repo**: [mitchfen/nanoleaf-controller](https://github.com/mitchfen/nanoleaf-controller)
+
+- 💡**Wiz Controller**
+  - **Description**: Allow anyone on my home network to control my WiZ lights without installing a proprietary app on their phone.
+  - **Tech**: Go, HTMX, CSS, Docker, Kubernetes
+  - **Repo**: [mitchfen/wiz-controller](https://github.com/mitchfen/wiz-controller)
+
 - 🎯**Momentum**
   - **Description**: Helps me keep track of tasks which need to be done every day, and to do them in habit stacks.
   - **Tech**: Go, HTMX, CSS, Docker, Kubernetes
@@ -47,16 +58,6 @@ My landing page:
   - **Tech**: Go, HTMX, Tailwind, SQLite, Chart.js, Docker, Kubernetes
   - **Repo**: [mitchfen/blood-pressure-tracker](https://github.com/mitchfen/blood-pressure-tracker)
 
-- 💡**Nanoleaf Controller**
-  - **Description**: Allow anyone on my home network to control the Nanoleaf light panels without installing a proprietary app on their phone.
-  - **Tech**: .NET 10, Blazor Server, Nanoleaf OpenAPI, Docker, Kubernetes
-  - **Repo**: [mitchfen/nanoleaf-controller](https://github.com/mitchfen/nanoleaf-controller)
-
-- 💡**Wiz Controller**
-  - **Description**: Allow anyone on my home network to control my WiZ lights without installing a proprietary app on their phone.
-  - **Tech**: Go, HTMX, CSS, Docker, Kubernetes
-  - **Repo**: [mitchfen/wiz-controller](https://github.com/mitchfen/wiz-controller)
-
 - 📋**Localpaste**
   - **Description**: Allows me to send text data between devices on my home network with automatic expiration.
   - **Tech**: Go, HTMX, CSS, Docker, Kubernetes
@@ -66,7 +67,7 @@ My landing page:
    - **Description**: A simple dashboard that serves as a central entry point to all my apps, so I only have to remember one URL.
    - **Deployment**: The [deploy script](./kubernetes%20manifests/landing-page/deploy.sh) regenerates the manifest and applies `index.html`. No custom container image needed for this one!
 
-### Off-the-Shelf Apps
+### Off-the-Shelf:
 - 🤖**Open WebUI**
   - **Description**: Frontend interface for my local LLMs running via LM Studio, allowing anyone on my home network to chat with local AI models.
   - **Repo**: [open-webui/open-webui](https://github.com/open-webui/open-webui)
@@ -80,7 +81,7 @@ My landing page:
 
 ## Hardware
 
-<img src="./images/homelab.jpg" width=450px />
+<img src="./images/homelab.jpg" width=800px />
 
 | Machine | CPU / GPU | CPU release year | Purpose | OS |
 | --- | --- | --- | --- | --- |
@@ -88,9 +89,3 @@ My landing page:
 | Draynor | i5-7600T | 2017 | Kubernetes (k3s) cluster | NixOS |
 | Varrock | i3-6100T | 2015 | Router, firewall, adblocking | pfSense |
 | Karamja | i7-7700T | 2017 | Hosts UnifiOS  | Debian 13 |
-
-### Proxy Host Overview
-<img src="./images/npm.png" width=800px />
-
-> **Note:** The dashboard shows access as "public" but this just means no authentication is configured within NPM itself. None of my services are exposed to the public internet.
-
