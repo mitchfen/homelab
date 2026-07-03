@@ -8,12 +8,12 @@
 ## Hardware
 <img src="./images/homelab.jpg" width=550px />
 
-| Machine | CPU | GPU | CPU release year | C/T |  Memory |Purpose | OS |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Karamja | i7-7700T || 2017 | 4c/8t | 16GB | UnifiOS and SMB Share | Debian 13 |
-| Varrock | i3-6100T || 2015 | 2c/4t | 8GB | Router, firewall, adblocking | pfSense |
-| Draynor | i5-7600T || 2017 | 4c/4t | 32GB | Kubernetes cluster (k3s) | NixOS |
-| Lumbridge | Ryzen 5 7600 | RX 7900 XTX | 2022 | 6c/12t | 32GB | Development, Local AI models | NixOS |
+| Machine | CPU | GPU |  Memory |Purpose | OS |
+| --- | --- | --- | --- | --- | --- |
+| Lumbridge | Ryzen 5 7600 | RX 7900 XTX  | 32GB | Development, Local AI models | NixOS |
+| Draynor | i5-7600T | Integrated | 32GB | Kubernetes cluster (k3s) | NixOS |
+| Varrock | i3-6100T | Integrated | 8GB | Router/firewall, adblocking, unbound DNS | pfSense |
+| Karamja | i7-7700T | Integrated  | 16GB | UnifiOS and SMB Share | Debian 13 |
 
 ## Networking
 - [pfSense](https://www.pfsense.org) handles routing and firewalling.
