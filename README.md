@@ -3,13 +3,11 @@
 > 
 > The cloud at home:
 
-# Mitch's Homelab 
-
 <img src="./images/homelab.jpg" width=550px />
 
 ## Self Hosted Applications
 
-### Custom-Built Apps:
+### Self Made Apps:
 - 💡 **Nanoleaf Controller**
   - **Description**: Allow anyone on my home network to control the Nanoleaf light panels without installing an app on their phone.
   - **Tech**: .NET 10, Blazor Server, Nanoleaf OpenAPI, Docker, Kubernetes
@@ -44,7 +42,7 @@
    - **Description**: A simple dashboard that serves as a central entry point to all my apps, so I only have to remember one URL.
    - **Deployment**: The [deploy script](./landing-page/deploy.sh) regenerates the manifest and applies `index.html`. No custom container image needed for this one!
 
-### Off-the-Shelf Apps:
+### Off The Shelf Apps:
 - 🤖 **Open WebUI**
   - **Description**: Frontend interface for my local LLMs running via LM Studio, allowing anyone on my home network to chat with local AI models.
   - **Repo**: [open-webui/open-webui](https://github.com/open-webui/open-webui)
