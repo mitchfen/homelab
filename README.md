@@ -5,8 +5,60 @@
 
 # Mitch's Homelab 
 
-## Hardware
 <img src="./images/homelab.jpg" width=550px />
+
+## Self Hosted Applications
+
+### Custom-Built Apps:
+- 💡 **Nanoleaf Controller**
+  - **Description**: Allow anyone on my home network to control the Nanoleaf light panels without installing an app on their phone.
+  - **Tech**: .NET 10, Blazor Server, Nanoleaf OpenAPI, Docker, Kubernetes
+  - **Repo**: [mitchfen/nanoleaf-controller](https://github.com/mitchfen/nanoleaf-controller)
+
+- 📋 **Localpaste**
+  - **Description**: Allows me to send text data between devices on my home network with automatic expiration.
+  - **Tech**: Go, HTMX, CSS, Docker, Kubernetes
+  - **Repo**: [mitchfen/localpaste](https://github.com/mitchfen/localpaste)
+
+- 🎯 **Momentum**
+  - **Description**: Helps me keep track of tasks which need to be done every day, and to do them in habit stacks.
+  - **Tech**: Go, HTMX, CSS, Docker, Kubernetes
+  - **Repo**: [mitchfen/momentum](https://github.com/mitchfen/momentum)
+
+- 💪 **Weight Tracker**
+  - **Description**: Allows me to track my weight and see a trend line.
+  - **Tech**: Go, SQLite, HTML, CSS, JS, Docker, Kubernetes
+  - **Repo**: [mitchfen/weight-tracker](https://github.com/mitchfen/weight-tracker)
+
+- ❤️ **Blood Pressure Tracker**
+  - **Description**: Allows me to track my blood pressure and visualize trends.
+  - **Tech**: Go, HTMX, Tailwind, SQLite, Chart.js, Docker, Kubernetes
+  - **Repo**: [mitchfen/blood-pressure-tracker](https://github.com/mitchfen/blood-pressure-tracker)
+
+- 💡 **Wiz Controller**
+   - **Description**: Allow anyone on my home network to control my WiZ lights without installing a proprietary app on their phone.
+   - **Tech**: Go, HTMX, CSS, Docker, Kubernetes
+   - **Repo**: [mitchfen/wiz-controller](https://github.com/mitchfen/wiz-controller)
+
+- 🚀 **Landing Page**
+   - **Description**: A simple dashboard that serves as a central entry point to all my apps, so I only have to remember one URL.
+   - **Deployment**: The [deploy script](./landing-page/deploy.sh) regenerates the manifest and applies `index.html`. No custom container image needed for this one!
+
+### Off-the-Shelf Apps:
+- 🤖 **Open WebUI**
+  - **Description**: Frontend interface for my local LLMs running via LM Studio, allowing anyone on my home network to chat with local AI models.
+  - **Repo**: [open-webui/open-webui](https://github.com/open-webui/open-webui)
+
+- 🚦 **Nginx Proxy Manager**
+  - **Description**: Reverse proxy and entrypoint for all my apps. 
+  - **Repo**: [NginxProxyManager/nginx-proxy-manager](https://github.com/NginxProxyManager/nginx-proxy-manager)
+
+- 📡 **UniFiOS**
+  - **Description**: To manage and control my WiFi access points. This runs on Karamja.
+  - **Website**: [https://help.ui.com/.../Self-Hosting-Unifi](https://help.ui.com/hc/en-us/articles/34210126298775-Self-Hosting-UniFi)
+
+
+## Hardware
 
 | Machine | CPU | GPU |  Memory |Purpose | OS |
 | --- | --- | --- | --- | --- | --- |
@@ -34,54 +86,7 @@
 - I also connect using GitHub Copilot CLI's BYOM (bring your own model) feature. 
 - I'm new to local AI; learning more about quantization, inference, tuning etc.
 
-## Self Hosted Applications
 
-### Custom-Built Apps:
-- 💡**Nanoleaf Controller**
-  - **Description**: Allow anyone on my home network to control the Nanoleaf light panels without installing an app on their phone.
-  - **Tech**: .NET 10, Blazor Server, Nanoleaf OpenAPI, Docker, Kubernetes
-  - **Repo**: [mitchfen/nanoleaf-controller](https://github.com/mitchfen/nanoleaf-controller)
-
-- 💡**Wiz Controller**
-  - **Description**: Allow anyone on my home network to control my WiZ lights without installing a proprietary app on their phone.
-  - **Tech**: Go, HTMX, CSS, Docker, Kubernetes
-  - **Repo**: [mitchfen/wiz-controller](https://github.com/mitchfen/wiz-controller)
-
-- 🎯**Momentum**
-  - **Description**: Helps me keep track of tasks which need to be done every day, and to do them in habit stacks.
-  - **Tech**: Go, HTMX, CSS, Docker, Kubernetes
-  - **Repo**: [mitchfen/momentum](https://github.com/mitchfen/momentum)
-
-- 💪**Weight Tracker**
-  - **Description**: Allows me to track my weight and see a trend line.
-  - **Tech**: Go, SQLite, HTML, CSS, JS, Docker, Kubernetes
-  - **Repo**: [mitchfen/weight-tracker](https://github.com/mitchfen/weight-tracker)
-
-- ❤️**Blood Pressure Tracker**
-  - **Description**: Allows me to track my blood pressure and visualize trends.
-  - **Tech**: Go, HTMX, Tailwind, SQLite, Chart.js, Docker, Kubernetes
-  - **Repo**: [mitchfen/blood-pressure-tracker](https://github.com/mitchfen/blood-pressure-tracker)
-
-- 📋**Localpaste**
-  - **Description**: Allows me to send text data between devices on my home network with automatic expiration.
-  - **Tech**: Go, HTMX, CSS, Docker, Kubernetes
-  - **Repo**: [mitchfen/localpaste](https://github.com/mitchfen/localpaste)
-
-- 🚀**Landing Page**
-   - **Description**: A simple dashboard that serves as a central entry point to all my apps, so I only have to remember one URL.
-   - **Deployment**: The [deploy script](./kubernetes%20manifests/landing-page/deploy.sh) regenerates the manifest and applies `index.html`. No custom container image needed for this one!
-
-### Off-the-Shelf Apps:
-- 🤖**Open WebUI**
-  - **Description**: Frontend interface for my local LLMs running via LM Studio, allowing anyone on my home network to chat with local AI models.
-  - **Repo**: [open-webui/open-webui](https://github.com/open-webui/open-webui)
-
-- 🚦**Nginx Proxy Manager**
-  - **Description**: Reverse proxy and entrypoint for all my apps. 
-  - **Repo**: [NginxProxyManager/nginx-proxy-manager](https://github.com/NginxProxyManager/nginx-proxy-manager)
-
-- 📡**UniFiOS**
-  - **Description**: To manage and control my WiFi access points. This runs on Karamja.
 
 
 ## Landing page
