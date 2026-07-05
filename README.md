@@ -11,21 +11,21 @@
 
 | App | Description | Repository |
 | --- | --- | --- |
-| **Nanoleaf Controller** | Allow users on my home network to control my [Nanoleaf light panels](https://nanoleaf.me) without installing the proprietary app on their phone. | [Link](https://github.com/mitchfen/nanoleaf-controller) |
-| **Localpaste** | Send text data between devices on my home network with automatic expiration. | [Link](https://github.com/mitchfen/localpaste) |
-| **Momentum** | Keep track of tasks which need to be done every day, and to do them in habit stacks. | [Link](https://github.com/mitchfen/momentum) |
-| **Weight Tracker** | Track my weight and visualize trends. | [Link](https://github.com/mitchfen/weight-tracker) |
-| **Blood Pressure Tracker** | Track my blood pressure and visualize trends. | [Link](https://github.com/mitchfen/blood-pressure-tracker) |
-| **Wiz Controller** | Allow users on my home network to control my [WiZ lights](https://www.wizconnected.com) without installing the proprietary app on their phone. | [Link](https://github.com/mitchfen/wiz-controller) |
-| **Landing Page** | A simple dashboard that serves as a central entry point to all my apps, so I only have to remember one URL. | [Link](./landing-page/index.html) |
+| Nanoleaf Controller | Allow users on my home network to control my [Nanoleaf light panels](https://nanoleaf.me) without installing the proprietary app on their phone. | [Link](https://github.com/mitchfen/nanoleaf-controller) |
+| Localpaste | Send text data between devices on my home network with automatic expiration. | [Link](https://github.com/mitchfen/localpaste) |
+| Momentum | Keep track of tasks which need to be done every day, and to do them in habit stacks. | [Link](https://github.com/mitchfen/momentum) |
+| Weight Tracker | Track my weight and visualize trends. | [Link](https://github.com/mitchfen/weight-tracker) |
+| Blood Pressure Tracker | Track my blood pressure and visualize trends. | [Link](https://github.com/mitchfen/blood-pressure-tracker) |
+| Wiz Controller | Allow users on my home network to control my [WiZ lights](https://www.wizconnected.com) without installing the proprietary app on their phone. | [Link](https://github.com/mitchfen/wiz-controller) |
+| Landing Page | A simple dashboard that serves as a central entry point to all my apps, so I only have to remember one URL. | [Link](./landing-page/index.html) |
 
 ### Off the Shelf
 
 | App | Description | Website |
 | --- | --- | --- |
-| **Open WebUI** | Frontend interface for my local LLMs running via LM Studio, allowing anyone on my home network to chat with local AI models. | [Link](https://github.com/open-webui/open-webui) |
-| **Nginx Proxy Manager** | Reverse proxy and entrypoint for all my apps. | [Link](https://github.com/NginxProxyManager/nginx-proxy-manager) |
-| **UniFiOS** | Allows me to manage and update my Ubiquiti access points. | [Link](https://help.ui.com/hc/en-us/articles/34210126298775-Self-Hosting-UniFi) |
+| Open WebUI | Frontend interface for my local LLMs running via LM Studio, allowing anyone on my home network to chat with local AI models. | [Link](https://github.com/open-webui/open-webui) |
+| Nginx Proxy Manager | Reverse proxy and entrypoint for all my apps. | [Link](https://github.com/NginxProxyManager/nginx-proxy-manager) |
+| UniFiOS | Allows me to manage and update my Ubiquiti access points. | [Link](https://help.ui.com/hc/en-us/articles/34210126298775-Self-Hosting-UniFi) |
 
 ## Networking
 - I use [pfSense](https://www.pfsense.org) for routing and firewalling. It's installed on an OptiPlex micro, which uses the built in NIC for WAN and an RJ45 to M.2 adapter for LAN. It uses the RTL8125 chipset. Thanks to [Daniel García](https://daniel.es/blog/pfsense-fix-realtek-issues/) for the page detailing how to get realtek drivers installed.
@@ -46,6 +46,15 @@
 - I also connect using GitHub Copilot CLI's BYOM (bring your own model) feature. 
 - I'm new to local AI; learning more about quantization, inference, tuning etc.
 
+## Hardware
+
+| Machine | CPU | GPU |  Memory |Purpose | OS |
+| --- | --- | --- | --- | --- | --- |
+| Lumbridge | Ryzen 5 7600 | Radeon RX 7900 XTX  | 32GB | Development, Local AI models | NixOS |
+| Draynor | i5-7600T | Integrated | 32GB | Kubernetes cluster (k3s) | NixOS |
+| Varrock | i3-6100T | Integrated | 8GB | Router/firewall, adblocking, unbound DNS | pfSense |
+| Karamja | i7-7700T | Integrated | 16GB | UnifiOS and SMB Share | Debian 13 |
+
 ## NixOS 
 Most of my machines run [NixOS](https://nixos.org/). I store their declarative configuration files (`configuration.nix`) in this repository under the `machine specific files` directory. 
 
@@ -55,15 +64,6 @@ By tracking these configurations in Git, I get some awesome benefits:
 - **Ability to rollback**: Nix upgrades are atomic, so if an update breaks something, I can just reboot, select the previous generation, and I'm good to go.
 
 (You might wonder why, then, I run Debian on Karamja. The reason is I want to maintain familiarity with Debian/Ubuntu systems since they're the most common Linux distros)
-
-## Hardware
-
-| Machine | CPU | GPU |  Memory |Purpose | OS |
-| --- | --- | --- | --- | --- | --- |
-| Lumbridge | Ryzen 5 7600 | Radeon RX 7900 XTX  | 32GB | Development, Local AI models | NixOS |
-| Draynor | i5-7600T | Integrated | 32GB | Kubernetes cluster (k3s) | NixOS |
-| Varrock | i3-6100T | Integrated | 8GB | Router/firewall, adblocking, unbound DNS | pfSense |
-| Karamja | i7-7700T | Integrated | 16GB | UnifiOS and SMB Share | Debian 13 |
 
 ## Landing page
 <img src="./images/landing-page.png" /> 
