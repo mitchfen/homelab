@@ -58,7 +58,6 @@
     k3s
     kubernetes-helm
     btop
-    lf
     screenfetch
   ];
 

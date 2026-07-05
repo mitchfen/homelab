@@ -1,5 +1,0 @@
-cmd open $nvim $fx
-
-# For windows
-# cmd open $nvim %f%
-

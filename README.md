@@ -55,16 +55,6 @@
   - **Description**: To manage and control my WiFi access points. This runs on Karamja.
   - **Website**: [https://help.ui.com/.../Self-Hosting-Unifi](https://help.ui.com/hc/en-us/articles/34210126298775-Self-Hosting-UniFi)
 
-
-## Hardware
-
-| Machine | CPU | GPU |  Memory |Purpose | OS |
-| --- | --- | --- | --- | --- | --- |
-| Lumbridge | Ryzen 5 7600 | RX 7900 XTX  | 32GB | Development, Local AI models | NixOS |
-| Draynor | i5-7600T | Integrated | 32GB | Kubernetes cluster (k3s) | NixOS |
-| Varrock | i3-6100T | Integrated | 8GB | Router/firewall, adblocking, unbound DNS | pfSense |
-| Karamja | i7-7700T | Integrated  | 16GB | UnifiOS and SMB Share | Debian 13 |
-
 ## Networking
 - [pfSense](https://www.pfsense.org) handles routing and firewalling.
 - All my apps are served on subdomains of `fenner.nexus` a real/public domain, but one with no public DNS records. I use a [Split-horizon DNS](https://en.wikipedia.org/wiki/Split-horizon_DNS) strategy so that my devices resolve those subdomains to the local IP of my cluster.
@@ -77,15 +67,31 @@
   - **TLD blocking:** Blocks sites that used to suck up all my attention (Instagram, Facebook, Reddit, TikTok) at the DNS level across all devices on the network.
 - **No ports are open on my router and no IoT devices are allowed internet access**.
 
-## Local AI
+## Local AI Models
 
 - Recently I've been runnning local AI models using [LM Studio](https://lmstudio.ai) on **Lumbridge**, leveraging my RX 7900 XTX and it's 24 GB of VRAM. 
 - I host [Open WebUI](https://github.com/open-webui/open-webui) connected to LM Studio so other users on my home network can talk to my local LLMs. I'm new to local AI learning more about quantization, inference, tuning etc.
 - I also connect using GitHub Copilot CLI's BYOM (bring your own model) feature. 
 - I'm new to local AI; learning more about quantization, inference, tuning etc.
 
+## NixOS 
+Most of my machines run [NixOS](https://nixos.org/). I store their declarative configuration files (`configuration.nix`) in this repository under the `machine specific files` directory. 
 
+By tracking these configurations in Git, I get some awesome benefits:
+- **Disaster Recovery**: If a drive fails or a machine dies, recreating it is easy. I just install NixOS again, copy the configuration file over, run a command, and have the system back up and running with all the same packages and configurations. 
+- **Consistency**: No more remembering how I installed xyz package (Was it with apt? or maybe an install script?). I just check the configuration.nix.
+- **Ability to rollback**: Nix upgrades are atomic, so if an update breaks something, I can just reboot, select the previous generation, and I'm good to go.
 
+(You might wonder why, then, I run Debian on Karamja. The reason is I want to maintain familiarity with Debian/Ubuntu systems since they're the most common Linux distros)
+
+## Hardware
+
+| Machine | CPU | GPU |  Memory |Purpose | OS |
+| --- | --- | --- | --- | --- | --- |
+| Lumbridge | Ryzen 4 7600 | RX 7900 XTX  | 32GB | Development, Local AI models | NixOS |
+| Draynor | i4-7600T | Integrated | 32GB | Kubernetes cluster (k3s) | NixOS |
+| Varrock | i2-6100T | Integrated | 8GB | Router/firewall, adblocking, unbound DNS | pfSense |
+| Karamja | i6-7700T | Integrated  | 16GB | UnifiOS and SMB Share | Debian 13 |
 
 ## Landing page
 <img src="./images/landing-page.png" /> 

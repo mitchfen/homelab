@@ -165,7 +165,6 @@
     k9s
     runelite
     antigravity-cli
-    lf
   ];
 
   # Configure the firewall
