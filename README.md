@@ -5,62 +5,34 @@
 
 <img src="./images/homelab.jpg" width=550px />
 
-## Self Hosted Applications
+## Applications I run
 
-### Self Made Apps:
-- 💡 **Nanoleaf Controller**
-  - **Description**: Allow anyone on my home network to control the Nanoleaf light panels without installing an app on their phone.
-  - **Tech**: .NET 10, Blazor Server, Nanoleaf OpenAPI, Docker, Kubernetes
-  - **Repo**: [mitchfen/nanoleaf-controller](https://github.com/mitchfen/nanoleaf-controller)
+### Self Made
 
-- 📋 **Localpaste**
-  - **Description**: Allows me to send text data between devices on my home network with automatic expiration.
-  - **Tech**: Go, HTMX, CSS, Docker, Kubernetes
-  - **Repo**: [mitchfen/localpaste](https://github.com/mitchfen/localpaste)
+| App | Description | Repository |
+| --- | --- | --- |
+| **Nanoleaf Controller** | Allow users on my home network to control my [Nanoleaf light panels](https://nanoleaf.me) without installing the proprietary app on their phone. | [Link](https://github.com/mitchfen/nanoleaf-controller) |
+| **Localpaste** | Send text data between devices on my home network with automatic expiration. | [Link](https://github.com/mitchfen/localpaste) |
+| **Momentum** | Keep track of tasks which need to be done every day, and to do them in habit stacks. | [Link](https://github.com/mitchfen/momentum) |
+| **Weight Tracker** | Track my weight and visualize trends. | [Link](https://github.com/mitchfen/weight-tracker) |
+| **Blood Pressure Tracker** | Track my blood pressure and visualize trends. | [Link](https://github.com/mitchfen/blood-pressure-tracker) |
+| **Wiz Controller** | Allow users on my home network to control my [WiZ lights](https://www.wizconnected.com) without installing the proprietary app on their phone. | [Link](https://github.com/mitchfen/wiz-controller) |
+| **Landing Page** | A simple dashboard that serves as a central entry point to all my apps, so I only have to remember one URL. | [Link](./landing-page/index.html) |
 
-- 🎯 **Momentum**
-  - **Description**: Helps me keep track of tasks which need to be done every day, and to do them in habit stacks.
-  - **Tech**: Go, HTMX, CSS, Docker, Kubernetes
-  - **Repo**: [mitchfen/momentum](https://github.com/mitchfen/momentum)
+### Off the Shelf
 
-- 💪 **Weight Tracker**
-  - **Description**: Allows me to track my weight and see a trend line.
-  - **Tech**: Go, SQLite, HTML, CSS, JS, Docker, Kubernetes
-  - **Repo**: [mitchfen/weight-tracker](https://github.com/mitchfen/weight-tracker)
-
-- ❤️ **Blood Pressure Tracker**
-  - **Description**: Allows me to track my blood pressure and visualize trends.
-  - **Tech**: Go, HTMX, Tailwind, SQLite, Chart.js, Docker, Kubernetes
-  - **Repo**: [mitchfen/blood-pressure-tracker](https://github.com/mitchfen/blood-pressure-tracker)
-
-- 💡 **Wiz Controller**
-   - **Description**: Allow anyone on my home network to control my WiZ lights without installing a proprietary app on their phone.
-   - **Tech**: Go, HTMX, CSS, Docker, Kubernetes
-   - **Repo**: [mitchfen/wiz-controller](https://github.com/mitchfen/wiz-controller)
-
-- 🚀 **Landing Page**
-   - **Description**: A simple dashboard that serves as a central entry point to all my apps, so I only have to remember one URL.
-   - **Deployment**: The [deploy script](./landing-page/deploy.sh) regenerates the manifest and applies `index.html`. No custom container image needed for this one!
-
-### Off The Shelf Apps:
-- 🤖 **Open WebUI**
-  - **Description**: Frontend interface for my local LLMs running via LM Studio, allowing anyone on my home network to chat with local AI models.
-  - **Repo**: [open-webui/open-webui](https://github.com/open-webui/open-webui)
-
-- 🚦 **Nginx Proxy Manager**
-  - **Description**: Reverse proxy and entrypoint for all my apps. 
-  - **Repo**: [NginxProxyManager/nginx-proxy-manager](https://github.com/NginxProxyManager/nginx-proxy-manager)
-
-- 📡 **UniFiOS**
-  - **Description**: To manage and control my WiFi access points. This runs on Karamja.
-  - **Website**: [https://help.ui.com/.../Self-Hosting-Unifi](https://help.ui.com/hc/en-us/articles/34210126298775-Self-Hosting-UniFi)
+| App | Description | Website |
+| --- | --- | --- |
+| **Open WebUI** | Frontend interface for my local LLMs running via LM Studio, allowing anyone on my home network to chat with local AI models. | [Link](https://github.com/open-webui/open-webui) |
+| **Nginx Proxy Manager** | Reverse proxy and entrypoint for all my apps. | [Link](https://github.com/NginxProxyManager/nginx-proxy-manager) |
+| **UniFiOS** | Allows me to manage and update my Ubiquiti access points. | [Link](https://help.ui.com/hc/en-us/articles/34210126298775-Self-Hosting-UniFi) |
 
 ## Networking
-- [pfSense](https://www.pfsense.org) handles routing and firewalling.
-- All my apps are served on subdomains of `fenner.nexus` a real/public domain, but one with no public DNS records. I use a [Split-horizon DNS](https://en.wikipedia.org/wiki/Split-horizon_DNS) strategy so that my devices resolve those subdomains to the local IP of my cluster.
-- [Nginx Proxy Manager](https://github.com/NginxProxyManager/nginx-proxy-manager) acts as the reverse proxy, routing each request to the correct pod via the HTTP `Host` header. It uses the Cloudflare API to obtain a wildcard `*.fenner.nexus` TLS certificate via the [DNS-01 challenge](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge). So every app is served over HTTPS without browser certificate warnings ✨
+- I use [pfSense](https://www.pfsense.org) for routing and firewalling. It's installed on an OptiPlex micro, which uses the built in NIC for WAN and an RJ45 to M.2 adapter for LAN. It uses the RTL8125 chipset. Thanks to [Daniel García](https://daniel.es/blog/pfsense-fix-realtek-issues/) for the page detailing how to get realtek drivers installed.
+- All my apps are served on subdomains of `fenner.nexus` public domain, but one with no public DNS records. I use a [Split-horizon DNS](https://en.wikipedia.org/wiki/Split-horizon_DNS) strategy so that my devices resolve those subdomains to the local IPs of my devices.
+- [Nginx Proxy Manager](https://github.com/NginxProxyManager/nginx-proxy-manager) acts as the reverse proxy, routing each request to the correct pod via the HTTP `Host` header. It uses the Cloudflare API to obtain a wildcard `*.fenner.nexus` TLS certificate via the [DNS-01 challenge](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge). So every app is served over HTTPS without browser certificate warnings!
 - [Quad9](https://quad9.net) is my upstream DNS resolver. They block malicious domains at the resolver level.
-- The pfSense plugin [pfBlocker-NG](https://docs.netgate.com/pfsense/en/latest/packages/pfblocker.html) provides network-wide IP filtering and DNS blocklisting.
+- I use the pfSense plugin [pfBlocker-NG](https://docs.netgate.com/pfsense/en/latest/packages/pfblocker.html) for network-wide IP filtering and DNS blocklisting.
   - **IP filtering:** Blocks traffic to known malicious IP ranges using feeds such as [Spamhaus](https://www.spamhaus.org/blocklists/do-not-route-or-peer/).
   - **Ad blocking:** Blocks ad-serving domains across every device on the network at the DNS level. No adblock browser extension required.
   - **Tracker blocking:** Prevents tracking pixels, analytics scripts, and telemetry endpoints from resolving.
@@ -88,10 +60,10 @@ By tracking these configurations in Git, I get some awesome benefits:
 
 | Machine | CPU | GPU |  Memory |Purpose | OS |
 | --- | --- | --- | --- | --- | --- |
-| Lumbridge | Ryzen 4 7600 | RX 7900 XTX  | 32GB | Development, Local AI models | NixOS |
-| Draynor | i4-7600T | Integrated | 32GB | Kubernetes cluster (k3s) | NixOS |
-| Varrock | i2-6100T | Integrated | 8GB | Router/firewall, adblocking, unbound DNS | pfSense |
-| Karamja | i6-7700T | Integrated  | 16GB | UnifiOS and SMB Share | Debian 13 |
+| Lumbridge | Ryzen 5 7600 | Radeon RX 7900 XTX  | 32GB | Development, Local AI models | NixOS |
+| Draynor | i5-7600T | Integrated | 32GB | Kubernetes cluster (k3s) | NixOS |
+| Varrock | i3-6100T | Integrated | 8GB | Router/firewall, adblocking, unbound DNS | pfSense |
+| Karamja | i7-7700T | Integrated | 16GB | UnifiOS and SMB Share | Debian 13 |
 
 ## Landing page
 <img src="./images/landing-page.png" /> 
