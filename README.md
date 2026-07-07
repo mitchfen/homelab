@@ -66,5 +66,13 @@ By tracking these configurations in Git, I get some awesome benefits:
 
 (You might wonder why, then, I run Debian on Karamja. The reason is I want to maintain familiarity with Debian/Ubuntu systems since they're the most common Linux distros)
 
+## Landing page
+See the [index.html](./landing-page/index.html) file for the full source code and [manifest.yaml](./landing-page/manifest.yaml) for the manifest. I pull the html into the manifest as a config map, so no custom container image is needed for this page.
+<img src="./images/landing-page.png" width=400px />
+
 ## Proxy dashboard
+Here you can see how I use Nginx Proxy Manager to serve all my apps over HTTPS. 
+
 <img src="./images/npm.png" />
+
+> Note: that the "Public" access above just means it is freely accessible on my network. No sites are exposed to the internet.
