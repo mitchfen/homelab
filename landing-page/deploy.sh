@@ -22,6 +22,7 @@ EOF
 sed 's/^/    /' "$SCRIPT_DIR/index.html" >> "$SCRIPT_DIR/manifest.yaml"
 
 cat >> "$SCRIPT_DIR/manifest.yaml" << 'EOF'
+
 ---
 apiVersion: apps/v1
 kind: Deployment

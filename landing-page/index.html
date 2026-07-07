@@ -1,276 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mitch's Home Dashboard</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>start.fenner.nexus</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-color: #000000;
-            --text-main: #ffffff;
-            --text-muted: #888888;
-            --link-color: #58a6ff;
-            --terminal-font: "IBM Plex Mono", monospace;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: var(--terminal-font);
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            min-height: 100vh;
-            padding: 3rem 1.5rem;
-            -webkit-font-smoothing: antialiased;
+            background-color: #000;
+            color: #fff;
+            font-family: 'IBM Plex Mono', monospace;
+            padding: 2rem;
+            line-height: 1.6;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            width: 100%;
+        ul {
+            list-style-type: none;
+            padding-left: 0;
         }
 
-        header {
-            margin-bottom: 3rem;
-            animation: fadeInDown 0.5s ease-out forwards;
+        li {
+            margin-bottom: 0.5rem;
         }
 
-        h1 {
-            font-weight: 700;
-            font-size: clamp(1.2rem, 4vw, 2rem);
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-        }
-
-        .prompt::before {
-            content: "guest@nexus:~$ ./";
-            color: #0c0;
-            margin-right: 10px;
-        }
-
-        .cursor {
-            display: inline-block;
-            width: 0.6em;
-            height: 1.2em;
-            background-color: var(--text-main);
-            animation: blink 1s step-end infinite;
-            margin-left: 5px;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        .dashboard-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem;
-        }
-
-        .section-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--link-color);
-            margin-bottom: 1rem;
-            text-transform: lowercase;
-        }
-        
-        .section-title::before {
-            content: "ls -l ";
-            color: var(--text-muted);
-        }
-
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1rem;
-        }
-
-        .card {
-            border: 1px solid #333;
-            padding: 1rem;
+        a {
+            color: #fff;
             text-decoration: none;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            transition: all 0.2s;
-            background: transparent;
         }
 
-        .card:hover {
-            border-color: var(--link-color);
-            background-color: rgba(88, 166, 255, 0.05);
-            color: var(--link-color);
+        a:hover {
+            text-decoration: underline;
         }
-
-        .icon-wrapper {
-            font-size: 1.2rem;
-            width: 30px;
-            text-align: center;
-        }
-
-        .card-content {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-title {
-            font-weight: 500;
-            font-size: 1rem;
-        }
-
-        /* Animations */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .animate-pop {
-            animation: popIn 0.3s ease-out backwards;
-        }
-
-        @keyframes popIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .card-grid .card:nth-child(1) { animation-delay: 0.1s; }
-        .card-grid .card:nth-child(2) { animation-delay: 0.15s; }
-        .card-grid .card:nth-child(3) { animation-delay: 0.2s; }
-        .card-grid .card:nth-child(4) { animation-delay: 0.25s; }
-        .card-grid .card:nth-child(5) { animation-delay: 0.3s; }
-        .card-grid .card:nth-child(6) { animation-delay: 0.35s; }
-        .card-grid .card:nth-child(7) { animation-delay: 0.4s; }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <header>
-            <h1 class="prompt">start.fenner.nexus<span class="cursor"></span></h1>
-        </header>
+    <h3>Apps</h3>
+    <ul>
+        <li><a href="https://ai.fenner.nexus">🤖 Local AI</a></li>
+        <li><a href="https://paste.fenner.nexus">📝 Local Text Sharing</a></li>
+        <li><a href="https://search.fenner.nexus">🔍 Local Search Engine</a></li>
+        <li><a href="https://wiz.fenner.nexus">💡 WiZ Controller</a></li>
+        <li><a href="https://nanoleaf.fenner.nexus">🌈 Nanoleaf Controller</a></li>
+        <li><a href="https://momentum.fenner.nexus">✅ Momentum Task Tracker</a></li>
+        <li><a href="https://tracker.fenner.nexus">📉 Mitch's Weight Tracker</a></li>
+        <li><a href="https://caroline-tracker.fenner.nexus">📉 Caroline's Weight Tracker</a></li>
+        <li><a href="https://bp.fenner.nexus">❤️ Blood Pressure Tracker</a></li>
+    </ul>
 
-        <div class="dashboard-grid">
-            <!-- Tools Section -->
-            <div class="section">
-                <div class="section-title">Applications</div>
-                <div class="card-grid">
-                    <a href="https://ai.fenner.nexus" class="card animate-pop">
-                        <div class="icon-wrapper">🧠</div>
-                        <div class="card-content">
-                            <div class="card-title">Local AI</div>
-
-                        </div>
-                    </a>
-
-                    <a href="https://paste.fenner.nexus" class="card animate-pop">
-                        <div class="icon-wrapper">📋</div>
-                        <div class="card-content">
-                            <div class="card-title">Localpaste</div>
-
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Light Controllers Section -->
-            <div class="section">
-                <div class="section-title">Light Controllers</div>
-                <div class="card-grid">
-                    <a href="https://wiz.fenner.nexus" class="card animate-pop">
-                        <div class="icon-wrapper">💡</div>
-                        <div class="card-content">
-                            <div class="card-title">WiZ</div>
-
-                        </div>
-                    </a>
-
-                    <a href="https://nanoleaf.fenner.nexus" class="card animate-pop">
-                        <div class="icon-wrapper">🎨</div>
-                        <div class="card-content">
-                            <div class="card-title">Nanoleaf</div>
-
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Trackers Section -->
-            <div class="section">
-                <div class="section-title">Trackers</div>
-                <div class="card-grid">
-                    <a href="https://momentum.fenner.nexus" class="card animate-pop">
-                        <div class="icon-wrapper">🚀</div>
-                        <div class="card-content">
-                            <div class="card-title">Momentum</div>
-
-                        </div>
-                    </a>
-
-                    <a href="https://tracker.fenner.nexus" class="card animate-pop">
-                        <div class="icon-wrapper">⚖️</div>
-                        <div class="card-content">
-                            <div class="card-title">Mitch's weight Tracker</div>
-
-                        </div>
-                    </a>
-
-                    <a href="https://caroline-tracker.fenner.nexus" class="card animate-pop">
-                        <div class="icon-wrapper">⚖️</div>
-                        <div class="card-content">
-                            <div class="card-title">Caroline's weight Tracker</div>
-
-                        </div>
-                    </a>
-
-                    <a href="https://bp.fenner.nexus" class="card animate-pop">
-                        <div class="icon-wrapper">❤️</div>
-                        <div class="card-content">
-                            <div class="card-title">Blood Pressure</div>
-
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Admin Section -->
-            <div class="section">
-                <div class="section-title">Network & Admin</div>
-                <div class="card-grid">
-                    <a href="http://192.168.1.1" class="card animate-pop">
-                        <div class="icon-wrapper">🛡️</div>
-                        <div class="card-content">
-                            <div class="card-title">pfSense Router/Firewall</div>
-                        </div>
-                    </a>
-
-                    <a href="https://unifi.fenner.nexus" class="card animate-pop">
-                        <div class="icon-wrapper">🛜</div>
-                        <div class="card-content">
-                            <div class="card-title">UniFi OS</div>
-
-                        </div>
-                    </a>
-
-                    <a href="https://npm.fenner.nexus" class="card animate-pop">
-                        <div class="icon-wrapper">🚦</div>
-                        <div class="card-content">
-                            <div class="card-title">Proxy Manager</div>
-
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <h3>Admin</h3>
+    <ul>
+        <li><a href="http://192.168.1.1">🌐 Router</a></li>
+        <li><a href="https://unifi.fenner.nexus">📡 UniFi OS</a></li>
+        <li><a href="https://npm.fenner.nexus">🔒 Proxy Manager</a></li>
+    </ul>
 </body>
+
 </html>

@@ -25,7 +25,8 @@
 | --- | --- | --- |
 | Open WebUI | Frontend interface for my local LLMs running via LM Studio, allowing anyone on my home network to chat with local AI models. | [Link](https://github.com/open-webui/open-webui) |
 | Nginx Proxy Manager | Reverse proxy and entrypoint for all my apps. | [Link](https://github.com/NginxProxyManager/nginx-proxy-manager) |
-| UniFiOS | Allows me to manage and update my Ubiquiti access points. | [Link](https://help.ui.com/hc/en-us/articles/34210126298775-Self-Hosting-UniFi) |
+| UniFi OS | Allows me to manage and update my Ubiquiti access points. | [Link](https://help.ui.com/hc/en-us/articles/34210126298775-Self-Hosting-UniFi) |
+| SearXNG | Privacy respecting internet metasearch engine which aggregates results from various search engines and databases. | [Link](https://github.com/searxng/searxng) |
 
 ## Networking
 - I use [pfSense](https://www.pfsense.org) for routing and firewalling. It's installed on an OptiPlex micro, which uses the built in NIC for WAN and an RJ45 to M.2 adapter for LAN. It uses the RTL8125 chipset. Thanks to [Daniel García](https://daniel.es/blog/pfsense-fix-realtek-issues/) for the page detailing how to get realtek drivers installed.
@@ -64,9 +65,6 @@ By tracking these configurations in Git, I get some awesome benefits:
 - **Ability to rollback**: Nix upgrades are atomic, so if an update breaks something, I can just reboot, select the previous generation, and I'm good to go.
 
 (You might wonder why, then, I run Debian on Karamja. The reason is I want to maintain familiarity with Debian/Ubuntu systems since they're the most common Linux distros)
-
-## Landing page
-<img src="./images/landing-page.png" /> 
 
 ## Proxy dashboard
 <img src="./images/npm.png" />
