@@ -67,7 +67,8 @@ By tracking these configurations in Git, I get some awesome benefits:
 (You might wonder why, then, I run Debian on Karamja. The reason is I want to maintain familiarity with Debian/Ubuntu systems since they're the most common Linux distros)
 
 ## Landing page
-See the [index.html](./landing-page/index.html) file for the full source code and [manifest.yaml](./landing-page/manifest.yaml) for the manifest. I pull the html into the manifest as a config map, so no custom container image is needed for this page.
+See the [index.html](./landing-page/index.html) and [deploy.sh](./landing-page/deploy.sh) files.  
+The script builds the manifest on the fly, and the manifest sets the full HTML as a config map in an nginx pod. So no custom container image is required!
 <img src="./images/landing-page.png" width=400px />
 
 ## Proxy dashboard
