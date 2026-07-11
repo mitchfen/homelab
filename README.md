@@ -25,6 +25,7 @@
 | --- | --- | --- |
 | Open WebUI | Frontend interface for my local LLMs running via LM Studio, allowing anyone on my home network to chat with local AI models. | [Link](https://github.com/open-webui/open-webui) |
 | Nginx Proxy Manager | Reverse proxy and entrypoint for all my apps. | [Link](https://github.com/NginxProxyManager/nginx-proxy-manager) |
+| pfBlocker-NG | IP filtering, DNS blocklisting, ad/tracker blocking, and TLD blocking. | [Link](https://docs.netgate.com/pfsense/en/latest/packages/pfblocker.html) |
 | UniFi OS | Allows me to manage and update my Ubiquiti access points. | [Link](https://help.ui.com/hc/en-us/articles/34210126298775-Self-Hosting-UniFi) |
 | SearXNG | Privacy respecting internet metasearch engine which aggregates results from various search engines and databases. | [Link](https://github.com/searxng/searxng) |
 
@@ -52,8 +53,8 @@
 | Machine | CPU | GPU |  Memory |Purpose | OS |
 | --- | --- | --- | --- | --- | --- |
 | Lumbridge | Ryzen 5 7600 | Radeon RX 7900 XTX  | 32GB | Development, Local AI models | NixOS |
-| Draynor | i5-7600T | Integrated | 32GB | Kubernetes cluster (k3s) | NixOS |
-| Varrock | i3-6100T | Integrated | 8GB | Router/firewall, adblocking, unbound DNS | pfSense |
+| Draynor | i5-7600T | Integrated | 32GB | Kubernetes cluster (k3s) for most of my apps | NixOS |
+| Varrock | i3-6100T | Integrated | 8GB | Router/firewall, pfblockerNG ad/tracker/IP/TLD blocking | pfSense |
 | Karamja | i7-7700T | Integrated | 16GB | UnifiOS and SMB Share | Debian 13 |
 
 ## NixOS 
