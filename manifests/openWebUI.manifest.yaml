@@ -6,14 +6,14 @@ metadata:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: open-webui-pvc
+  name: openwebui-pvc
   namespace: open-webui
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 2Gi
+      storage: 10Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -43,20 +43,22 @@ spec:
           value: "http://192.168.1.3:1234/v1"
         - name: OPENAI_API_KEY
           value: "not-needed"
+        - name: WEBUI_AUTH
+          value: "false"
         volumeMounts:
         - name: webui-data
           mountPath: /app/backend/data
         resources:
-          requests:
-            memory: "512Mi"
-            cpu: "250m"
           limits:
-            memory: "1Gi"
-            cpu: "1000m"
+            memory: "10Gi"
+            cpu: "2"
+          requests:
+            memory: "5Gi"
+            cpu: "2"
       volumes:
       - name: webui-data
         persistentVolumeClaim:
-          claimName: open-webui-pvc
+          claimName: openwebui-pvc
 ---
 apiVersion: v1
 kind: Service
