@@ -48,15 +48,6 @@
 - I also connect using GitHub Copilot CLI's BYOM (bring your own model) feature. 
 - I'm new to local AI; learning more about quantization, inference, tuning etc.
 
-## Hardware
-
-| Machine | CPU | GPU |  Memory |Purpose | OS |
-| --- | --- | --- | --- | --- | --- |
-| Lumbridge | Ryzen 5 7600 | Radeon RX 7900 XTX  | 32GB | Development, Local AI models | NixOS |
-| Draynor | i5-7600T | Integrated | 32GB | Kubernetes cluster (k3s) for most of my apps | NixOS |
-| Varrock | i3-6100T | Integrated | 8GB | Router/firewall, pfblockerNG ad/tracker/IP/TLD blocking | pfSense |
-| Karamja | i7-7700T | Integrated | 16GB | UnifiOS and SMB Share | Debian 13 |
-
 ## NixOS 
 Most of my machines run [NixOS](https://nixos.org/). I store their declarative configuration files (`configuration.nix`) in this repository under the `machine specific files` directory. 
 
@@ -67,13 +58,28 @@ By tracking these configurations in Git, I get some awesome benefits:
 
 (You might wonder why, then, I run Debian on Karamja. The reason is I want to maintain familiarity with Debian/Ubuntu systems since they're the most common Linux distros)
 
+> Note: that the "Public" access above just means it is freely accessible on my network. No sites are exposed to the internet.
+
+## Hardware
+
+| Machine | CPU | GPU |  Memory |Purpose | OS |
+| --- | --- | --- | --- | --- | --- |
+| Lumbridge | Ryzen 5 7600X | Radeon RX 7900 XTX  | 32GB | Development, Local AI models | NixOS |
+| Draynor | i5-7600T | Integrated | 32GB | Kubernetes cluster (k3s) for most of my apps | NixOS |
+| Varrock | i3-6100T | Integrated | 8GB | Router/firewall, pfblockerNG ad/tracker/IP/TLD blocking | pfSense |
+| Karamja | i7-7700T | Integrated | 16GB | UnifiOS and SMB Share | Debian |
+
+<img src="./images/lumbridge.png" width="600px" />
+<img src="./images/draynor.png" width="600px" />
+<img src="./images/karamja.png" width="600px" />
+
 ## Landing page
 See the [index.html](./landing-page/index.html) and [deploy.sh](./landing-page/deploy.sh) files. The script builds the manifest on the fly, and the manifest sets the full HTML as a config map in an nginx pod. So no custom container image is required!  
 <img src="./images/landing-page.png" width=400px />
+
+
 
 ## Proxy dashboard
 Here you can see how I use Nginx Proxy Manager to serve all my apps over HTTPS. 
 
 <img src="./images/npm.png" />
-
-> Note: that the "Public" access above just means it is freely accessible on my network. No sites are exposed to the internet.
