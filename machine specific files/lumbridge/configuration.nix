@@ -89,6 +89,12 @@
     vimAlias = true;
   };
 
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = false;
+    dedicatedServer.openFirewall = false;
+  };
+
   # Fish shell configuration and aliases
   programs.fish = {
     enable = true;
@@ -165,6 +171,12 @@
     k9s
     runelite
     antigravity-cli
+    ffmpeg
+    dotnet-sdk_10
+    powershell
+    yt-dlp
+    mangohud
+    protontricks
   ];
 
   # Configure the firewall
@@ -176,3 +188,4 @@
   # Do not change
   system.stateVersion = "25.11"; 
 }
+
