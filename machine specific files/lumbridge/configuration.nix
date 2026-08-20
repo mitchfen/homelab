@@ -157,26 +157,22 @@
     vlc
     screenfetch
     proton-pass
-    antigravity
     gthumb
     git
     gh
+    github-copilot-cli
     go
     gcc
-    nodejs_latest
     btop
     lmstudio
     kubernetes-helm
     kubectl
     k9s
-    runelite
-    antigravity-cli
     ffmpeg
-    dotnet-sdk_10
-    powershell
     yt-dlp
     mangohud
     protontricks
+    discord
   ];
 
   # Configure the firewall
