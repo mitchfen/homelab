@@ -60,6 +60,15 @@ By tracking these configurations in Git, I get some awesome benefits:
 
 > Note: that the "Public" access above just means it is freely accessible on my network. No sites are exposed to the internet.
 
+## Landing page
+See the [index.html](./landing-page/index.html) and [deploy.sh](./landing-page/deploy.sh) files. The script builds the manifest on the fly, and the manifest sets the full HTML as a config map in an nginx pod. So no custom container image is required!  
+<img src="./images/landing-page.png" width=400px />
+
+## Proxy dashboard
+Here you can see how I use Nginx Proxy Manager to serve all my apps over HTTPS. 
+
+<img src="./images/npm.png" />
+
 ## Hardware
 
 | Machine | CPU | GPU |  Memory |Purpose | OS |
@@ -72,14 +81,3 @@ By tracking these configurations in Git, I get some awesome benefits:
 <img src="./images/lumbridge.png" width="600px" />
 <img src="./images/draynor.png" width="600px" />
 <img src="./images/karamja.png" width="600px" />
-
-## Landing page
-See the [index.html](./landing-page/index.html) and [deploy.sh](./landing-page/deploy.sh) files. The script builds the manifest on the fly, and the manifest sets the full HTML as a config map in an nginx pod. So no custom container image is required!  
-<img src="./images/landing-page.png" width=400px />
-
-
-
-## Proxy dashboard
-Here you can see how I use Nginx Proxy Manager to serve all my apps over HTTPS. 
-
-<img src="./images/npm.png" />
