@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: momentum-config
+  namespace: momentum
+data:
+  DAILY_TASKS: "Before First Meeting: Shower + Brush teeth + Moisturize + Weigh yourself + Feed Caesar + Medication + Coffee"

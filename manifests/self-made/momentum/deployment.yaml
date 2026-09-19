@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: momentum-deployment
+  namespace: momentum
+  labels:
+    app: momentum
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: momentum
+  template:
+    metadata:
+      labels:
+        app: momentum
+    spec:
+      containers:
+      - name: momentum
+        image: ghcr.io/mitchfen/momentum:latest
+        ports:
+        - containerPort: 80
+        envFrom:
+        - configMapRef:
+            name: momentum-config
+        volumeMounts:
+        - name: momentum-data
+          mountPath: /app/data
+        resources:
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+          requests:
+            memory: "1Gi"
+            cpu: "250m"
+      volumes:
+      - name: momentum-data
+        persistentVolumeClaim:
+          claimName: momentum-pvc
