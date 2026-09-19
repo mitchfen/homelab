@@ -22,11 +22,6 @@
     options = [ "noatime" ];
   };
 
-  # Configure journald to use volatile storage (RAM) to reduce disk I/O
-  services.journald.extraConfig = ''
-    Storage=volatile
-    RuntimeMaxUse=50M
-  '';
 
   # Automatically optimize the Nix store to save disk space
   nix.settings.auto-optimise-store = true;
@@ -59,7 +54,6 @@
 
   # --- GNOME PACKAGE CLEANUP ---
   environment.gnome.excludePackages = (with pkgs; [
-    gnome-photos
     gnome-tour
     gedit
   ]) ++ (with pkgs; [
@@ -102,6 +96,7 @@
       nixUpgrade = "sudo nixos-rebuild switch --upgrade";
       nixClean = "sudo nix-collect-garbage -d";
       nixListGenerations = "sudo nixos-rebuild list-generations";
+      editNixConfig = "sudo nvim /etc/nixos/configuration.nix";
       k = "kubectl";
       vim = "nvim";
     };
@@ -151,15 +146,21 @@
 
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
-    google-chrome
-    firefox 
     gnome-tweaks
-    vlc
-    screenfetch
-    proton-pass
     gthumb
+    google-chrome
+    librewolf
+    obsidian
+    proton-pass
+    protonmail-desktop
+    proton-vpn
+    protontricks
+    screenfetch
+    antigravity
     git
     gh
+    azure-cli
+    terraform
     go
     gcc
     btop
@@ -168,10 +169,10 @@
     kubectl
     k9s
     ffmpeg
+    vlc
     mangohud
-    protontricks
     discord
-    azure-cli
+    runelite
   ];
 
   # Configure the firewall
