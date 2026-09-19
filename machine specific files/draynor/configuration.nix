@@ -101,9 +101,9 @@
   environment.systemPackages = with pkgs; [
     k3s
     kubernetes-helm
+    azure-cli
     btop
     screenfetch
-    antigravity-cli
   ];
 
   # k3s server configuration

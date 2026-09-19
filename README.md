@@ -44,9 +44,8 @@
 ## Local AI Models
 
 - Recently I've been runnning local AI models using [LM Studio](https://lmstudio.ai) on **Lumbridge**, leveraging my RX 7900 XTX and it's 24 GB of VRAM. 
-- I host [Open WebUI](https://github.com/open-webui/open-webui) connected to LM Studio so other users on my home network can talk to my local LLMs. I'm new to local AI learning more about quantization, inference, tuning etc.
+- I host [Open WebUI](https://github.com/open-webui/open-webui) connected to LM Studio so other users on my home network can talk to my local LLMs.
 - I also connect using GitHub Copilot CLI's BYOM (bring your own model) feature. 
-- I'm new to local AI; learning more about quantization, inference, tuning etc.
 
 ## NixOS 
 Most of my machines run [NixOS](https://nixos.org/). I store their declarative configuration files (`configuration.nix`) in this repository under the `machine specific files` directory. 
@@ -58,16 +57,27 @@ By tracking these configurations in Git, I get some awesome benefits:
 
 (You might wonder why, then, I run Debian on Karamja. The reason is I want to maintain familiarity with Debian/Ubuntu systems since they're the most common Linux distros)
 
-> Note: that the "Public" access above just means it is freely accessible on my network. No sites are exposed to the internet.
+## Terraform
+
+I make changes on my cluster by modifying the code/files in this repo then running `terraform apply` 😎  
+Terraform state is stored in an Azure Storage account. 
+
+## Backups
+
+Draynor's stateful data is backed up off-machine to Azure Blob Storage.
+See [backup-to-azure.sh](./machine%20specific%20files/draynor/backup-to-azure.sh)
+
 
 ## Landing page
-See the [index.html](./landing-page/index.html) and [deploy.sh](./landing-page/deploy.sh) files. The script builds the manifest on the fly, and the manifest sets the full HTML as a config map in an nginx pod. So no custom container image is required!  
+The [index.html](./landing-page/index.html) file is stored in a Kubernetes ConfigMap and served by an nginx pod. Terraform manages the ConfigMap, deployment, and service, so updating this page only requires `terraform apply`.  
+
 <img src="./images/landing-page.png" width=400px />
 
 ## Proxy dashboard
 Here you can see how I use Nginx Proxy Manager to serve all my apps over HTTPS. 
 
 <img src="./images/npm.png" />
+> Note: that the "Public" access above just means it is freely accessible on my network. No sites are exposed to the internet.
 
 ## Hardware
 

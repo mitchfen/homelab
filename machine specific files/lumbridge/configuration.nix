@@ -160,7 +160,6 @@
     gthumb
     git
     gh
-    github-copilot-cli
     go
     gcc
     btop
@@ -169,10 +168,10 @@
     kubectl
     k9s
     ffmpeg
-    yt-dlp
     mangohud
     protontricks
     discord
+    azure-cli
   ];
 
   # Configure the firewall

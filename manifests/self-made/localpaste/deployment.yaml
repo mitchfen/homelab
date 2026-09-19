@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: localpaste
+  namespace: localpaste
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: localpaste
+  template:
+    metadata:
+      labels:
+        app: localpaste
+    spec:
+      containers:
+      - name: localpaste
+        image: ghcr.io/mitchfen/localpaste:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: http
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"

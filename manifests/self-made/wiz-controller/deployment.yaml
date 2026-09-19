@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wizcontroller-deployment
+  namespace: wiz-controller
+  labels:
+    app: wizcontroller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wizcontroller
+  template:
+    metadata:
+      labels:
+        app: wizcontroller
+    spec:
+      containers:
+        - name: wizcontroller
+          image: ghcr.io/mitchfen/wiz-controller:latest
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 250m
+          ports:
+            - containerPort: 80
