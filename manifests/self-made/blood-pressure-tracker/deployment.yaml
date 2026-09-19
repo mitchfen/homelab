@@ -47,5 +47,6 @@ spec:
           periodSeconds: 5
       volumes:
       - name: db
-        persistentVolumeClaim:
-          claimName: bptracker-db
+        hostPath:
+          path: /var/lib/bptracker
+          type: DirectoryOrCreate

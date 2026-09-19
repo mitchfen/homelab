@@ -27,12 +27,6 @@ locals {
     if yamldecode(document).kind == "StorageClass"
   }
 
-  persistent_volume_claim_documents = {
-    for filename, document in local.manifest_documents :
-    filename => document
-    if yamldecode(document).kind == "PersistentVolumeClaim"
-  }
-
   workload_documents = {
     for filename, document in local.manifest_documents :
     filename => document
@@ -54,20 +48,11 @@ resource "kubectl_manifest" "storage_classes" {
   yaml_body = each.value
 }
 
-resource "kubectl_manifest" "persistent_volume_claims" {
-  for_each  = local.persistent_volume_claim_documents
-  yaml_body = each.value
-
-  lifecycle {
-    prevent_destroy = true
-  }
-}
-
 resource "kubectl_manifest" "workloads" {
   for_each  = local.workload_documents
   yaml_body = each.value
 
-  depends_on = [kubectl_manifest.namespaces, kubectl_manifest.persistent_volume_claims, kubectl_manifest.storage_classes]
+  depends_on = [kubectl_manifest.namespaces, kubectl_manifest.storage_classes]
 }
 
 resource "kubectl_manifest" "landing_page_namespace" {

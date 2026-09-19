@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: weighttracker
-  namespace: weighttracker
+  name: caroline-tracker
+  namespace: caroline-tracker
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: weighttracker
+      app: caroline-tracker
   template:
     metadata:
       labels:
-        app: weighttracker
+        app: caroline-tracker
     spec:
       containers:
-      - name: weighttracker
+      - name: caroline-tracker
         image: ghcr.io/mitchfen/weight-tracker:latest
         ports:
         - containerPort: 8080
@@ -47,5 +47,5 @@ spec:
       volumes:
       - name: db
         hostPath:
-          path: /var/lib/weighttracker
+          path: /var/lib/caroline-tracker
           type: DirectoryOrCreate

@@ -12,10 +12,10 @@
   };
 
   # Configure journald to use volatile storage (RAM) to reduce disk I/O and limit size
-  services.journald.extraConfig = ''
-    Storage=volatile
-    RuntimeMaxUse=50M
-  '';
+  services.journald.settings.Journal = {
+    Storage = "volatile";
+    RuntimeMaxUse = "50M";
+  };
 
   # Automatically optimize the Nix store to save disk space
   nix.settings.auto-optimise-store = true;

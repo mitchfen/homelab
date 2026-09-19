@@ -64,8 +64,7 @@ Terraform state is stored in an Azure Storage account.
 
 ## Backups
 
-Draynor's stateful data is backed up off-machine to Azure Blob Storage.
-See [backup-to-azure.sh](./machine%20specific%20files/draynor/backup-to-azure.sh)
+Draynor's stateful data is backed up off-machine to Azure Blob Storage. See the [backup plan](./BackupPlan.md).
 
 
 ## Landing page

@@ -6,10 +6,8 @@ CONTAINER="backups"
 BACKUP_USER="${SUDO_USER:-$USER}"
 TIMESTAMP="$(date -u +%Y-%m-%dT%H-%M-%SZ)"
 ARCHIVE_NAME="draynor-${TIMESTAMP}.tar.gz"
-CHECKSUM_NAME="${ARCHIVE_NAME}.sha256"
 WORK_DIR="$(mktemp --directory)"
 ARCHIVE_PATH="${WORK_DIR}/${ARCHIVE_NAME}"
-CHECKSUM_PATH="${WORK_DIR}/${CHECKSUM_NAME}"
 K3S_STOPPED=false
 
 cleanup() {
@@ -39,14 +37,16 @@ K3S_STOPPED=true
 tar --create --gzip --file "$ARCHIVE_PATH" --directory / \
   var/lib/rancher/k3s/server \
   var/lib/rancher/k3s/storage \
-  var/lib/npm
+  var/lib/npm \
+  var/lib/weighttracker \
+  var/lib/caroline-tracker \
+  var/lib/bptracker
 
 echo "Restarting k3s..."
 systemctl start k3s
 K3S_STOPPED=false
 
-sha256sum "$ARCHIVE_PATH" > "$CHECKSUM_PATH"
-chown "$BACKUP_USER" "$WORK_DIR" "$ARCHIVE_PATH" "$CHECKSUM_PATH"
+chown "$BACKUP_USER" "$WORK_DIR" "$ARCHIVE_PATH"
 
 echo "Verifying Azure CLI authentication for ${BACKUP_USER}..."
 sudo -u "$BACKUP_USER" az account show --only-show-errors --output none
@@ -59,18 +59,8 @@ sudo -u "$BACKUP_USER" az storage blob upload \
   --file "$ARCHIVE_PATH" \
   --auth-mode login \
   --overwrite false \
+  --tier Cold \
   --content-type application/gzip \
-  --only-show-errors \
-  --output none
-
-sudo -u "$BACKUP_USER" az storage blob upload \
-  --account-name "$STORAGE_ACCOUNT" \
-  --container-name "$CONTAINER" \
-  --name "draynor/${CHECKSUM_NAME}" \
-  --file "$CHECKSUM_PATH" \
-  --auth-mode login \
-  --overwrite false \
-  --content-type text/plain \
   --only-show-errors \
   --output none
 

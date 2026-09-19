@@ -32,8 +32,9 @@ spec:
             cpu: "1000m"
           requests:
             memory: "1Gi"
-            cpu: "250m"
+            cpu: "50m"
       volumes:
       - name: momentum-data
-        persistentVolumeClaim:
-          claimName: momentum-pvc
+        hostPath:
+          path: /var/lib/momentum
+          type: DirectoryOrCreate
