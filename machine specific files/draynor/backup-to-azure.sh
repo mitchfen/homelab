@@ -4,8 +4,10 @@ set -euo pipefail
 STORAGE_ACCOUNT="mitchfenner"
 CONTAINER="backups"
 BACKUP_USER="${SUDO_USER:-$USER}"
-TIMESTAMP="$(date -u +%Y-%m-%dT%H-%M-%SZ)"
-ARCHIVE_NAME="draynor-${TIMESTAMP}.tar.gz"
+# Blob versioning is enabled on the storage account, so we always upload under
+# the same blob name; Azure keeps prior uploads as versions instead of us
+# needing timestamped filenames.
+ARCHIVE_NAME="draynor.tar.gz"
 WORK_DIR="$(mktemp --directory)"
 ARCHIVE_PATH="${WORK_DIR}/${ARCHIVE_NAME}"
 K3S_STOPPED=false
@@ -58,7 +60,7 @@ sudo -u "$BACKUP_USER" az storage blob upload \
   --name "draynor/${ARCHIVE_NAME}" \
   --file "$ARCHIVE_PATH" \
   --auth-mode login \
-  --overwrite false \
+  --overwrite true \
   --tier Cold \
   --content-type application/gzip \
   --only-show-errors \
