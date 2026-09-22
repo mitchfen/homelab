@@ -26,27 +26,26 @@
 
 ### Self Made / Vibe Coded
 
-| App | Description | Repository |
-| --- | --- | --- |
-| Nanoleaf Controller | Allow users on my home network to control my [Nanoleaf light panels](https://nanoleaf.me) without installing the proprietary app on their phone. | [Link](https://github.com/mitchfen/nanoleaf-controller) |
-| Localpaste | Send text data between devices on my home network with automatic expiration. | [Link](https://github.com/mitchfen/localpaste) |
-| Momentum | Keep track of tasks which need to be done every day, and to do them in habit stacks. | [Link](https://github.com/mitchfen/momentum) |
-| Weight Tracker | Track my weight and visualize trends. | [Link](https://github.com/mitchfen/weight-tracker) |
-| Blood Pressure Tracker | Track my blood pressure and visualize trends. | [Link](https://github.com/mitchfen/blood-pressure-tracker) |
-| Wiz Controller | Allow users on my home network to control my [WiZ lights](https://www.wizconnected.com) without installing the proprietary app on their phone. | [Link](https://github.com/mitchfen/wiz-controller) |
-| Landing Page | A simple dashboard that serves as a central entry point to all my apps, so I only have to remember one URL. | [Link](./landing-page/index.html) |
+| App | Description | How | Repository |
+| --- | --- | --- | --- |
+| Nanoleaf Controller | Allow users on my home network to control my [Nanoleaf light panels](https://nanoleaf.me) without installing the proprietary app on their phone. | Kubernetes| [Link](https://github.com/mitchfen/nanoleaf-controller) |
+| Localpaste | Send text data between devices on my home network with automatic expiration. | Kubernetes| [Link](https://github.com/mitchfen/localpaste) |
+| Momentum | Keep track of tasks which need to be done every day, and to do them in habit stacks. | Kubernetes | [Link](https://github.com/mitchfen/momentum) |
+| Weight Tracker | Track my weight and visualize trends. | Kubernetes | [Link](https://github.com/mitchfen/weight-tracker) |
+| Blood Pressure Tracker | Track my blood pressure and visualize trends. | Kubernetes | [Link](https://github.com/mitchfen/blood-pressure-tracker) |
+| Wiz Controller | Allow users on my home network to control my [WiZ lights](https://www.wizconnected.com) without installing the proprietary app on their phone. | Kubernetes | [Link](https://github.com/mitchfen/wiz-controller) |
+| Landing Page | A simple dashboard that serves as a central entry point to all my apps, so I only have to remember one URL. | Kubernetes | [Link](./landing-page/index.html) |
 
 ### Off the Shelf
 
-| App | Description | Website |
-| --- | --- | --- |
-| Open WebUI | Frontend interface for my local LLMs running via LM Studio, allowing anyone on my home network to chat with local AI models. | [Link](https://github.com/open-webui/open-webui) |
-| Nginx Proxy Manager | Reverse proxy and entrypoint for all my apps. | [Link](https://github.com/NginxProxyManager/nginx-proxy-manager) |
-| pfBlocker-NG | IP filtering, DNS blocklisting, ad/tracker blocking, and TLD blocking. | [Link](https://docs.netgate.com/pfsense/en/latest/packages/pfblocker.html) |
-| UniFi OS | Allows me to manage and update my Ubiquiti access points. | [Link](https://help.ui.com/hc/en-us/articles/34210126298775-Self-Hosting-UniFi) |
-| SearXNG | Privacy respecting internet metasearch engine which aggregates results from various search engines and databases. | [Link](https://github.com/searxng/searxng) |
-
-
+| App | Description | How | Website |
+| --- | --- | --- | --- |
+| SearXNG | Privacy respecting internet metasearch engine. | Kubernetes | [Link](https://github.com/searxng/searxng) |
+| Open WebUI | Frontend interface for my local LLMs running via LM Studio, allowing anyone on my home network to chat with local AI models. | Kubernetes| [Link](https://github.com/open-webui/open-webui) |
+| Nginx Proxy Manager | Reverse proxy and entrypoint for all my apps. | Kubernetes | [Link](https://github.com/NginxProxyManager/nginx-proxy-manager) |
+| UniFi OS | Manage and update my Ubiquiti access points. | Debian | [Link](https://help.ui.com/hc/en-us/articles/34210126298775-Self-Hosting-UniFi) |
+| Jellyfin | Media server. | Debian | [Link](https://jellyfin.org) |
+| pfBlocker-NG | IP filtering, DNS blocklisting, ad/tracker blocking, and TLD blocking. | pfSense Extension | [Link](https://docs.netgate.com/pfsense/en/latest/packages/pfblocker.html) |
 
 ## Local AI Models
 
@@ -88,7 +87,7 @@ Here you can see how I use Nginx Proxy Manager to serve all my apps over HTTPS.
 | Lumbridge | Ryzen 5 7600X | Radeon RX 7900 XTX  | 32GB | Development, Local AI models | NixOS |
 | Draynor | i5-7600T | Integrated | 32GB | Kubernetes cluster (k3s) for most of my apps | NixOS |
 | Varrock | i3-6100T | Integrated | 8GB | Router/firewall, pfblockerNG ad/tracker/IP/TLD blocking | pfSense |
-| Karamja | i7-7700T | Integrated | 16GB | UnifiOS and SMB Share | Debian |
+| Karamja | i7-7700T | Integrated | 16GB | UnifiOS and Jellyfin | Debian |
 
 <img src="./images/lumbridge.png" width="600px" />  
 
