@@ -44,6 +44,9 @@ resource "kubectl_manifest" "deployment" {
           labels = {
             app = "landing-page"
           }
+          annotations = {
+            "checksum/html" = sha256(file(var.html_path))
+          }
         }
         spec = {
           containers = [{

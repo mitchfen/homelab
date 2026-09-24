@@ -18,13 +18,11 @@
 
 ## Grafana Password
 
-After applying the monitoring stack, retrieve the generated Grafana administrator password:
+After applying the monitoring stack, retrieve the generated Grafana administrator password from the Kubernetes secret:
 
 ```bash
-terraform -chdir=terraform/environments/homelab output -raw grafana_admin_password
+kubectl get secret -n monitoring grafana-admin -o jsonpath="{.data.admin-password}" | base64 --decode; echo
 ```
-
-The password is stored in Terraform state, which is protected by Azure RBAC.
 
 ## How to Update The Monitoring Chart
 

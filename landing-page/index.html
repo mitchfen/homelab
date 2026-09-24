@@ -19,6 +19,7 @@
         ul {
             list-style-type: none;
             padding-left: 0;
+            margin: 0;
         }
 
         li {
@@ -34,12 +35,36 @@
             text-decoration: underline;
         }
 
+        .dashboard {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 850px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            flex: 1;
+        }
+
+        @media (min-width: 768px) {
+            .dashboard {
+                flex-direction: row;
+            }
+        }
+
         fieldset {
             border: 1px solid #fff;
             border-radius: 8px;
             padding: 1rem 1.5rem;
-            margin-bottom: 1.5rem;
-            max-width: 400px;
+            margin: 0;
+            width: 100%;
+            box-sizing: border-box;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         legend {
@@ -51,30 +76,48 @@
 </head>
 
 <body>
-    <fieldset>
-        <legend>Apps</legend>
-        <ul>
-            <li><a href="https://momentum.fenner.nexus">✅ Momentum Task Tracker</a></li>
-            <li><a href="https://tracker.fenner.nexus">📉 Mitch's Tracker</a></li>
-            <li><a href="https://caroline-tracker.fenner.nexus">📉 Caroline's Tracker</a></li>
-            <li><a href="https://bp.fenner.nexus">❤️ Blood Pressure Tracker</a></li>
-            <li><a href="https://ai.fenner.nexus">🤖 Local AI</a></li>
-            <li><a href="https://paste.fenner.nexus">📝 Local Text Sharing</a></li>
-            <li><a href="https://search.fenner.nexus">🔍 Local Search Engine</a></li>
-            <li><a href="https://wiz.fenner.nexus">💡 WiZ Controller</a></li>
-            <li><a href="https://nanoleaf.fenner.nexus">🌈 Nanoleaf Controller</a></li>
-            <li><a href="https://jellyfin.fenner.nexus">🎬 Media Server</a></li>
-        </ul>
-    </fieldset>
-
-    <fieldset>
-        <legend>Admin</legend>
-        <ul>
-            <li><a href="http://192.168.1.1">🌐 Router</a></li>
-            <li><a href="https://unifi.fenner.nexus">📡 UniFi OS</a></li>
-            <li><a href="https://npm.fenner.nexus">🔒 Proxy Manager</a></li>
-        </ul>
-    </fieldset>
+    <div class="dashboard">
+        <!-- Column 1-->
+        <div class="column">
+            <fieldset>
+                <legend>Smart Home</legend>
+                <ul>
+                    <li><a href="https://wiz.fenner.nexus">💡 WiZ Controller</a></li>
+                    <li><a href="https://nanoleaf.fenner.nexus">🌈 Nanoleaf Controller</a></li>
+                    <li><a href="https://jellyfin.fenner.nexus">🎬 Media Server</a></li>
+                </ul>
+            </fieldset>
+            <fieldset>
+                <legend>Tools</legend>
+                <ul>
+                    <li><a href="https://paste.fenner.nexus">📝 Share Text Between Devices</a></li>
+                    <li><a href="https://search.fenner.nexus">🔍 Local Search Engine</a></li>
+                    <li><a href="https://ai.fenner.nexus">🤖 Local AI</a></li>
+                </ul>
+            </fieldset>
+        </div>
+        <!-- Column 2-->
+        <div class="column">
+            <fieldset>
+                <legend>Trackers</legend>
+                <ul>
+                    <li><a href="https://momentum.fenner.nexus">✅ Momentum Task Tracker</a></li>
+                    <li><a href="https://tracker.fenner.nexus">📉 Mitch's Tracker</a></li>
+                    <li><a href="https://caroline-tracker.fenner.nexus">📉 Caroline's Tracker</a></li>
+                    <li><a href="https://bp.fenner.nexus">❤️ Blood Pressure Tracker</a></li>
+                </ul>
+            </fieldset>
+            <fieldset>
+                <legend>Admin</legend>
+                <ul>
+                    <li><a href="http://192.168.1.1">🌐 pfSense Router</a></li>
+                    <li><a href="https://unifi.fenner.nexus">📡 UniFi OS Server</a></li>
+                    <li><a href="https://npm.fenner.nexus">🔒 Node Proxy Manager</a></li>
+                    <li><a href="https://grafana.fenner.nexus">📊 Grafana Dashboards</a></li>
+                </ul>
+            </fieldset>
+        </div>
+    </div>
 </body>
 
 </html>

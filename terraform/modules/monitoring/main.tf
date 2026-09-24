@@ -77,3 +77,22 @@ resource "helm_release" "monitoring" {
 
   depends_on = [kubectl_manifest.grafana_admin]
 }
+
+resource "kubectl_manifest" "dashboard_homelab_overview" {
+  yaml_body = yamlencode({
+    apiVersion = "v1"
+    kind       = "ConfigMap"
+    metadata = {
+      name      = "grafana-dashboard-homelab-overview"
+      namespace = var.namespace
+      labels = {
+        grafana_dashboard = "1"
+      }
+    }
+    data = {
+      "homelab-overview.json" = file("${path.module}/dashboards/homelab-overview.json")
+    }
+  })
+
+  depends_on = [kubectl_manifest.namespace]
+}
