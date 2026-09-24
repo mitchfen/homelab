@@ -68,6 +68,16 @@ By tracking these configurations in Git, I get some awesome benefits:
 I make changes on my cluster by modifying the code/files in this repo then running `terraform apply` 😎  
 Terraform state is stored in an Azure Storage account. 
 
+## Monitoring
+
+I'm not running any critical services on my homelab, but just for learning/educational purposes I'm deploying the [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) to my cluster via Terraform. It includes:
+
+- [Prometheus](https://prometheus.io/) to collect and retain Kubernetes and Draynor metrics.
+- [Grafana](https://grafana.com/oss/grafana/) to explore metrics and build dashboards.
+- [Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/) (currently unused)
+
+Grafana and Prometheus use k3s local-path persistent storage, which is covered by the Draynor backup scope. The chart version is pinned in [the monitoring Terraform module](./terraform/modules/monitoring/variables.tf); see [Terraform reminders](./terraform/reminders.md) for deployment, password retrieval, and update instructions.
+
 ## Backups
 
 Draynor's stateful data is backed up off-machine to Azure Blob Storage. See the [backup plan](./BackupPlan.md).
