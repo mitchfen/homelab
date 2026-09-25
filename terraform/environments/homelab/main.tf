@@ -9,3 +9,7 @@ module "landing_page" {
 
   html_path = "${path.root}/../../../landing-page/index.html"
 }
+
+module "monitoring" {
+  source = "../../modules/monitoring"
+}
