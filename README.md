@@ -9,7 +9,7 @@
 
 | Machine | CPU | GPU |  Memory |Purpose | OS |
 | --- | --- | --- | --- | --- | --- |
-| Karamja | i7-7700T | Integrated | 16GB | UnifiOS and Jellyfin | Debian |
+| Karamja | i7-7700T | Integrated | 16GB | UnifiOS (may change back to k3s node)| Debian |
 | Varrock | i3-6100T | Integrated | 8GB | Router/firewall, pfblockerNG ad/tracker/IP/TLD blocking | pfSense |
 | Draynor | i5-7600T | Integrated | 32GB | Kubernetes cluster (k3s) for most of my apps | NixOS |
 | Lumbridge | Ryzen 5 7600X | Radeon RX 7900 XTX  | 32GB | Development, Gaming, Running open source models | NixOS |
