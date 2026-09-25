@@ -735,103 +735,106 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "$datasource"
-      },
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 31 },
+      "id": 103,
+      "title": "pfBlockerNG DNSBL",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "loki", "uid": "$lokidatasource" },
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": "auto",
-            "displayMode": "auto"
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Status"
-            },
-            "properties": [
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "color-background"
-                }
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "red",
-                      "value": null
-                    },
-                    {
-                      "color": "green",
-                      "value": 1
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        ]
+          "color": { "fixedColor": "red", "mode": "fixed" },
+          "mappings": [],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "red", "value": null }] },
+          "unit": "short"
+        }
       },
-      "gridPos": {
-        "h": 8,
-        "w": 24,
-        "x": 0,
-        "y": 31
-      },
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 32 },
       "id": 12,
       "options": {
-        "footer": {
-          "show": false
-        },
-        "frameIndex": 0,
-        "showHeader": true
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["sum"], "fields": "", "values": false },
+        "textMode": "auto"
       },
       "pluginVersion": "10.0.0",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "$datasource"
-          },
+          "datasource": { "type": "loki", "uid": "$lokidatasource" },
           "editorMode": "code",
-          "expr": "kube_pod_status_ready{condition=\"true\", namespace!~\"kube-system|monitoring\"} * on(pod, namespace) group_left(phase) kube_pod_status_phase{phase=\"Running\"}",
-          "format": "table",
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
+          "expr": "count_over_time({job=\"pfsense\"} |= \"DNSBL-python\" [24h])",
+          "legendFormat": "Blocks",
+          "queryType": "instant",
           "refId": "A"
         }
       ],
-      "title": "Homelab Pod Readiness & Health Summary",
-      "transformations": [
+      "title": "DNS Blocks (24h)",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "loki", "uid": "$lokidatasource" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "fillOpacity": 15, "lineInterpolation": "smooth" },
+          "unit": "short"
+        }
+      },
+      "gridPos": { "h": 8, "w": 18, "x": 6, "y": 32 },
+      "id": 13,
+      "options": {
+        "legend": { "displayMode": "list", "placement": "bottom" },
+        "tooltip": { "mode": "multi" }
+      },
+      "targets": [
         {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time": true
-            },
-            "indexByName": {
-              "Value": 2,
-              "namespace": 0,
-              "pod": 1
-            },
-            "renameByName": {
-              "Status": "Status",
-              "Value": "Ready State",
-              "namespace": "Namespace",
-              "pod": "Pod Name"
-            }
-          }
+          "datasource": { "type": "loki", "uid": "$lokidatasource" },
+          "editorMode": "code",
+          "expr": "sum(count_over_time({job=\"pfsense\"} |= \"DNSBL-python\" [$__interval]))",
+          "legendFormat": "Blocks / interval",
+          "queryType": "range",
+          "refId": "A"
         }
       ],
-      "type": "table"
+      "title": "DNS Block Rate Over Time",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "loki", "uid": "$lokidatasource" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "fillOpacity": 80 },
+          "unit": "short"
+        }
+      },
+      "gridPos": { "h": 10, "w": 24, "x": 0, "y": 40 },
+      "id": 14,
+      "options": {
+        "barWidth": 0.6,
+        "groupWidth": 0.7,
+        "legend": { "displayMode": "list", "placement": "bottom" },
+        "orientation": "horizontal",
+        "tooltip": { "mode": "single" },
+        "xTickLabelMaxLength": 50,
+        "xTickLabelRotation": 0
+      },
+      "targets": [
+        {
+          "datasource": { "type": "loki", "uid": "$lokidatasource" },
+          "editorMode": "code",
+          "expr": "topk(15, sum by (tld) (count_over_time({job=\"pfsense\"} |= \"DNSBL-python\" | regexp `DNSBL-python,[^,]+,[^,]*\\.(?P<tld>[a-zA-Z0-9-]+),` [$__range])))",
+          "legendFormat": "{{tld}}",
+          "queryType": "instant",
+          "refId": "A"
+        }
+      ],
+      "title": "Top Blocked TLDs (time range)",
+      "type": "barchart"
     }
   ],
   "refresh": "10s",
@@ -854,6 +857,20 @@
         "label": "Data source",
         "name": "datasource",
         "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "Loki",
+          "value": "Loki"
+        },
+        "hide": 0,
+        "label": "Loki data source",
+        "name": "lokidatasource",
+        "query": "loki",
         "refresh": 1,
         "regex": "",
         "type": "datasource"

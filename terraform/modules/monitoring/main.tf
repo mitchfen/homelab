@@ -109,6 +109,13 @@ resource "helm_release" "loki" {
       commonConfig = {
         replication_factor = 1
       }
+      limits_config = {
+        retention_period = "30d"
+      }
+      compactor = {
+        retention_enabled    = true
+        delete_request_store = "filesystem"
+      }
       schemaConfig = {
         configs = [
           {
@@ -186,12 +193,16 @@ resource "helm_release" "promtail" {
                 target_label: 'host'
             pipeline_stages:
               - regex:
-                  expression: 'DNSBL-python.*,[\d\.]+,(?P<client_ip>[\d\.]+),(?P<domain>[^,]+),(?P<feed>[^,]+),(?P<block_type>[^,]+)'
+                  expression: 'DNSBL-python,[^,]+,(?P<queried_domain>[^,]+),(?P<client_ip>[^,]+),(?P<resolver>[^,]+),(?P<block_type>[^,]+),(?P<list_name>[^,]+),(?P<matched_domain>[^,]+),(?P<feed>[^,]+),(?P<action>[^,\s]+)'
               - labels:
+                  queried_domain: ''
                   client_ip: ''
-                  domain: ''
-                  feed: ''
+                  resolver: ''
                   block_type: ''
+                  list_name: ''
+                  matched_domain: ''
+                  feed: ''
+                  action: ''
         EOT
       }
     }
