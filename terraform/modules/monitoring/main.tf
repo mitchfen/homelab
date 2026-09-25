@@ -8,6 +8,9 @@ resource "kubectl_manifest" "namespace" {
   })
 }
 
+# Note: This is not a production grade setup. The password is persisted in state. 
+# The state is protected by Azure RBAC and IP whitelisting which disallows any traffic to the storage account not from my IP. 
+# In a real production environment, I would use an Azure Key Vault.
 resource "random_password" "grafana_admin" {
   length  = 32
   special = true
