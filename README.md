@@ -57,7 +57,7 @@ I'm not running any critical services on my homelab, but just for learning/educa
 - [Grafana](https://grafana.com/oss/grafana/) to explore metrics and build dashboards.
 - [Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/) (currently unused)
 
-Grafana and Prometheus use k3s local-path persistent storage, which is covered by the Draynor backup scope. The chart version is pinned in [the monitoring Terraform module](./terraform/modules/monitoring/variables.tf); see [Terraform reminders](./terraform/reminders.md) for deployment, password retrieval, and update instructions.
+Grafana and Prometheus use k3s local-path persistent storage, which is covered by the Draynor backup scope. The chart version is pinned in [the monitoring Terraform module](./terraform/modules/monitoring/variables.tf); see [Terraform reminders](./terraform/README.md) for deployment, password retrieval, and update instructions.
 
 ## Backups
 

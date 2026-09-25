@@ -5,10 +5,24 @@ variable "namespace" {
   nullable    = false
 }
 
-variable "chart_version" {
+variable "kube_prometheus_stack_chart_version" {
   description = "Pinned kube-prometheus-stack Helm chart version."
   type        = string
-  default     = "91.5.1"
+  default     = "91.5.3"
+  nullable    = false
+}
+
+variable "loki_chart_version" {
+  description = "Pinned Loki Helm chart version."
+  type        = string
+  default     = "7.3.0"
+  nullable    = false
+}
+
+variable "promtail_chart_version" {
+  description = "Pinned Promtail Helm chart version."
+  type        = string
+  default     = "6.17.1"
   nullable    = false
 }
 
@@ -33,9 +47,16 @@ variable "prometheus_storage_size" {
   nullable    = false
 }
 
+variable "loki_storage_size" {
+  description = "Persistent storage requested by Loki."
+  type        = string
+  default     = "20Gi"
+  nullable    = false
+}
+
 variable "prometheus_retention" {
   description = "How long Prometheus retains collected metrics."
   type        = string
-  default     = "15d"
+  default     = "14d"
   nullable    = false
 }

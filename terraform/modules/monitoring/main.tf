@@ -38,7 +38,7 @@ resource "helm_release" "monitoring" {
   name       = "monitoring"
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "kube-prometheus-stack"
-  version    = var.chart_version
+  version    = var.kube_prometheus_stack_chart_version
   namespace  = var.namespace
 
   atomic  = true
@@ -57,6 +57,16 @@ resource "helm_release" "monitoring" {
         size             = var.grafana_storage_size
         storageClassName = var.storage_class_name
       }
+      # Provision Loki automatically as a Grafana data source
+      additionalDataSources = [
+        {
+          name      = "Loki"
+          type      = "loki"
+          access    = "proxy"
+          url       = "http://loki.${var.namespace}.svc.cluster.local:3100"
+          isDefault = false
+        }
+      ]
     }
     prometheus = {
       prometheusSpec = {
@@ -79,6 +89,120 @@ resource "helm_release" "monitoring" {
   })]
 
   depends_on = [kubectl_manifest.grafana_admin]
+}
+
+resource "helm_release" "loki" {
+  name       = "loki"
+  repository = "https://grafana.github.io/helm-charts"
+  chart      = "loki"
+  version    = var.loki_chart_version
+  namespace  = var.namespace
+
+  atomic  = true
+  timeout = 600
+  wait    = true
+
+  values = [yamlencode({
+    deploymentMode = "SingleBinary"
+    loki = {
+      auth_enabled = false
+      commonConfig = {
+        replication_factor = 1
+      }
+      schemaConfig = {
+        configs = [
+          {
+            from         = "2024-04-01"
+            store        = "tsdb"
+            object_store = "filesystem"
+            schema       = "v13"
+            index = {
+              prefix = "index_"
+              period = "24h"
+            }
+          }
+        ]
+      }
+      storage = {
+        type = "filesystem"
+      }
+    }
+    singleBinary = {
+      replicas = 1
+      persistence = {
+        enabled          = true
+        size             = var.loki_storage_size
+        storageClassName = var.storage_class_name
+      }
+    }
+    backend       = { replicas = 0 }
+    read          = { replicas = 0 }
+    write         = { replicas = 0 }
+    ingester      = { replicas = 0 }
+    querier       = { replicas = 0 }
+    queryFrontend = { replicas = 0 }
+  })]
+
+  depends_on = [kubectl_manifest.namespace]
+}
+
+resource "helm_release" "promtail" {
+  name       = "promtail"
+  repository = "https://grafana.github.io/helm-charts"
+  chart      = "promtail"
+  version    = var.promtail_chart_version
+  namespace  = var.namespace
+
+  atomic  = true
+  timeout = 600
+  wait    = true
+
+  values = [yamlencode({
+    # Enable NodePort on the main Promtail service block
+    service = {
+      type = "NodePort"
+    }
+    config = {
+      clients = [
+        {
+          url = "http://loki.${var.namespace}.svc.cluster.local:3100/loki/api/v1/push"
+        }
+      ]
+      snippets = {
+        extraScrapeConfigs = <<-EOT
+          - job_name: pfsense-syslog
+            syslog:
+              listen_address: 0.0.0.0:1514
+              idle_timeout: 1h
+              label_structured_data: yes
+              labels:
+                job: pfsense
+            relabel_configs:
+              - source_labels: ['__syslog_message_hostname']
+                target_label: 'host'
+            pipeline_stages:
+              - regex:
+                  expression: 'DNSBL-python.*,[\d\.]+,(?P<client_ip>[\d\.]+),(?P<domain>[^,]+),(?P<feed>[^,]+),(?P<block_type>[^,]+)'
+              - labels:
+                  client_ip: ''
+                  domain: ''
+                  feed: ''
+                  block_type: ''
+        EOT
+      }
+    }
+    extraPorts = {
+      syslog = {
+        name          = "syslog"
+        containerPort = 1514
+        servicePort   = 514
+        nodePort      = 30514 # Static NodePort for pfSense syslog target
+        protocol      = "UDP"
+      }
+    }
+  })]
+
+  depends_on = [helm_release.loki]
 }
 
 resource "kubectl_manifest" "dashboard_homelab_overview" {
