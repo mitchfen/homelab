@@ -146,6 +146,7 @@ resource "helm_release" "loki" {
   depends_on = [kubectl_manifest.namespace]
 }
 
+# Promtail does nothing except ferry logs between pfBlocker-ng and Loki
 resource "helm_release" "promtail" {
   name       = "promtail"
   repository = "https://grafana.github.io/helm-charts"
@@ -158,21 +159,24 @@ resource "helm_release" "promtail" {
   wait    = true
 
   values = [yamlencode({
-    # Enable NodePort on the main Promtail service block
-    service = {
-      type = "NodePort"
-    }
+    # Disable default host/pod log scraping
     config = {
+      file_watch_config = {
+        enabled = false
+      }
       clients = [
         {
           url = "http://loki.${var.namespace}.svc.cluster.local:3100/loki/api/v1/push"
         }
       ]
       snippets = {
+        # Overwrite default Kubernetes pod scrape configs so ONLY pfSense is ingested
+        scrapeConfigs      = ""
         extraScrapeConfigs = <<-EOT
           - job_name: pfsense-syslog
             syslog:
               listen_address: 0.0.0.0:1514
+              listen_protocol: udp
               idle_timeout: 1h
               label_structured_data: yes
               labels:
@@ -195,9 +199,12 @@ resource "helm_release" "promtail" {
       syslog = {
         name          = "syslog"
         containerPort = 1514
-        servicePort   = 514
-        nodePort      = 30514 # Static NodePort for pfSense syslog target
         protocol      = "UDP"
+        service = {
+          type     = "NodePort"
+          port     = 1514
+          nodePort = 32747
+        }
       }
     }
   })]
