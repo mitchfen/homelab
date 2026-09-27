@@ -86,6 +86,9 @@ Draynor's stateful data is backed up off-site to Azure Blob Storage. See the [ba
 | Nginx Proxy Manager | Reverse proxy and entrypoint for all my apps. | Kubernetes | [Link](https://github.com/NginxProxyManager/nginx-proxy-manager) |
 | UniFi OS | Manage and update my Ubiquiti access points. | Debian | [Link](https://help.ui.com/hc/en-us/articles/34210126298775-Self-Hosting-UniFi) |
 | pfBlocker-NG | IP filtering, DNS blocklisting, ad/tracker blocking, and TLD blocking. | pfSense Extension | [Link](https://docs.netgate.com/pfsense/en/latest/packages/pfblocker.html) |
+| Grafana | Monitoring and visualizations for my cluster. | Kubernetes | [Link](https://grafana.com) |
+| Prometheus | Metrics collection and retention for my cluster. | Kubernetes | [Link](https://prometheus.io) |
+| Loki | Currently used just to collect logs from pfBlocker-NG. | Kubernetes | [Link](https://grafana.com/oss/loki/) |
 
 ## Local AI Models
 

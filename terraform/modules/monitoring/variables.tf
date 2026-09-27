@@ -19,12 +19,6 @@ variable "loki_chart_version" {
   nullable    = false
 }
 
-variable "promtail_chart_version" {
-  description = "Pinned Promtail Helm chart version."
-  type        = string
-  default     = "6.17.1"
-  nullable    = false
-}
 
 variable "storage_class_name" {
   description = "StorageClass used for Grafana and Prometheus persistent data."
