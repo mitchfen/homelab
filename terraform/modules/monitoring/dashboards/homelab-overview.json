@@ -5,8 +5,8 @@
     "name": "homelab-combined-overview",
     "namespace": "default",
     "uid": "c31f015c-1239-432e-b445-e8248a40aac2",
-    "resourceVersion": "1790429281382015",
-    "generation": 9,
+    "resourceVersion": "1790558623678001",
+    "generation": 13,
     "creationTimestamp": "2026-09-24T15:59:18Z",
     "labels": {
       "grafana.app/deprecatedInternalID": "4474877209665536"
@@ -15,11 +15,11 @@
       "grafana.app/createdBy": "access-policy:service",
       "grafana.app/managedBy": "classic-file-provisioning",
       "grafana.app/managerId": "sidecarProvider",
-      "grafana.app/sourceChecksum": "2c102a948b3030dd4bc8a0ebdeb7e600",
+      "grafana.app/sourceChecksum": "e8ce30c6da22c4cad1287e9a7096ce1b",
       "grafana.app/sourcePath": "/tmp/dashboards/homelab-overview.json",
-      "grafana.app/sourceTimestamp": "1790429281000",
+      "grafana.app/sourceTimestamp": "1790558623000",
       "grafana.app/updatedBy": "access-policy:service",
-      "grafana.app/updatedTimestamp": "2026-09-26T13:28:01Z",
+      "grafana.app/updatedTimestamp": "2026-09-28T01:23:43Z",
       "grafana.app/folder": ""
     }
   },
@@ -235,7 +235,6 @@
               "options": {
                 "legend": {
                   "calcs": [
-                    "lastNotNull",
                     "max"
                   ],
                   "displayMode": "table",
@@ -271,8 +270,12 @@
                       "group": "prometheus",
                       "kind": "DataQuery",
                       "spec": {
+                        "editorMode": "code",
+                        "exemplar": false,
                         "expr": "sum(container_memory_working_set_bytes{container!=\"\", namespace!~\"kube-system|monitoring\"}) by (namespace)",
-                        "legendFormat": "{{namespace}}"
+                        "instant": false,
+                        "legendFormat": "{{namespace}}",
+                        "range": true
                       },
                       "version": "v0"
                     },
@@ -351,7 +354,6 @@
               "options": {
                 "legend": {
                   "calcs": [
-                    "lastNotNull",
                     "max"
                   ],
                   "displayMode": "table",
@@ -389,8 +391,8 @@
                       "spec": {
                         "direction": "backward",
                         "editorMode": "code",
-                        "expr": "topk(15, sum by (domain) (\n  count_over_time(\n    {job=\"pfsense\"} |= \"DNSBL-python\" \n    | regexp `DNSBL-python,[^,]+,(?P<domain>[^,]+),` \n    [$__range]\n  )\n))",
-                        "legendFormat": "{{tld}}",
+                        "expr": "topk(25, sum by (domain) (\n  count_over_time(\n    {job=\"pfsense\"} |= \"DNSBL-python\" \n    | regexp `DNSBL-python,[^,]+,(?:[a-zA-Z0-9_-]+\\.)*(?P<domain>[a-zA-Z0-9_-]+\\.[a-zA-Z0-9_-]+),` \n    [$__range]\n  )\n))",
+                        "legendFormat": "{{domain}}",
                         "queryType": "instant"
                       },
                       "version": "v0"
@@ -400,13 +402,34 @@
                 }
               ],
               "queryOptions": {},
-              "transformations": []
+              "transformations": [
+                {
+                  "group": "",
+                  "kind": "Transformation",
+                  "spec": {}
+                },
+                {
+                  "group": "sortBy",
+                  "kind": "Transformation",
+                  "spec": {
+                    "options": {
+                      "fields": {},
+                      "sort": [
+                        {
+                          "desc": true,
+                          "field": "Value #A"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
             }
           },
           "description": "",
           "id": 14,
           "links": [],
-          "title": "Blocked Domains",
+          "title": "Blocks by TLD",
           "vizConfig": {
             "group": "barchart",
             "kind": "VizConfig",
@@ -414,23 +437,23 @@
               "fieldConfig": {
                 "defaults": {
                   "color": {
-                    "fixedColor": "light-purple",
-                    "mode": "shades"
+                    "mode": "palette-classic"
                   },
                   "custom": {
-                    "axisBorderShow": false,
+                    "axisBorderShow": true,
                     "axisCenteredZero": false,
                     "axisColorMode": "text",
+                    "axisGridShow": false,
                     "axisLabel": "",
                     "axisPlacement": "auto",
                     "fillOpacity": 100,
-                    "gradientMode": "hue",
+                    "gradientMode": "none",
                     "hideFrom": {
                       "legend": false,
                       "tooltip": false,
                       "viz": false
                     },
-                    "lineWidth": 1,
+                    "lineWidth": 0,
                     "scaleDistribution": {
                       "type": "linear"
                     },
@@ -456,15 +479,16 @@
                 "overrides": []
               },
               "options": {
-                "barRadius": 0,
-                "barWidth": 0.9,
+                "barRadius": 0.25,
+                "barWidth": 0.95,
+                "colorByField": "Time",
                 "fullHighlight": false,
                 "groupWidth": 0.8,
                 "legend": {
                   "calcs": [],
                   "displayMode": "list",
                   "placement": "bottom",
-                  "showLegend": true
+                  "showLegend": false
                 },
                 "orientation": "horizontal",
                 "showValue": "always",
@@ -478,6 +502,176 @@
                 "xTickLabelMaxLength": 50,
                 "xTickLabelRotation": 0,
                 "xTickLabelSpacing": 100
+              }
+            },
+            "version": "13.2.2"
+          }
+        }
+      },
+      "panel-15": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "P8E80F9AEF21F6940"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "direction": "backward",
+                        "editorMode": "code",
+                        "expr": "sum(count_over_time({job=\"pfsense\"} |= \"DNSBL-python\" [24h]))",
+                        "queryType": "range"
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 15,
+          "links": [],
+          "title": "Lookups blocked",
+          "vizConfig": {
+            "group": "stat",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "fixedColor": "#ad46ff",
+                    "mode": "thresholds"
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "options": {
+                "colorMode": "value",
+                "graphMode": "none",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+              }
+            },
+            "version": "13.2.2"
+          }
+        }
+      },
+      "panel-16": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "$datasource"
+                      },
+                      "group": "prometheus",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "sum(kube_pod_status_phase{phase=~\"Failed|Pending|Unknown\"}) \n+ sum(kube_pod_status_ready{condition=\"false\", status=\"true\"})",
+                        "legendFormat": "__auto",
+                        "range": true
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 16,
+          "links": [],
+          "title": "Failed, Pending, Unknown pods",
+          "vizConfig": {
+            "group": "stat",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "noValue": "0",
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "options": {
+                "colorMode": "value",
+                "graphMode": "none",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
               }
             },
             "version": "13.2.2"
@@ -762,7 +956,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum(increase(kube_pod_container_status_restarts_total[24h]))",
+                        "expr": "max(node_thermal_zone_temp)",
                         "legendFormat": "Restarts",
                         "range": true
                       },
@@ -779,7 +973,7 @@
           "description": "",
           "id": 5,
           "links": [],
-          "title": "Pod Restarts (24h)",
+          "title": "Draynor CPU Temp",
           "vizConfig": {
             "group": "stat",
             "kind": "VizConfig",
@@ -806,7 +1000,7 @@
                       }
                     ]
                   },
-                  "unit": "none"
+                  "unit": "celsius"
                 },
                 "overrides": []
               },
@@ -866,7 +1060,7 @@
                           "name": "panel-2"
                         },
                         "height": 4,
-                        "width": 5,
+                        "width": 4,
                         "x": 4,
                         "y": 0
                       }
@@ -879,8 +1073,8 @@
                           "name": "panel-3"
                         },
                         "height": 4,
-                        "width": 5,
-                        "x": 9,
+                        "width": 4,
+                        "x": 8,
                         "y": 0
                       }
                     },
@@ -892,8 +1086,21 @@
                           "name": "panel-4"
                         },
                         "height": 4,
-                        "width": 5,
-                        "x": 14,
+                        "width": 4,
+                        "x": 12,
+                        "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-16"
+                        },
+                        "height": 4,
+                        "width": 4,
+                        "x": 16,
                         "y": 0
                       }
                     },
@@ -905,9 +1112,35 @@
                           "name": "panel-5"
                         },
                         "height": 4,
-                        "width": 5,
-                        "x": 19,
+                        "width": 4,
+                        "x": 20,
                         "y": 0
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-10"
+                        },
+                        "height": 8,
+                        "width": 12,
+                        "x": 0,
+                        "y": 4
+                      }
+                    },
+                    {
+                      "kind": "GridLayoutItem",
+                      "spec": {
+                        "element": {
+                          "kind": "ElementReference",
+                          "name": "panel-11"
+                        },
+                        "height": 8,
+                        "width": 12,
+                        "x": 12,
+                        "y": 4
                       }
                     }
                   ]
@@ -929,37 +1162,10 @@
                       "spec": {
                         "element": {
                           "kind": "ElementReference",
-                          "name": "panel-14"
+                          "name": "panel-15"
                         },
                         "height": 10,
-                        "width": 24,
-                        "x": 0,
-                        "y": 0
-                      }
-                    }
-                  ]
-                }
-              },
-              "title": "pfBlockerNG DNSBL"
-            }
-          },
-          {
-            "kind": "RowsLayoutRow",
-            "spec": {
-              "collapse": false,
-              "layout": {
-                "kind": "GridLayout",
-                "spec": {
-                  "items": [
-                    {
-                      "kind": "GridLayoutItem",
-                      "spec": {
-                        "element": {
-                          "kind": "ElementReference",
-                          "name": "panel-10"
-                        },
-                        "height": 8,
-                        "width": 12,
+                        "width": 3,
                         "x": 0,
                         "y": 0
                       }
@@ -969,18 +1175,18 @@
                       "spec": {
                         "element": {
                           "kind": "ElementReference",
-                          "name": "panel-11"
+                          "name": "panel-14"
                         },
-                        "height": 8,
-                        "width": 12,
-                        "x": 12,
+                        "height": 10,
+                        "width": 21,
+                        "x": 3,
                         "y": 0
                       }
                     }
                   ]
                 }
               },
-              "title": "Homelab Application Metrics"
+              "title": "DNS Blackhole"
             }
           }
         ]

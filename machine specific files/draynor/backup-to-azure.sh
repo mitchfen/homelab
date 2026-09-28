@@ -37,6 +37,7 @@ systemctl stop k3s
 K3S_STOPPED=true
 
 tar --create --gzip --file "$ARCHIVE_PATH" --directory / \
+  --exclude='var/lib/rancher/k3s/storage/pvc-*_monitoring_*' \
   var/lib/rancher/k3s/server \
   var/lib/rancher/k3s/storage \
   var/lib/npm \

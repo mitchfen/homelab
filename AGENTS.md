@@ -11,3 +11,26 @@
 - **Deployment**: Make changes to the infrastructure by modifying files in this repository, but leave deploying/applying to the user via `./makeItSo.sh`. Avoid manual `kubectl` or `helm` commands for permanent deployment changes.
 - **Networking**: Applications are served on subdomains of `fenner.nexus`. This uses a split-horizon DNS setup (no public DNS records) and Nginx Proxy Manager routes requests based on the HTTP `Host` header.
 - **Terraform State**: Stored in a private Azure Blob Storage container.
+
+## Logging & Observability (Loki)
+- Currently ONLY used to collect pfBlocker-NG DNSBL logs.
+- **External URL**: `https://loki.fenner.nexus` (routed via Nginx Proxy Manager; redirects HTTP to HTTPS).
+- **In-Cluster URL**: `http://loki.monitoring.svc.cluster.local:3100`
+- **Authentication**: Disabled (`auth_enabled: false`).
+- **Core Endpoints / API**:
+  - Ready check: `GET /ready`
+  - Push logs: `POST /loki/api/v1/push` (used by log shippers like Promtail, Fluentbit, syslog-ng)
+  - Query instant: `GET /loki/api/v1/query?query=<LogQL>`
+  - Query range: `GET /loki/api/v1/query_range?query=<LogQL>&start=<unix_nano>&end=<unix_nano>`
+  - Label names: `GET /loki/api/v1/labels`
+  - Label values: `GET /loki/api/v1/label/<name>/values`
+  - Tail logs (streaming): `GET /loki/api/v1/tail?query=<LogQL>`
+
+## Related Documentation & Reference Files
+Consult these markdown documents for deeper context on specific subsystems:
+- [README.md](file:///home/mitchfen/Projects/homelab/README.md): High-level homelab architecture, hardware inventory (hostnames, specs, roles), network topology, and DNS/Nginx Proxy Manager setup.
+- [BackupPlan.md](file:///home/mitchfen/Projects/homelab/BackupPlan.md): Backup scope, retention policies, Azure storage configuration, and step-by-step bare-metal recovery procedures for Draynor.
+- [terraform/README.md](file:///home/mitchfen/Projects/homelab/terraform/README.md): Terraform workflow details, retrieving generated credentials (e.g. Grafana admin password), and upgrading Helm charts.
+- [machine specific files/varrock/README.md](file:///home/mitchfen/Projects/homelab/machine%20specific%20files/varrock/README.md): Architecture and operational guide for pfBlockerNG log streaming from pfSense (`dnsbl.log`) directly into Loki via `dnsbl-to-loki.sh` and FreeBSD daemon supervision.
+
+

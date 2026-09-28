@@ -7,7 +7,7 @@ module "cluster_manifests" {
 module "landing_page" {
   source = "../../modules/landing-page"
 
-  html_path = "${path.root}/../../../landing-page/index.html"
+  html_path = "${path.root}/../../../machine specific files/draynor/landingPage.html"
 }
 
 module "monitoring" {

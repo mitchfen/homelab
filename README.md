@@ -3,7 +3,7 @@
 > 
 > The cloud at home:
 
-<img src="./images/homelab.jpg" width=550px />
+<img src="./screenshots/homelab.jpg" width=550px />
 
 ## Hardware
 
@@ -15,11 +15,11 @@
 | Lumbridge | Ryzen 5 7600X | Radeon RX 7900 XTX  | 32GB | Development, Gaming, Running open source models | NixOS |
 
 <!--
-<img src="./images/lumbridge.png" width="600px" />  
+<img src="./screenshots/lumbridge.png" width="600px" />  
 
-<img src="./images/draynor.png" width="600px" />  
+<img src="./screenshots/draynor.png" width="600px" />  
 
-<img src="./images/karamja.png" width="600px" />
+<img src="./screenshots/karamja.png" width="600px" />
 -->
 
 ## NixOS 
@@ -40,9 +40,9 @@
 
 - All my apps are served on subdomains of `fenner.nexus`. That is a public domain, but one with **no public DNS records**. I use a [split horizon DNS](https://en.wikipedia.org/wiki/Split-horizon_DNS) strategy so my devices resolve those subdomains to the local IPs of my devices.
 - [Nginx Proxy Manager](https://github.com/NginxProxyManager/nginx-proxy-manager) acts as the reverse proxy, routing each request to the correct pod via the HTTP `Host` header. It uses the Cloudflare API and the [DNS-01 challenge](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge) to obtain a wildcard `*.fenner.nexus` TLS certificate from [Let's Encrypt](https://letsencrypt.org/). So every app is served over HTTPS without browser certificate warnings!
-- See my [start page](./landing-page/index.html) (and how it has no certificate warnings 😉). It's stored in a Kubernetes ConfigMap and served by an nginx pod. Terraform manages the ConfigMap, deployment, and service. 
+- See my [start page](./machine%20specific%20files/draynor/landingPage.html) (and how it has no certificate warnings 😉). It's stored in a Kubernetes ConfigMap and served by an nginx pod. Terraform manages the ConfigMap, deployment, and service. 
 
-<img src="./images/landing-page.png" width=400px />
+<img src="./screenshots/landing-page.png" width=400px />
 
 ## Terraform
 
