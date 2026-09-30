@@ -90,7 +90,7 @@
   };
 
   # Fish shell configuration and aliases
-  programs.fish = {
+  programs.zsh = {
     enable = true;
     shellAliases = {
       nixUpgrade = "sudo nixos-rebuild switch --upgrade";
@@ -126,7 +126,7 @@
     isNormalUser = true;
     description = "mitchfen";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
-    shell = pkgs.fish; 
+    shell = pkgs.zsh; 
     packages = with pkgs; [
       # User specific packages can go here
     ];
@@ -173,6 +173,7 @@
     mangohud
     discord
     runelite
+    bolt-launcher
   ];
 
   # Configure the firewall
