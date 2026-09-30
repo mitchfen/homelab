@@ -4,22 +4,20 @@
   "metadata": {
     "name": "homelab-combined-overview",
     "namespace": "default",
-    "uid": "c31f015c-1239-432e-b445-e8248a40aac2",
-    "resourceVersion": "1790558623678001",
-    "generation": 13,
-    "creationTimestamp": "2026-09-24T15:59:18Z",
+    "uid": "9cc77108-4a4a-4d9c-acc0-c86b6ea71edd",
+    "resourceVersion": "1790681389822009",
+    "generation": 1,
+    "creationTimestamp": "2026-09-29T11:29:49Z",
     "labels": {
-      "grafana.app/deprecatedInternalID": "4474877209665536"
+      "grafana.app/deprecatedInternalID": "1715400522670080"
     },
     "annotations": {
       "grafana.app/createdBy": "access-policy:service",
       "grafana.app/managedBy": "classic-file-provisioning",
       "grafana.app/managerId": "sidecarProvider",
-      "grafana.app/sourceChecksum": "e8ce30c6da22c4cad1287e9a7096ce1b",
+      "grafana.app/sourceChecksum": "5a90700f8271bcd1dc55b52db124637e",
       "grafana.app/sourcePath": "/tmp/dashboards/homelab-overview.json",
-      "grafana.app/sourceTimestamp": "1790558623000",
-      "grafana.app/updatedBy": "access-policy:service",
-      "grafana.app/updatedTimestamp": "2026-09-28T01:23:43Z",
+      "grafana.app/sourceTimestamp": "1790559049000",
       "grafana.app/folder": ""
     }
   },
@@ -84,7 +82,7 @@
           "description": "",
           "id": 1,
           "links": [],
-          "title": "Node CPU Usage",
+          "title": "Draynor CPU Usage",
           "vizConfig": {
             "group": "stat",
             "kind": "VizConfig",
@@ -391,7 +389,7 @@
                       "spec": {
                         "direction": "backward",
                         "editorMode": "code",
-                        "expr": "topk(25, sum by (domain) (\n  count_over_time(\n    {job=\"pfsense\"} |= \"DNSBL-python\" \n    | regexp `DNSBL-python,[^,]+,(?:[a-zA-Z0-9_-]+\\.)*(?P<domain>[a-zA-Z0-9_-]+\\.[a-zA-Z0-9_-]+),` \n    [$__range]\n  )\n))",
+                        "expr": "topk(25, sum by (domain) (\ncount_over_time(\n{job=\"pfsense\"} |= \"DNSBL-python\"\n| regexp `DNSBL-python,[^,]+,(?:[a-zA-Z0-9_-]+\\.)*(?P<domain>[a-zA-Z0-9_-]+\\.[a-zA-Z0-9_-]+),`\n| domain !~ \".*grafana.*\"\n[1h]\n)))\n\n",
                         "legendFormat": "{{domain}}",
                         "queryType": "instant"
                       },
@@ -426,10 +424,10 @@
               ]
             }
           },
-          "description": "",
+          "description": "Excluding Grafana",
           "id": 14,
           "links": [],
-          "title": "Blocks by TLD",
+          "title": "DNS Blocks by TLD",
           "vizConfig": {
             "group": "barchart",
             "kind": "VizConfig",
@@ -528,7 +526,7 @@
                       "spec": {
                         "direction": "backward",
                         "editorMode": "code",
-                        "expr": "sum(count_over_time({job=\"pfsense\"} |= \"DNSBL-python\" [24h]))",
+                        "expr": "sum(count_over_time({job=\"pfsense\"} |= \"DNSBL-python\" [$__range]))",
                         "queryType": "range"
                       },
                       "version": "v0"
@@ -714,7 +712,7 @@
           "description": "",
           "id": 2,
           "links": [],
-          "title": "Node Memory Usage",
+          "title": "Draynor Memory Usage",
           "vizConfig": {
             "group": "stat",
             "kind": "VizConfig",
@@ -803,7 +801,7 @@
           "description": "",
           "id": 3,
           "links": [],
-          "title": "Node Root Disk Usage",
+          "title": "Draynor Root Disk Usage",
           "vizConfig": {
             "group": "stat",
             "kind": "VizConfig",
@@ -1164,7 +1162,7 @@
                           "kind": "ElementReference",
                           "name": "panel-15"
                         },
-                        "height": 10,
+                        "height": 5,
                         "width": 3,
                         "x": 0,
                         "y": 0
@@ -1186,7 +1184,7 @@
                   ]
                 }
               },
-              "title": "DNS Blackhole"
+              "title": "DNSBL"
             }
           }
         ]
