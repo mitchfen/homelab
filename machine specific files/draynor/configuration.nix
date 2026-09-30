@@ -61,7 +61,7 @@
   };
 
   # Fish shell configuration and aliases
-  programs.fish = {
+  programs.zsh = {
     enable = true;
     shellAliases = {
       nixUpgrade = "sudo nixos-rebuild switch --upgrade";
@@ -79,7 +79,7 @@
     isNormalUser = true;
     description = "mitchfen";
     extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.fish;
+    shell = pkgs.zsh;
     packages = with pkgs; [];
 
     # Configure with my public SSH key. https://github.com/mitchfen.keys
