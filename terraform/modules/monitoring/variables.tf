@@ -8,7 +8,7 @@ variable "namespace" {
 variable "kube_prometheus_stack_chart_version" {
   description = "Pinned kube-prometheus-stack Helm chart version."
   type        = string
-  default     = "91.5.3"
+  default     = "91.8.2"
   nullable    = false
 }
 

@@ -23,7 +23,13 @@ kubectl get secret -n monitoring grafana-admin -o jsonpath="{.data.admin-passwor
 
 ## How to Update The Monitoring Chart
 
-Check available versions and update `variables.tf` accordingly:
+You can automatically check available chart versions and update `modules/monitoring/variables.tf` by running:
+
+```bash
+./update-monitoring-charts.sh
+```
+
+Or perform the steps manually:
 
 ```bash
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
@@ -32,3 +38,4 @@ helm repo update
 helm search repo prometheus-community/kube-prometheus-stack 
 helm search repo grafana/loki
 ```
+
