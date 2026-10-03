@@ -90,7 +90,7 @@
   };
 
   # Fish shell configuration and aliases
-  programs.zsh = {
+  programs.fish = {
     enable = true;
     shellAliases = {
       nixUpgrade = "sudo nixos-rebuild switch --upgrade";
@@ -126,7 +126,7 @@
     isNormalUser = true;
     description = "mitchfen";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
-    shell = pkgs.zsh; 
+    shell = pkgs.fish; 
     packages = with pkgs; [
       # User specific packages can go here
     ];
