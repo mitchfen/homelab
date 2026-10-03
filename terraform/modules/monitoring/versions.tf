@@ -6,8 +6,5 @@ terraform {
     kubectl = {
       source = "gavinbunney/kubectl"
     }
-    random = {
-      source = "hashicorp/random"
-    }
   }
 }

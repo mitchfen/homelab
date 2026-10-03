@@ -8,31 +8,12 @@ resource "kubectl_manifest" "namespace" {
   })
 }
 
-# Note: This is not a production grade setup. The password is persisted in state. 
-# The state is protected by Azure RBAC and IP whitelisting which disallows any traffic to the storage account not from my IP. 
-# In a real production environment, I would use an Azure Key Vault.
-resource "random_password" "grafana_admin" {
-  length  = 32
-  special = true
-}
-
-resource "kubectl_manifest" "grafana_admin" {
-  yaml_body = yamlencode({
-    apiVersion = "v1"
-    kind       = "Secret"
-    metadata = {
-      name      = "grafana-admin"
-      namespace = var.namespace
-    }
-    type = "Opaque"
-    data = {
-      "admin-user"     = base64encode("admin")
-      "admin-password" = base64encode(random_password.grafana_admin.result)
-    }
-  })
-
-  depends_on = [kubectl_manifest.namespace]
-}
+# Security note: The Grafana admin secret ('grafana-admin') is managed out-of-band: 
+# Command:
+#   kubectl create secret generic grafana-admin \
+#     -n monitoring \
+#     --from-literal=admin-user='admin' \
+#     --from-literal=admin-password='<STRONG_PASSWORD>'
 
 resource "helm_release" "monitoring" {
   name       = "monitoring"
@@ -88,7 +69,7 @@ resource "helm_release" "monitoring" {
     }
   })]
 
-  depends_on = [kubectl_manifest.grafana_admin]
+  depends_on = [kubectl_manifest.namespace]
 }
 
 resource "helm_release" "loki" {

@@ -6,5 +6,6 @@ terraform {
     key                  = "homelab.tfstate"
     subscription_id      = "c50e892e-1a7b-4ce6-8880-fc52843e6c4b"
     use_azuread_auth     = true
+    # encrypted by default in Azure Storage. No encrypt = true needed.
   }
 }
