@@ -1,3 +1,14 @@
+terraform {
+  required_providers {
+    helm = {
+      source = "hashicorp/helm"
+    }
+    kubectl = {
+      source = "gavinbunney/kubectl"
+    }
+  }
+}
+
 resource "kubectl_manifest" "namespace" {
   yaml_body = yamlencode({
     apiVersion = "v1"

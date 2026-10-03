@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    kubectl = {
+      source = "gavinbunney/kubectl"
+    }
+  }
+}
+
 data "kubectl_file_documents" "manifests" {
   for_each = toset(fileset(var.manifest_dir, "**/*.yaml"))
   content  = file("${var.manifest_dir}/${each.value}")
