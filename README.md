@@ -59,7 +59,11 @@ For monitoring I deploy:
 
 <img src="./images/grafanaDash.png" width="1000px" />
 
+## Leveraging Open Source AI Models
 
+I run local AI models using [LM Studio](https://lmstudio.ai) on Lumbridge, leveraging my RX 7900 XTX and it's 24 GB of VRAM:
+- For terminal-based workflows, I am building [github.com/mitchfen/rig](https://github.com/mitchfen/rig) a lightweight CLI harness that helps me leverage my local AI models.
+- I host [Open WebUI](https://github.com/open-webui/open-webui) connected to LM Studio so other users on my home network can chat with local models.
 
 ## Applications I run
 
@@ -74,6 +78,7 @@ For monitoring I deploy:
 | Blood Pressure Tracker | Track my blood pressure and visualize trends. | Kubernetes | [Link](https://github.com/mitchfen/blood-pressure-tracker) |
 | Wiz Controller | Allow users on my home network to control my [WiZ lights](https://www.wizconnected.com) without installing the proprietary app on their phone. | Kubernetes | [Link](https://github.com/mitchfen/wiz-controller) |
 | Landing Page | A simple dashboard that serves as a central entry point to all my apps, so I only have to remember one URL. | Kubernetes | [Link](./landing-page/index.html) |
+| Rig | A lightweight CLI harness for interacting with local LLMs hosted in LM Studio. Gives local models safe, controlled access to files and terminal tools. | Lumbridge (local binary) | [Link](https://github.com/mitchfen/rig) |
 
 ### Off the Shelf
 
@@ -95,7 +100,3 @@ For monitoring I deploy:
 ## Backups
 
 Draynor's stateful data is backed up off-site to Azure Blob Storage. See the [backup plan](./BackupPlan.md).
-
-## Local AI Models
-
-Recently I've been runnning local AI models using [LM Studio](https://lmstudio.ai) on Lumbridge, leveraging my RX 7900 XTX and it's 24 GB of VRAM. I host [Open WebUI](https://github.com/open-webui/open-webui) connected to LM Studio so other users on my home network can chat with local models. I am also experimenting with GitHub Copilot's bring your own model (BYOM) feature.
