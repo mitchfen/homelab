@@ -3,26 +3,9 @@
 > 
 > The cloud at home:
 
-<img src="./images/homelab.jpg" width=550px />
-
-## Hardware
-
-| Machine | CPU | Memory | GPU | Purpose | OS |
-| --- | --- | --- | --- | --- | --- |
-| Karamja | i7-7700T | 16GB | Integrated | UniFi OS for network management | Debian |
-| Varrock | i3-6100T | 8GB | Integrated | Router/firewall, pfblocker-NG IP and DNS filter | pfSense |
-| Draynor | i5-7600T | 32GB | Integrated | Single node Kubernetes cluster (k3s) | NixOS |
-| Lumbridge | Ryzen 5 7600X | 32GB | Radeon RX 7900 XTX | Development, Gaming, Running open source models | NixOS |
-
-<!--
-<img src="./images/lumbridge.png" width="600px" />  
-
-<img src="./images/draynor.png" width="600px" />  
-
-<img src="./images/karamja.png" width="600px" />
--->
-
-
+| Hardware | Description |
+|-|-|
+| <img src="./images/homelab.jpg" /> | **Karamja**<br>Debian box running UniFi OS for my Ubiquiti access points.<br><br>**Varrock**<br>My pfSense router, firewall and DNS sinkhole.<br><br>**Draynor**<br>NixOs single-node k3s cluster that runs my applications, reverse proxy, and monitoring stack. <br><br>**Space for two more OptiPlex Micros**<br>👀<br><br>**Lumbridge**<br>My daily driver, running NixOs. Has a Radeon RX 7900 XTX for running open-source models (and gaming). |
 
 ## Networking and Security
 
@@ -36,18 +19,27 @@
 
 ## Split Horizon DNS and fenner.nexus
 
-All my apps are served on subdomains of `fenner.nexus`. That is a public domain, but one with **no public DNS records**. I use a [split horizon DNS](https://en.wikipedia.org/wiki/Split-horizon_DNS) strategy so my devices resolve those subdomains to the local IPs of my devices. [Nginx Proxy Manager](https://github.com/NginxProxyManager/nginx-proxy-manager) acts as the reverse proxy, routing each request to the correct pod via the HTTP `Host` header. It uses the Cloudflare API and the [DNS-01 challenge](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge) to obtain a wildcard `*.fenner.nexus` TLS certificate from [Let's Encrypt](https://letsencrypt.org/). So every app is served over HTTPS without browser certificate warnings! See my [start page](./machine%20specific%20files/draynor/landingPage.html) (and how it has no certificate warnings 😉). It's stored in a Kubernetes ConfigMap and served by an nginx pod. Terraform manages the ConfigMap, deployment, and service. 
+All my apps are served on subdomains of `fenner.nexus`. That is a public domain, but one with **no public DNS records**. I use a [split horizon DNS](https://en.wikipedia.org/wiki/Split-horizon_DNS) strategy so my devices resolve those subdomains to the local IPs of my devices. [Nginx Proxy Manager](https://github.com/NginxProxyManager/nginx-proxy-manager) acts as the reverse proxy, routing each request to the correct pod via the HTTP `Host` header. It uses the Cloudflare API and the [DNS-01 challenge](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge) to obtain a wildcard `*.fenner.nexus` TLS certificate from [Let's Encrypt](https://letsencrypt.org/). So every app is served over HTTPS without browser certificate warnings! See my start page (and how it has no certificate warnings). It's stored in a Kubernetes ConfigMap and served by an nginx pod. Terraform manages the ConfigMap, deployment, and service. 
 
 <img src="./images/landing-page.png" width=500px />
 
-## Making it Declarative with Terraform
+## Making my Cluster Declarative with Terraform
+<img src="./images/makeItSo.jpeg" width=300px />  
 
 Changes are made to my cluster in two steps:
 1. Modify the files as desired
 2. Run `makeItSo.sh`  
-<img src="./images/makeItSo.jpeg" width=400px />  
 This wraps a terraform plan/apply, and consolidates what used to be a mishmash of kubectl/bash/helm commands. 
-Terraform state is stored in a private Azure Blob Storage container (I know I know, not very "self hosted" of me. But I wanted it off site.)  
+
+I chose Terraform over GitOps because this is a small, single-node cluster that I update deliberately rather than continuously. Running `makeItSo.sh` gives me one explicit deployment step without maintaining an additional in-cluster controller, although it means the cluster will not automatically reconcile drift or deploy changes when I push to Git.
+
+Terraform state is stored in a private Azure Blob Storage container (I know I know, not very "self hosted" of me. But I wanted it off site.)
+
+## Leveraging Open Source AI Models
+
+I run local AI models using [LM Studio](https://lmstudio.ai) on Lumbridge, leveraging my RX 7900 XTX and its 24 GB of VRAM. I am building [github.com/mitchfen/rig](https://github.com/mitchfen/rig); a CLI harness that helps me leverage my local AI models and learn more about AI tooling.
+
+<img src="./images/rig.png" width=600px/>
 
 ## Keeping an eye on things
 
@@ -59,13 +51,7 @@ For monitoring I deploy:
 
 <img src="./images/grafanaDash.png" width="1000px" />
 
-## Leveraging Open Source AI Models
-
-I run local AI models using [LM Studio](https://lmstudio.ai) on Lumbridge, leveraging my RX 7900 XTX and it's 24 GB of VRAM:
-- For terminal-based workflows, I am building [github.com/mitchfen/rig](https://github.com/mitchfen/rig) a lightweight CLI harness that helps me leverage my local AI models.
-- I host [Open WebUI](https://github.com/open-webui/open-webui) connected to LM Studio so other users on my home network can chat with local models.
-
-## Applications I run
+## Applications I host
 
 ### Self Made (Vibe Coded)
 
@@ -78,7 +64,6 @@ I run local AI models using [LM Studio](https://lmstudio.ai) on Lumbridge, lever
 | Blood Pressure Tracker | Track my blood pressure and visualize trends. | Kubernetes | [Link](https://github.com/mitchfen/blood-pressure-tracker) |
 | Wiz Controller | Allow users on my home network to control my [WiZ lights](https://www.wizconnected.com) without installing the proprietary app on their phone. | Kubernetes | [Link](https://github.com/mitchfen/wiz-controller) |
 | Landing Page | A simple dashboard that serves as a central entry point to all my apps, so I only have to remember one URL. | Kubernetes | [Link](./landing-page/index.html) |
-| Rig | A lightweight CLI harness for interacting with local LLMs hosted in LM Studio. Gives local models safe, controlled access to files and terminal tools. | Lumbridge (local binary) | [Link](https://github.com/mitchfen/rig) |
 
 ### Off the Shelf
 
@@ -95,7 +80,10 @@ I run local AI models using [LM Studio](https://lmstudio.ai) on Lumbridge, lever
 
 ## NixOS (the best distro)
 
-2/3 of my Linux hosts run [NixOS](https://nixos.org/). I store their declarative configuration files (`configuration.nix`) in this repo. If a drive fails or a machine dies, I can easily recreate it by installing NixOS, copying over the configuration, and running a command. You might wonder why, then, I run Debian on Karamja. The reason is I want to maintain familiarity with Debian/Ubuntu systems since they're the most common Linux distros.
+Two of my three Linux hosts run [NixOS](https://nixos.org/). I store their declarative configuration files (`configuration.nix`) here in this repo. If a drive fails or a machine dies, I can easily recreate it by installing NixOS, copying the configuration to `/etc/nixos`, and running `sudo nixos-rebuild switch`. NixOs also works great with AI because the system configuration is clearly readable as text, and in one place.
+
+### Then why Debian on Karamja?
+I want to maintain familiarity with Debian/Ubuntu systems since they're the most common Linux systems.
 
 ## Backups
 
