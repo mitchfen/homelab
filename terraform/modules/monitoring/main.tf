@@ -134,6 +134,9 @@ resource "helm_release" "loki" {
         storageClassName = var.storage_class_name
       }
     }
+    gateway = {
+      affinity = {}
+    }
     backend       = { replicas = 0 }
     read          = { replicas = 0 }
     write         = { replicas = 0 }

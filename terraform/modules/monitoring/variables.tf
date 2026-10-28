@@ -8,14 +8,14 @@ variable "namespace" {
 variable "kube_prometheus_stack_chart_version" {
   description = "Pinned kube-prometheus-stack Helm chart version."
   type        = string
-  default     = "92.10.1"
+  default     = "92.14.1"
   nullable    = false
 }
 
 variable "loki_chart_version" {
   description = "Pinned Loki Helm chart version."
   type        = string
-  default     = "7.3.0"
+  default     = "7.5.0"
   nullable    = false
 }
 
