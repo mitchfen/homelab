@@ -35,12 +35,6 @@ I chose Terraform over GitOps because this is a small, single-node cluster that 
 
 Terraform state is stored in a private Azure Blob Storage container (I know I know, not very "self hosted" of me. But I wanted it off site.)
 
-## Leveraging Open Source AI Models
-
-I run local AI models using [LM Studio](https://lmstudio.ai) on Lumbridge, leveraging my RX 7900 XTX and its 24 GB of VRAM. I am building [github.com/mitchfen/rig](https://github.com/mitchfen/rig); a CLI harness that helps me leverage my local AI models and learn more about AI tooling.
-
-<img src="./images/rig.png" width=600px/>
-
 ## Keeping an eye on things
 
 For monitoring I deploy:
@@ -84,6 +78,14 @@ Two of my three Linux hosts run [NixOS](https://nixos.org/). I store their decla
 
 ### Then why Debian on Karamja?
 I want to maintain familiarity with Debian/Ubuntu systems since they're the most common Linux systems.
+
+## Leveraging Open Source AI Models
+
+I run local AI models using [LM Studio](https://lmstudio.ai) on Lumbridge, leveraging my RX 7900 XTX and its 24 GB of VRAM. I am building [github.com/mitchfen/rig](https://github.com/mitchfen/rig); a CLI harness that helps me leverage my local AI models and learn more about AI tooling.
+
+<img src="./images/rig.png" width=600px/>
+
+
 
 ## Backups
 
