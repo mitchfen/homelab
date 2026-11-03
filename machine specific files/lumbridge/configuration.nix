@@ -4,6 +4,9 @@
 
 { config, pkgs, ... }:
 
+let
+  unstable = import <unstable> { config = config.nixpkgs.config; };
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -21,7 +24,6 @@
   fileSystems."/" = {
     options = [ "noatime" ];
   };
-
 
   # Automatically optimize the Nix store to save disk space
   nix.settings.auto-optimise-store = true;
@@ -145,7 +147,7 @@
   };
 
   # List packages installed in system profile.
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = (with pkgs; [
     gnome-tweaks
     gthumb
     google-chrome
@@ -156,7 +158,6 @@
     proton-vpn
     protontricks
     screenfetch
-    antigravity
     git
     gh
     azure-cli
@@ -174,6 +175,8 @@
     discord
     runelite
     bolt-launcher
+  ]) ++ [
+    unstable.antigravity-ide
   ];
 
   # Configure the firewall
