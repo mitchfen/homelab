@@ -153,10 +153,6 @@ in
     google-chrome
     librewolf
     obsidian
-    proton-pass
-    protonmail-desktop
-    proton-vpn
-    protontricks
     screenfetch
     git
     gh
@@ -165,7 +161,6 @@ in
     go
     gcc
     btop
-    lmstudio
     kubernetes-helm
     kubectl
     k9s
@@ -177,6 +172,11 @@ in
     bolt-launcher
   ]) ++ [
     unstable.antigravity-ide
+    unstable.antigravity-cli
+    unstable.protonmail-desktop
+    unstable.proton-pass
+    unstable.proton-vpn
+    unstable.lmstudio
   ];
 
   # Configure the firewall
