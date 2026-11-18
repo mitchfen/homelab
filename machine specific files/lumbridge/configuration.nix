@@ -167,11 +167,19 @@ in
     ffmpeg
     vlc
     mangohud
-    discord
     runelite
     bolt-launcher
   ]) ++ [
-    unstable.antigravity-ide
+    unstable.discord
+    (pkgs.symlinkJoin {
+      name = "antigravity-ide";
+      paths = [ unstable.antigravity-ide ];
+      buildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/antigravity-ide \
+          --set NODE_TLS_REJECT_UNAUTHORIZED 0
+      '';
+    })
     unstable.antigravity-cli
     unstable.protonmail-desktop
     unstable.proton-pass
