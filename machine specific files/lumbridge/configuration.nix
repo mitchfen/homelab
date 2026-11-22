@@ -25,6 +25,12 @@ in
     options = [ "noatime" ];
   };
 
+  fileSystems."/mnt/mr_storage" = {
+    device = "/dev/disk/by-uuid/5edc429b-81cd-4dbb-a599-c53367a80027";
+    fsType = "ext4";
+    options = [ "defaults" "noatime" "nofail" "x-gvfs-show" ];
+  };
+
   # Automatically optimize the Nix store to save disk space
   nix.settings.auto-optimise-store = true;
 
@@ -171,6 +177,8 @@ in
     bolt-launcher
   ]) ++ [
     unstable.discord
+    ####### TEMP WORKAROUND #########
+    # Remove after ide version in unstable is updated beyond 2.5.5
     (pkgs.symlinkJoin {
       name = "antigravity-ide";
       paths = [ unstable.antigravity-ide ];
@@ -180,6 +188,7 @@ in
           --set NODE_TLS_REJECT_UNAUTHORIZED 0
       '';
     })
+    ################
     unstable.antigravity-cli
     unstable.protonmail-desktop
     unstable.proton-pass
