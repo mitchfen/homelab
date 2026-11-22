@@ -135,7 +135,10 @@ resource "helm_release" "loki" {
       }
     }
     gateway = {
-      affinity = {}
+      # Clear the chart's default hard podAntiAffinity (an empty map `{}` is
+      # merged with defaults in Helm and leaves podAntiAffinity intact, which
+      # deadlocks RollingUpdate on a single-node cluster).
+      affinity = null
     }
     backend       = { replicas = 0 }
     read          = { replicas = 0 }
